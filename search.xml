@@ -60,12 +60,15 @@
 </ul>
 ]]></content>
       <categories>
-        <category>nodebb</category>
+        <category>编程</category>
+        <category>前端</category>
+        <category>后端</category>
       </categories>
       <tags>
         <tag>初体验</tag>
         <tag>论坛系统</tag>
         <tag>社区</tag>
+        <tag>nodebb</tag>
       </tags>
   </entry>
   <entry>
@@ -226,12 +229,15 @@
 </ul>
 ]]></content>
       <categories>
-        <category>软件架构模式</category>
+        <category>设计模式</category>
+        <category>编程</category>
+        <category>编程思想</category>
       </categories>
       <tags>
         <tag>MVC</tag>
         <tag>MVP</tag>
         <tag>MVVM</tag>
+        <tag>软件架构模式</tag>
       </tags>
   </entry>
   <entry>
@@ -250,7 +256,8 @@
 <h2 id="置顶功能最终效果图"><a href="#置顶功能最终效果图" class="headerlink" title="置顶功能最终效果图"></a>置顶功能最终效果图</h2><p><img src="https://i.loli.net/2021/03/22/GrqLlXYtCFWSMdx.png" alt="Screenshot_20210322_145826.png"></p>
 ]]></content>
       <categories>
-        <category>hexo</category>
+        <category>编程</category>
+        <category>前端</category>
       </categories>
       <tags>
         <tag>blog</tag>
@@ -269,7 +276,8 @@
 <h2 id="最终效果图"><a href="#最终效果图" class="headerlink" title="最终效果图"></a>最终效果图</h2><p><img src="https://i.loli.net/2021/03/22/NGc4vdQ2rlZSp5J.png" alt="blog-previews.png"></p>
 ]]></content>
       <categories>
-        <category>hexo</category>
+        <category>编程</category>
+        <category>前端</category>
       </categories>
       <tags>
         <tag>blog</tag>
