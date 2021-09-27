@@ -12,6 +12,8 @@
     <url>/2021/09/27/installNodeBB/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>有许多老开源或收费的论坛系统，如 Discuz!。不过我对php并不感冒，而且Discuz我觉得年代已久，体验难以跟上现代化，所以找到了NodeBB这个开源论坛系统。</p>
 <h2 id="NodeBB简介"><a href="#NodeBB简介" class="headerlink" title="NodeBB简介"></a>NodeBB简介</h2><p>NodeBB 论坛软件由 Node.js 提供支持，支持 Redis、MongoDB 或 PostgreSQL 数据库。它利用网络套接字进行即时交互和实时通知。NodeBB 具有许多开箱即用的现代功能，例如社交网络集成和流媒体讨论，同时仍确保与旧浏览器兼容。<br>通过使用第三方插件启用附加功能。</p>
+<span id="more"></span>
+
 <h2 id="事前准备"><a href="#事前准备" class="headerlink" title="事前准备"></a>事前准备</h2><ul>
 <li>安装<a href="https://docs.mongodb.com/manual/installation/">MongoDB</a> (最好最新稳定版)</li>
 <li>安装Git</li>
