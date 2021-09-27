@@ -8,6 +8,65 @@
 ]]></content>
   </entry>
   <entry>
+    <title>论坛系统NodeBB初体验</title>
+    <url>/2021/09/27/installNodeBB/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>有许多老开源或收费的论坛系统，如 Discuz!。不过我对php并不感冒，而且Discuz我觉得年代已久，体验难以跟上现代化，所以找到了NodeBB这个开源论坛系统。</p>
+<h2 id="NodeBB简介"><a href="#NodeBB简介" class="headerlink" title="NodeBB简介"></a>NodeBB简介</h2><p>NodeBB 论坛软件由 Node.js 提供支持，支持 Redis、MongoDB 或 PostgreSQL 数据库。它利用网络套接字进行即时交互和实时通知。NodeBB 具有许多开箱即用的现代功能，例如社交网络集成和流媒体讨论，同时仍确保与旧浏览器兼容。<br>通过使用第三方插件启用附加功能。</p>
+<h2 id="事前准备"><a href="#事前准备" class="headerlink" title="事前准备"></a>事前准备</h2><ul>
+<li>安装<a href="https://docs.mongodb.com/manual/installation/">MongoDB</a> (最好最新稳定版)</li>
+<li>安装Git</li>
+<li>安装<a href="https://nodejs.org/zh-cn/download/">Node.js</a> (需要特定版，我目前对应的版本是node v14和npm v6)</li>
+<li>安装<a href="https://nginx.org/en/download.html">Nginx</a>w</li>
+</ul>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h3><ul>
+<li>安装MongoDB。完成安装<code>mongo</code>进入Mongo Shell</li>
+<li>切换到admin 数据库  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use admin</span><br></pre></td></tr></table></figure></li>
+<li>创建一个管理员用户  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.createUser( &#123; user: &quot;admin&quot;, pwd: &quot;&lt;Enter a secure password&gt;&quot;, roles: [ &#123; role: &quot;root&quot;, db: &quot;admin&quot; &#125; ] &#125; )</span><br></pre></td></tr></table></figure></li>
+<li>切换到一个新的数据库，主要用来储存数据，名字可以是默认的’nodebb’，之后配置nodebb就不必输入数据库名。这里用默认的’nodebb’名称。  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use nodebb &#x2F;&#x2F;切换到一个不存在的数据库会自动创建</span><br></pre></td></tr></table></figure></li>
+<li>创建一个拥有适当权限的用户管理nodebb数据库。  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">db.createUser( &#123; user: &quot;nodebb&quot;, pwd: &quot;&lt;Enter a secure password&gt;&quot;, roles: [ &#123; role: &quot;readWrite&quot;, db: &quot;nodebb&quot; &#125;, &#123; role: &quot;clusterMonitor&quot;, db: &quot;admin&quot; &#125; ] &#125; )</span><br></pre></td></tr></table></figure></li>
+<li>配置完可以退出Mongo Shell  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">quit()</span><br></pre></td></tr></table></figure></li>
+<li>编辑<code>/etc/mongod.conf</code>，增加以下配置以启用数据库身份验证  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">security:</span><br><span class="line">authorization: enabled</span><br></pre></td></tr></table></figure></li>
+<li>重启MongoDB，可以验证是否生效  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart mongod</span><br><span class="line">mongo -u admin -p your_password --authenticationDatabase&#x3D;admin &#x2F;&#x2F;连接验证是否可行</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="NodeBB"><a href="#NodeBB" class="headerlink" title="NodeBB"></a>NodeBB</h3><ul>
+<li>使用git clone命令克隆仓库下来本地，我这里克隆<code>v1.18.x</code>版本，其他版本就像这样<code>v1.16.x</code>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone -b v1.18.x https:&#x2F;&#x2F;github.com&#x2F;NodeBB&#x2F;NodeBB.git nodebb</span><br><span class="line">cd nodebb &#x2F;&#x2F;切换文件夹到nodebb中</span><br></pre></td></tr></table></figure></li>
+<li>执行命令以配置，配置完会得到一个config.json文件，日后想要修改配置可以通过这个文件  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#x2F;nodebb setup</span><br></pre></td></tr></table></figure></li>
+<li>配置完便可以启动nodebb了。  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#x2F;nodebb start &#x2F;&#x2F;启动</span><br><span class="line">.&#x2F;nodebb stop &#x2F;&#x2F;停止</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><ul>
+<li>安装Nginx，完成安装若没有启动需要启动。  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo systemctl start nginx &#x2F;&#x2F;启动</span><br><span class="line">sudo systemctl status nginx &#x2F;&#x2F;查看状态</span><br></pre></td></tr></table></figure></li>
+<li>配置server块，最好在<code>/etc/nginx/sites-available/</code>中添加新文件，可以复制default后修改，方便许多。添加文件后记得<code>ln -s</code>文件到<code>/etc/nginx/sites-enabled/</code>下以启用配置。  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line"></span><br><span class="line">    server_name forum.example.com;</span><br><span class="line"></span><br><span class="line">    location &#x2F; &#123;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_set_header X-Forwarded-Proto $scheme;</span><br><span class="line">        proxy_set_header Host $http_host;</span><br><span class="line">        proxy_set_header X-NginX-Proxy true;</span><br><span class="line"></span><br><span class="line">        proxy_pass http:&#x2F;&#x2F;127.0.0.1:4567;</span><br><span class="line">        proxy_redirect off;</span><br><span class="line"></span><br><span class="line">        # Socket.IO Support</span><br><span class="line">        proxy_http_version 1.1;</span><br><span class="line">        proxy_set_header Upgrade $http_upgrade;</span><br><span class="line">        proxy_set_header Connection &quot;upgrade&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>记得重新加载Nginx  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo nginx -s reload</span><br></pre></td></tr></table></figure></li>
+<li>浏览器浏览<code>http://forum.example.com</code>或<code>http://localhost</code>可以查看效果</li>
+</ul>
+<h2 id="使用Docker"><a href="#使用Docker" class="headerlink" title="使用Docker"></a>使用Docker</h2><h3 id="自行构建"><a href="#自行构建" class="headerlink" title="自行构建"></a>自行构建</h3><ul>
+<li>项目有<code>Dockerfile</code>和<code>docker-compose.yml</code>，可以使用docker-compose启动，不过我遇到一些问题，可以先试试可行没有再使用下面的方法<h3 id="拉已构建好的镜像"><a href="#拉已构建好的镜像" class="headerlink" title="拉已构建好的镜像"></a>拉已构建好的镜像</h3></li>
+<li>Docker先创建一个网络  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo docker network create mongo-net</span><br></pre></td></tr></table></figure></li>
+<li>拉个MongoDB镜像并启动  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo docker run --name mongo --restart always --network mongo-net -d mongo</span><br></pre></td></tr></table></figure></li>
+<li>Docker Hub中已经有官网的NodeBB镜像，一样拉下来启动即可  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run --restart always --name forum --network mongo-net -p 4567:4567 -d nodebb&#x2F;docker</span><br></pre></td></tr></table></figure></li>
+<li>执行成功后论坛已启动，浏览器进入论坛会进入图形配置页面，简单配置一下即可。</li>
+</ul>
+<h2 id="事后经验"><a href="#事后经验" class="headerlink" title="事后经验"></a>事后经验</h2><ul>
+<li>确保所有步骤都正常运行，尤其是Docker 网络，保持NodeBB容器和MongoDB容器在一个网络，NodeBB才能连接数据库。</li>
+<li>MongoDB的hostname在容器中貌似根据容器名称定义。如启动MongoDB容器时<code>--name mongo</code>，容器之间<code>ping mongo</code>可以ping通，显示出MongoDB容器的ip</li>
+<li>不要以其他权限运行NodeBB， 如sudo</li>
+</ul>
+<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><ul>
+<li><a href="https://github.com/NodeBB/NodeBB">NodeBB GitHub</a></li>
+<li><a href="https://docs.nodebb.org/">NodeBB Documentation</a></li>
+<li><a href="https://www.jianshu.com/p/ab72fe404c8d">快速搭建论坛，用 NodeBB 搭建自己的社区，汇聚可爱的人们 - 简书</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>nodebb</category>
+      </categories>
+      <tags>
+        <tag>初体验</tag>
+        <tag>论坛系统</tag>
+        <tag>社区</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MVC，MVP 和 MVVM 的理解</title>
     <url>/2021/03/23/MVPatternUnderstanding/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>做客户端开发、前端开发对<strong>MVC、MVP、MVVM</strong>这些名词不了解也应该大致听过，都是为了解决图形界面应用程序复杂性管理问题而产生的应用架构模式。</p>

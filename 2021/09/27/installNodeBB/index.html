@@ -23,28 +23,35 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="JinkerBlog">
-<meta property="og:url" content="http://example.com/index.html">
+<meta name="description" content="前言有许多老开源或收费的论坛系统，如 Discuz!。不过我对php并不感冒，而且Discuz我觉得年代已久，体验难以跟上现代化，所以找到了NodeBB这个开源论坛系统。 NodeBB简介NodeBB 论坛软件由 Node.js 提供支持，支持 Redis、MongoDB 或 PostgreSQL 数据库。它利用网络套接字进行即时交互和实时通知。NodeBB 具有许多开箱即用的现代功能，例如社交网">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论坛系统NodeBB初体验">
+<meta property="og:url" content="http://example.com/2021/09/27/installNodeBB/index.html">
 <meta property="og:site_name" content="JinkerBlog">
+<meta property="og:description" content="前言有许多老开源或收费的论坛系统，如 Discuz!。不过我对php并不感冒，而且Discuz我觉得年代已久，体验难以跟上现代化，所以找到了NodeBB这个开源论坛系统。 NodeBB简介NodeBB 论坛软件由 Node.js 提供支持，支持 Redis、MongoDB 或 PostgreSQL 数据库。它利用网络套接字进行即时交互和实时通知。NodeBB 具有许多开箱即用的现代功能，例如社交网">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-27T15:15:14.000Z">
+<meta property="article:modified_time" content="2021-09-27T16:54:03.338Z">
 <meta property="article:author" content="Jinker">
+<meta property="article:tag" content="初体验">
+<meta property="article:tag" content="论坛系统">
+<meta property="article:tag" content="社区">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2021/09/27/installNodeBB/">
 
 
 <script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
-<title>JinkerBlog</title>
+<title>论坛系统NodeBB初体验 | JinkerBlog</title>
   
 
 
@@ -169,7 +176,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -182,6 +189,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NodeBB%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">NodeBB简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%89%8D%E5%87%86%E5%A4%87"><span class="nav-number">3.</span> <span class="nav-text">事前准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MongoDB"><span class="nav-number">4.1.</span> <span class="nav-text">MongoDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NodeBB"><span class="nav-number">4.2.</span> <span class="nav-text">NodeBB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx"><span class="nav-number">4.3.</span> <span class="nav-text">Nginx</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Docker"><span class="nav-number">5.</span> <span class="nav-text">使用Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E8%A1%8C%E6%9E%84%E5%BB%BA"><span class="nav-number">5.1.</span> <span class="nav-text">自行构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%89%E5%B7%B2%E6%9E%84%E5%BB%BA%E5%A5%BD%E7%9A%84%E9%95%9C%E5%83%8F"><span class="nav-number">5.2.</span> <span class="nav-text">拉已构建好的镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%90%8E%E7%BB%8F%E9%AA%8C"><span class="nav-number">6.</span> <span class="nav-text">事后经验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99"><span class="nav-number">7.</span> <span class="nav-text">相关资料</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -238,60 +246,17 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/22/welcome/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/31568171?s=400&u=4ab900104741bbba92b8b03c8d88b4411bfa1f0e&v=4">
-      <meta itemprop="name" content="Jinker">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JinkerBlog">
-    </span>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="欢迎来到我的博客"><a href="#欢迎来到我的博客" class="headerlink" title="欢迎来到我的博客"></a>欢迎来到我的博客</h1><p><img src="https://coverfiles.alphacoders.com/516/51601.jpg" alt="欢迎封面"></p>
-<h2 id="博客摘要"><a href="#博客摘要" class="headerlink" title="博客摘要"></a>博客摘要</h2><p>我的博客主要是记录我学习编程过程中的点点滴滴以及一些经验。努力学习更多知识，补充自己的薄弱知识，成为更好的程序员。也包括一些不关编程的事情。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/27/installNodeBB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -304,9 +269,9 @@
       <meta itemprop="name" content="JinkerBlog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/27/installNodeBB/" class="post-title-link" itemprop="url">论坛系统NodeBB初体验</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          论坛系统NodeBB初体验
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -336,6 +301,13 @@
     </span>
 
   
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
 </div>
 
         </div>
@@ -345,7 +317,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>有许多老开源或收费的论坛系统，如 Discuz!。不过我对php并不感冒，而且Discuz我觉得年代已久，体验难以跟上现代化，所以找到了NodeBB这个开源论坛系统。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>有许多老开源或收费的论坛系统，如 Discuz!。不过我对php并不感冒，而且Discuz我觉得年代已久，体验难以跟上现代化，所以找到了NodeBB这个开源论坛系统。</p>
 <h2 id="NodeBB简介"><a href="#NodeBB简介" class="headerlink" title="NodeBB简介"></a>NodeBB简介</h2><p>NodeBB 论坛软件由 Node.js 提供支持，支持 Redis、MongoDB 或 PostgreSQL 数据库。它利用网络套接字进行即时交互和实时通知。NodeBB 具有许多开箱即用的现代功能，例如社交网络集成和流媒体讨论，同时仍确保与旧浏览器兼容。<br>通过使用第三方插件启用附加功能。</p>
 <h2 id="事前准备"><a href="#事前准备" class="headerlink" title="事前准备"></a>事前准备</h2><ul>
 <li>安装<a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/installation/">MongoDB</a> (最好最新稳定版)</li>
@@ -392,7 +364,6 @@
 <li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/ab72fe404c8d">快速搭建论坛，用 NodeBB 搭建自己的社区，汇聚可爱的人们 - 简书</a></li>
 </ul>
 
-      
     </div>
 
     
@@ -400,273 +371,27 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
+          <div class="post-tags">
+              <a href="/tags/%E5%88%9D%E4%BD%93%E9%AA%8C/" rel="tag"># 初体验</a>
+              <a href="/tags/%E8%AE%BA%E5%9D%9B%E7%B3%BB%E7%BB%9F/" rel="tag"># 论坛系统</a>
+              <a href="/tags/%E7%A4%BE%E5%8C%BA/" rel="tag"># 社区</a>
+          </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/23/MVPatternUnderstanding/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/31568171?s=400&u=4ab900104741bbba92b8b03c8d88b4411bfa1f0e&v=4">
-      <meta itemprop="name" content="Jinker">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JinkerBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/23/MVPatternUnderstanding/" class="post-title-link" itemprop="url">MVC，MVP 和 MVVM 的理解</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-03-23 18:57:22" itemprop="dateCreated datePublished" datetime="2021-03-23T18:57:22+08:00">2021-03-23</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-09-27 21:04:17" itemprop="dateModified" datetime="2021-09-27T21:04:17+08:00">2021-09-27</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">软件架构模式</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>做客户端开发、前端开发对<strong>MVC、MVP、MVVM</strong>这些名词不了解也应该大致听过，都是为了解决图形界面应用程序复杂性管理问题而产生的应用架构模式。</p>
-<p>网上很多文章关于这方面的讨论比较杂乱，各种MV模式之间的区别分不清，甚至有些描述都是错误的。本文追根溯源，从最经典的<strong>Smalltalk-80 MVC模式</strong>开始逐步还原图形界面之下最真实的MV模式。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/03/23/MVPatternUnderstanding/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/22/hexo-next-pin-top/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/31568171?s=400&u=4ab900104741bbba92b8b03c8d88b4411bfa1f0e&v=4">
-      <meta itemprop="name" content="Jinker">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JinkerBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/22/hexo-next-pin-top/" class="post-title-link" itemprop="url">Hexo 设置文章置顶</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-03-22 13:23:15" itemprop="dateCreated datePublished" datetime="2021-03-22T13:23:15+08:00">2021-03-22</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-09-27 21:04:17" itemprop="dateModified" datetime="2021-09-27T21:04:17+08:00">2021-09-27</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="前提摘要"><a href="#前提摘要" class="headerlink" title="前提摘要"></a>前提摘要</h2><p>博客通常都需要文章置顶功能，网上关于next主题置顶都比较旧，自己根据教程改了改，已经完善许多，Hexo为5.0版本，next为8.2.2版本。最终效果图已放到最下面，请自行查看。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/03/22/hexo-next-pin-top/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/23/MVPatternUnderstanding/" rel="prev" title="MVC，MVP 和 MVVM 的理解">
+                  <i class="fa fa-chevron-left"></i> MVC，MVP 和 MVVM 的理解
+                </a>
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/22/firstblog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/31568171?s=400&u=4ab900104741bbba92b8b03c8d88b4411bfa1f0e&v=4">
-      <meta itemprop="name" content="Jinker">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JinkerBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/22/firstblog/" class="post-title-link" itemprop="url">第一次使用Hexo blog</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-03-22 00:03:24" itemprop="dateCreated datePublished" datetime="2021-03-22T00:03:24+08:00">2021-03-22</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-09-27 21:04:17" itemprop="dateModified" datetime="2021-09-27T21:04:17+08:00">2021-09-27</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="我建立博客的缘故"><a href="#我建立博客的缘故" class="headerlink" title="我建立博客的缘故"></a>我建立博客的缘故</h2><p>网络上看见很多博客，感觉很高大尚，很早就想试试了。为此，我学习许多前后端的知识，虽然只是基础，不过也很满意了，未来我也想尝试建立自己的CMS网站。创建此文章时我的基础有HTML + CSS + JS, Vue, ExpressJS。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/03/22/firstblog/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
+            <div class="post-nav-item">
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          </div>
     </footer>
   </article>
 </div>
+
 
 
 
