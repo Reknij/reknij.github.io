@@ -47,7 +47,7 @@
 <h3 id="拉已构建好的镜像"><a href="#拉已构建好的镜像" class="headerlink" title="拉已构建好的镜像"></a>拉已构建好的镜像</h3><ul>
 <li>Docker先创建一个网络  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo docker network create mongo-net</span><br></pre></td></tr></table></figure></li>
 <li>拉个MongoDB镜像并启动  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo docker run --name mongo --restart always --network mongo-net -d mongo</span><br></pre></td></tr></table></figure></li>
-<li>Docker Hub中已经有官网的NodeBB镜像，一样拉下来启动即可  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run --restart always --name forum --network mongo-net -p 4567:4567 -d nodebb&#x2F;docker</span><br></pre></td></tr></table></figure></li>
+<li>Docker Hub中已经有官网的NodeBB镜像，一样拉下来启动即可  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo docker run --restart always --name forum --network mongo-net -p 4567:4567 -d nodebb&#x2F;docker</span><br></pre></td></tr></table></figure></li>
 <li>执行成功后论坛已启动，浏览器进入论坛会进入图形配置页面，简单配置一下即可。</li>
 </ul>
 <h2 id="事后经验"><a href="#事后经验" class="headerlink" title="事后经验"></a>事后经验</h2><ul>
