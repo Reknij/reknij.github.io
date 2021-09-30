@@ -1,29 +1,19 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
+
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+    
+    <title>论坛系统NodeBB初体验 - JinkerBlog</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
 
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_180x180.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_16x16.png">
-  <link rel="mask-icon" href="/images/favicon_180x180.png" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
-
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
-  </script>
-<meta name="description" content="前言有许多老开源或收费的论坛系统，如 Discuz!。不过我对php并不感冒，而且Discuz我觉得年代已久，体验难以跟上现代化，所以找到了NodeBB这个开源论坛系统。 NodeBB简介NodeBB 论坛软件由 Node.js 提供支持，支持 Redis、MongoDB 或 PostgreSQL 数据库。它利用网络套接字进行即时交互和实时通知。NodeBB 具有许多开箱即用的现代功能，例如社交网">
+    <link rel="shortcut icon" href="/favicon.png" type="image/png" />
+    <meta name="description" content="前言有许多老开源或收费的论坛系统，如 Discuz!。不过我对php并不感冒，而且Discuz我觉得年代已久，体验难以跟上现代化，所以找到了NodeBB这个开源论坛系统。 NodeBB简介NodeBB 论坛软件由 Node.js 提供支持，支持 Redis、MongoDB 或 PostgreSQL 数据库。它利用网络套接字进行即时交互和实时通知。NodeBB 具有许多开箱即用的现代功能，例如社交网">
 <meta property="og:type" content="article">
 <meta property="og:title" content="论坛系统NodeBB初体验">
 <meta property="og:url" content="http://example.com/2021/09/27/installNodeBB/index.html">
@@ -31,302 +21,175 @@
 <meta property="og:description" content="前言有许多老开源或收费的论坛系统，如 Discuz!。不过我对php并不感冒，而且Discuz我觉得年代已久，体验难以跟上现代化，所以找到了NodeBB这个开源论坛系统。 NodeBB简介NodeBB 论坛软件由 Node.js 提供支持，支持 Redis、MongoDB 或 PostgreSQL 数据库。它利用网络套接字进行即时交互和实时通知。NodeBB 具有许多开箱即用的现代功能，例如社交网">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-27T15:15:14.000Z">
-<meta property="article:modified_time" content="2021-09-28T04:51:02.606Z">
+<meta property="article:modified_time" content="2021-09-30T14:15:57.798Z">
 <meta property="article:author" content="Jinker">
+<meta property="article:tag" content="Web开发">
 <meta property="article:tag" content="初体验">
 <meta property="article:tag" content="论坛系统">
 <meta property="article:tag" content="社区">
 <meta property="article:tag" content="nodebb">
 <meta name="twitter:card" content="summary">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
+    <link rel="stylesheet" href="/css/style.css?v=1633011461463">
+     
+    
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1633011461463">
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
 
-
-<link rel="canonical" href="http://example.com/2021/09/27/installNodeBB/">
-
-
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
-<title>论坛系统NodeBB初体验 | JinkerBlog</title>
-  
-
-
-
-
-  <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏" role="button">
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://images4.alphacoders.com/171/171916.jpg)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="Jinker" class="mdui-btn mdui-btn-icon"><img src="https://avatars.githubusercontent.com/u/31568171?v=4" alt="Jinker"></a>
+            </div>
+        </div>
     </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <h1 class="site-title">JinkerBlog</h1>
-      <i class="logo-line"></i>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
-        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Jinker">
+            <img src="https://avatars.githubusercontent.com/u/31568171?v=4" alt="Jinker" alt="Jinker">
         </a>
-      </li>
-  </ul>
-</nav>
-
-
-
-  <div class="search-pop-overlay">
-    <div class="popup search-popup"><div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close" role="button">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
-
     </div>
-  </div>
-
-</div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>4</div>
+        <div><span>标签</span>12</div>
+        <div><span>分类</span>2</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
         
-  
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archives.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" target="_blank" rel="noopener" href="http://kpkan.com" title="我的站点">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的站点
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/jinkerleong/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
 
-  <aside class="sidebar">
+      <ul class="category-list">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目录
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/编程/">编程</a>
+          <span class="category-list-count">3</span>
         </li>
-        <li class="sidebar-nav-overview">
-          站点概览
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/编程思想/">编程思想</a>
+          <span class="category-list-count">1</span>
         </li>
+
+        
       </ul>
 
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NodeBB%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">NodeBB简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%89%8D%E5%87%86%E5%A4%87"><span class="nav-number">3.</span> <span class="nav-text">事前准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MongoDB"><span class="nav-number">4.1.</span> <span class="nav-text">MongoDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NodeBB"><span class="nav-number">4.2.</span> <span class="nav-text">NodeBB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx"><span class="nav-number">4.3.</span> <span class="nav-text">Nginx</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Docker"><span class="nav-number">5.</span> <span class="nav-text">使用Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E8%A1%8C%E6%9E%84%E5%BB%BA"><span class="nav-number">5.1.</span> <span class="nav-text">自行构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%89%E5%B7%B2%E6%9E%84%E5%BB%BA%E5%A5%BD%E7%9A%84%E9%95%9C%E5%83%8F"><span class="nav-number">5.2.</span> <span class="nav-text">拉已构建好的镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%90%8E%E7%BB%8F%E9%AA%8C"><span class="nav-number">6.</span> <span class="nav-text">事后经验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99"><span class="nav-number">7.</span> <span class="nav-text">相关资料</span></a></li></ol></div>
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Jinker"
-      src="https://avatars.githubusercontent.com/u/31568171?s=400&u=4ab900104741bbba92b8b03c8d88b4411bfa1f0e&v=4">
-  <p class="site-author-name" itemprop="name">Jinker</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap site-overview-item animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">5</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">6</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">10</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-
-
-
-        </div>
-      </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
-
-    
-  <div class="back-to-top" role="button">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
   </div>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/Web%E5%BC%80%E5%8F%91/" style="font-size: 20px;">Web开发</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/hexo-theme-next/" style="font-size: 15px;">hexo-theme-next</a> <a href="/tags/nodebb/" style="font-size: 10px;">nodebb</a> <a href="/tags/%E5%88%9D%E4%BD%93%E9%AA%8C/" style="font-size: 10px;">初体验</a> <a href="/tags/%E7%A4%BE%E5%8C%BA/" style="font-size: 10px;">社区</a> <a href="/tags/%E8%AE%BA%E5%9D%9B%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">论坛系统</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">软件架构模式</a>
+    </div>
+    
+  </div>
 
-    <div class="main-inner post posts-expand">
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2021 Jinker
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
 
-
-  
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/27/installNodeBB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/31568171?s=400&u=4ab900104741bbba92b8b03c8d88b4411bfa1f0e&v=4">
-      <meta itemprop="name" content="Jinker">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JinkerBlog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          论坛系统NodeBB初体验
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-09-27 23:15:14" itemprop="dateCreated datePublished" datetime="2021-09-27T23:15:14+08:00">2021-09-27</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-09-28 12:51:02" itemprop="dateModified" datetime="2021-09-28T12:51:02+08:00">2021-09-28</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%BC%96%E7%A8%8B/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%BC%96%E7%A8%8B/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="busuanzi_value_page_pv"></span>
-    </span>
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+              <img data-src="https://images4.alphacoders.com/171/171916.jpg" data-sizes="auto" alt="论坛系统NodeBB初体验" class="lazyload">
+              <h1>论坛系统NodeBB初体验</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2021年09月27日</a>
+    <a><i class="nexmoefont icon-areachart"></i>1k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
 </div>
 
-        </div>
-      </header>
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>有许多老开源或收费的论坛系统，如 Discuz!。不过我对php并不感冒，而且Discuz我觉得年代已久，体验难以跟上现代化，所以找到了NodeBB这个开源论坛系统。</p>
+      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>有许多老开源或收费的论坛系统，如 Discuz!。不过我对php并不感冒，而且Discuz我觉得年代已久，体验难以跟上现代化，所以找到了NodeBB这个开源论坛系统。</p>
 <h2 id="NodeBB简介"><a href="#NodeBB简介" class="headerlink" title="NodeBB简介"></a>NodeBB简介</h2><p>NodeBB 论坛软件由 Node.js 提供支持，支持 Redis、MongoDB 或 PostgreSQL 数据库。它利用网络套接字进行即时交互和实时通知。NodeBB 具有许多开箱即用的现代功能，例如社交网络集成和流媒体讨论，同时仍确保与旧浏览器兼容。<br>通过使用第三方插件启用附加功能。</p>
 <span id="more"></span>
 
@@ -377,119 +240,115 @@
 <li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/ab72fe404c8d">快速搭建论坛，用 NodeBB 搭建自己的社区，汇聚可爱的人们 - 简书</a></li>
 </ul>
 
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E5%88%9D%E4%BD%93%E9%AA%8C/" rel="tag"># 初体验</a>
-              <a href="/tags/%E8%AE%BA%E5%9D%9B%E7%B3%BB%E7%BB%9F/" rel="tag"># 论坛系统</a>
-              <a href="/tags/%E7%A4%BE%E5%8C%BA/" rel="tag"># 社区</a>
-              <a href="/tags/nodebb/" rel="tag"># nodebb</a>
-          </div>
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2021/03/23/MVPatternUnderstanding/" rel="prev" title="MVC，MVP 和 MVVM 的理解">
-                  <i class="fa fa-chevron-left"></i> MVC，MVP 和 MVVM 的理解
-                </a>
-            </div>
-            <div class="post-nav-item">
-            </div>
-          </div>
-    </footer>
   </article>
-</div>
 
-
-
-
-
-
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Jinker</span>
-</div>
-<div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
-  </div>
-
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Jinker<br>
+        <strong>本文链接：</strong><a href="http://example.com/2021/09/27/installNodeBB/" title="http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;09&#x2F;27&#x2F;installNodeBB&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;09&#x2F;27&#x2F;installNodeBB&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
     </div>
-  </footer>
-
-  
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
 
 
   
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Web%E5%BC%80%E5%8F%91/" rel="tag">Web开发</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/nodebb/" rel="tag">nodebb</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%88%9D%E4%BD%93%E9%AA%8C/" rel="tag">初体验</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E7%A4%BE%E5%8C%BA/" rel="tag">社区</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E8%AE%BA%E5%9D%9B%E7%B3%BB%E7%BB%9F/" rel="tag">论坛系统</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NodeBB%E7%AE%80%E4%BB%8B"><span class="toc-number">2.</span> <span class="toc-text">NodeBB简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%89%8D%E5%87%86%E5%A4%87"><span class="toc-number">3.</span> <span class="toc-text">事前准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.</span> <span class="toc-text">步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MongoDB"><span class="toc-number">4.1.</span> <span class="toc-text">MongoDB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NodeBB"><span class="toc-number">4.2.</span> <span class="toc-text">NodeBB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nginx"><span class="toc-number">4.3.</span> <span class="toc-text">Nginx</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Docker"><span class="toc-number">5.</span> <span class="toc-text">使用Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E8%A1%8C%E6%9E%84%E5%BB%BA"><span class="toc-number">5.1.</span> <span class="toc-text">自行构建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%89%E5%B7%B2%E6%9E%84%E5%BB%BA%E5%A5%BD%E7%9A%84%E9%95%9C%E5%83%8F"><span class="toc-number">5.2.</span> <span class="toc-text">拉已构建好的镜像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%90%8E%E7%BB%8F%E9%AA%8C"><span class="toc-number">6.</span> <span class="toc-text">事后经验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99"><span class="toc-number">7.</span> <span class="toc-text">相关资料</span></a></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+ 
+
+<script async src="/js/app.js?v=1633011461470"></script>
+
+
+	<script async src="/js/search.js?v=1633011461470"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
 
 
 
 
 
 </body>
+
 </html>
