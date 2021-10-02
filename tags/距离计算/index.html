@@ -4,7 +4,7 @@
 
 <head>
     
-    <title>Hexo 设置文章置顶 - JinkerBlog</title>
+    <title>标签：距离计算 - JinkerBlog</title>
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -13,27 +13,18 @@
     
 
     <link rel="shortcut icon" href="/favicon.png" type="image/png" />
-    <meta name="description" content="前提摘要博客通常都需要文章置顶功能，网上关于next主题置顶都比较旧，自己根据教程改了改，已经完善许多，Hexo为5.0版本，next为8.2.2版本。最终效果图已放到最下面，请自行查看。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Hexo 设置文章置顶">
-<meta property="og:url" content="https://jinkerleong.github.io/2021/03/22/hexo-next-pin-top/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="JinkerBlog">
+<meta property="og:url" content="https://jinkerleong.github.io/tags/%E8%B7%9D%E7%A6%BB%E8%AE%A1%E7%AE%97/index.html">
 <meta property="og:site_name" content="JinkerBlog">
-<meta property="og:description" content="前提摘要博客通常都需要文章置顶功能，网上关于next主题置顶都比较旧，自己根据教程改了改，已经完善许多，Hexo为5.0版本，next为8.2.2版本。最终效果图已放到最下面，请自行查看。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i.loli.net/2021/03/22/GrqLlXYtCFWSMdx.png">
-<meta property="article:published_time" content="2021-03-22T05:23:15.000Z">
-<meta property="article:modified_time" content="2021-10-02T16:35:59.056Z">
 <meta property="article:author" content="Jinker">
-<meta property="article:tag" content="hexo">
-<meta property="article:tag" content="hexo-theme-next">
-<meta property="article:tag" content="Web开发">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2021/03/22/GrqLlXYtCFWSMdx.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
-    <link rel="stylesheet" href="/css/style.css?v=1633193676340">
+    <link rel="stylesheet" href="/css/style.css?v=1633193676369">
      
     
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1633193676340">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1633193676369">
     
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
@@ -182,85 +173,34 @@
     </div>
     <div id="nexmoe-content">
         <div class="nexmoe-primary">
-            <div class="nexmoe-post">
+            <section class="nexmoe-posts">
+    
+    <div class="nexmoe-post">
+        <a href="/2021/10/02/distanceAlgorithm/">
+            
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 96.75%;"> 
+                    <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Coord_system_CA_0.svg/1200px-Coord_system_CA_0.svg.png" data-sizes="auto" alt="计算向量之间的距离方式" class="lazyload">
+                    <h1>计算向量之间的距离方式</h1>
+                </div>
+            
+        </a>
 
-  <article>
-      
-          <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
-              <img data-src="https://images4.alphacoders.com/171/171916.jpg" data-sizes="auto" alt="Hexo 设置文章置顶" class="lazyload">
-              <h1>Hexo 设置文章置顶</h1>
-          </div>
-      
-      
-      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
-    <a><i class="nexmoefont icon-calendar-fill"></i>2021年03月22日</a>
-    <a><i class="nexmoefont icon-areachart"></i>297 字</a>
-    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
-</div>
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+            <a><i class="nexmoefont icon-calendar-fill"></i>2021年10月02日</a>
+            <a><i class="nexmoefont icon-areachart"></i>560 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 2 分钟</a>
+        </div>
 
-      
-
-      <h2 id="前提摘要"><a href="#前提摘要" class="headerlink" title="前提摘要"></a>前提摘要</h2><p>博客通常都需要文章置顶功能，网上关于next主题置顶都比较旧，自己根据教程改了改，已经完善许多，Hexo为5.0版本，next为8.2.2版本。最终效果图已放到最下面，请自行查看。</p>
-<span id="more"></span>
-<h2 id="安装GitHub上的开源项目"><a href="#安装GitHub上的开源项目" class="headerlink" title="安装GitHub上的开源项目"></a>安装GitHub上的开源项目</h2><ul>
-<li>首先删除原本的文章排序模块<code>npm uninstall hexo-generator-index --save</code></li>
-<li>再安装可以置顶的排序模块<code>npm install hexo-generator-index-pin-top --save</code></li>
-</ul>
-<h2 id="置顶文章"><a href="#置顶文章" class="headerlink" title="置顶文章"></a>置顶文章</h2><p>在需要置顶的文章的Front-matter中加上<code>top: true</code>以置顶文章。<code>top: 任意数字</code>也可置顶，其中数字越大就越靠前。</p>
-<h2 id="设置置顶图标"><a href="#设置置顶图标" class="headerlink" title="设置置顶图标"></a>设置置顶图标</h2><p>编辑主题(我的是next)下<code>*/hexo-theme-next/layout/_partials/post/post-meta.njk</code>文件，插入代码到  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;post-meta&quot;&gt;</span><br><span class="line">  代码插在开头：</span><br><span class="line">  &#123;% if post.top %&#125;</span><br><span class="line">    &lt;span style&#x3D;&quot;margin-right:5px;&quot;&gt;</span><br><span class="line">      &lt;i class&#x3D;&quot;fa fa-thumbtack&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">    &lt;&#x2F;span&gt;</span><br><span class="line">    &lt;span&gt;</span><br><span class="line">      &lt;font style&#x3D;&quot;color:#EB6D39;&quot;&gt;置顶&lt;&#x2F;font&gt;</span><br><span class="line">    &lt;&#x2F;span&gt;</span><br><span class="line">    &lt;span class&#x3D;&quot;post-meta-divider&quot;&gt;&lt;&#x2F;span&gt;</span><br><span class="line">  &#123;% endif %&#125;</span><br><span class="line">  ...other code...</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="置顶功能最终效果图"><a href="#置顶功能最终效果图" class="headerlink" title="置顶功能最终效果图"></a>置顶功能最终效果图</h2><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://i.loli.net/2021/03/22/GrqLlXYtCFWSMdx.png" alt="Screenshot_20210322_145826.png" class="lazyload"></p>
-
-  </article>
-
-  
-      
-    <div class="nexmoe-post-copyright">
-        <strong>本文作者：</strong>Jinker<br>
-        <strong>本文链接：</strong><a href="https://jinkerleong.github.io/2021/03/22/hexo-next-pin-top/" title="https:&#x2F;&#x2F;jinkerleong.github.io&#x2F;2021&#x2F;03&#x2F;22&#x2F;hexo-next-pin-top&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;jinkerleong.github.io&#x2F;2021&#x2F;03&#x2F;22&#x2F;hexo-next-pin-top&#x2F;</a><br>
-        
-            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
-        
+        <article>
+            
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于游戏经常使用，在此记录下来。日后有新的算法便补充。</p>
+<h2 id="距离公式"><a href="#距离公式"...
+            
+        </article>
     </div>
-
-
-  
-  
-  <div class="nexmoe-post-meta nexmoe-rainbow">
     
-        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
-    
-    
-        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Web%E5%BC%80%E5%8F%91/" rel="tag">Web开发</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/hexo/" rel="tag">hexo</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/hexo-theme-next/" rel="tag">hexo-theme-next</a>
-    
-</div>
-
-  
-      <div class="nexmoe-post-footer">
-          <section class="nexmoe-comment">
-    <script id="dsq-count-scr" src="https://jinkerjk.disqus.com/count.js" async></script>
-<div id="disqus_thread"></div>
-<script>
-    var disqus_config = function () {
-        this.page.url = 'https://jinkerleong.github.io/2021/03/22/hexo-next-pin-top/'; // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'https://jinkerleong.github.io/2021/03/22/hexo-next-pin-top/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    };
-</script>
-<script id="disqus-thread-script">
-    (function() { // DON'T EDIT BELOW THIS LINE
-        var d = document;
-        var s = d.createElement('script');
-        s.src = '//jinkerjk.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', + new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-
 </section>
-      </div>
-  
-</div>
+
             <div class="nexmoe-post-right">
               <div class="nexmoe-fixed">
                   <div class="nexmoe-tool"> 
@@ -268,13 +208,6 @@
                       
                         
                           
-                          
-                              <button class="mdui-fab catalog" style="overflow:unset;">
-                                  <i class="nexmoefont icon-i-catalog"></i>
-                                  <div class="nexmoe-toc">
-                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E6%8F%90%E6%91%98%E8%A6%81"><span class="toc-number">1.</span> <span class="toc-text">前提摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85GitHub%E4%B8%8A%E7%9A%84%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.</span> <span class="toc-text">安装GitHub上的开源项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%AE%E9%A1%B6%E6%96%87%E7%AB%A0"><span class="toc-number">3.</span> <span class="toc-text">置顶文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E7%BD%AE%E9%A1%B6%E5%9B%BE%E6%A0%87"><span class="toc-number">4.</span> <span class="toc-text">设置置顶图标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%AE%E9%A1%B6%E5%8A%9F%E8%83%BD%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%E5%9B%BE"><span class="toc-number">5.</span> <span class="toc-text">置顶功能最终效果图</span></a></li></ol>
-                                  </div>
-                              </button>
                           
                           
                       
@@ -304,10 +237,10 @@
 
  
 
-<script async src="/js/app.js?v=1633193676346"></script>
+<script async src="/js/app.js?v=1633193676370"></script>
 
 
-	<script async src="/js/search.js?v=1633193676346"></script>
+	<script async src="/js/search.js?v=1633193676370"></script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
