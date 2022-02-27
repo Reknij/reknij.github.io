@@ -1,1 +1,1 @@
-Sitemap: https://reknij.github.io/sitemap.txt
+Sitemap: https://reknij.github.io/sitemap.xml
