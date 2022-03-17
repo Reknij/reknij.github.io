@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="en" style="--mainContentPadding:20px;"><head><script src="/bbob.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css"><link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/github.min.css"><script src="//unpkg.com/@highlightjs/cdn-assets@11.4.0/highlight.min.js"></script><script>!function(n){var t;"/"===n.search[1]&&(t=n.search.slice(1).split("&").map(function(n){return n.replace(/~and~/g,"&")}).join("?"),window.history.replaceState(null,null,n.pathname.slice(0,-1)+t+n.hash))}(window.location)</script><meta charset="UTF-8"><link rel="icon" href="/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Debian网络配置的一些问题</title><link href="https://unpkg.com/element-plus@2.1.0/dist/index.css" rel="stylesheet"><script src="https://unpkg.com/vue@3.2.25/dist/vue.runtime.global.prod.js"></script><script src="https://unpkg.com/vue-router@4.0.12/dist/vue-router.global.prod.js"></script><script src="https://unpkg.com/element-plus@2.1.0"></script><script type="module" crossorigin="" src="/assets/index.a9cb413b.js"></script><link rel="stylesheet" href="/assets/index.42c19989.css"><script src="https://reknij.disqus.com/embed.js" data-timestamp="1647488998524"></script><link rel="prefetch" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.7ab903feba7624935283ca4c7d8c7203.css"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.9450cde9dd2c9d366781a8fc5ff6e933.js"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.8a051c75736795faf464e93aee7362f6.js"><link rel="prefetch" as="script" href="https://disqus.com/next/config.js"></head><body><div id="app" data-v-app=""><div class="el-card is-always-shadow" id="app-container"><!--v-if--><div class="el-card__body" style=""><section class="el-container is-vertical"><header class="el-header" style="height: auto;"><div class="nav-wrapper"><h1 class="title">Reknij Blog</h1><div class="nav-container"><div id="nav-item-/" class="nav-item"><a href="/" class="nav-item-a">Home</a></div><div id="nav-item-/articles/scroll" class="nav-item"><a href="/articles/scroll" class="nav-item-a">Articles</a></div><div id="nav-item-/filter/archives" class="nav-item"><a href="/filter/archives" class="nav-item-a">Archives</a></div><div id="nav-item-/filter/categories" class="nav-item"><a href="/filter/categories" class="nav-item-a">Categories</a></div><div id="nav-item-/filter/tags" class="nav-item"><a href="/filter/tags" class="nav-item-a">Tags</a></div><div id="nav-item-/about" class="nav-item"><a href="/about" class="nav-item-a">About</a></div></div></div></header><main class="el-main" id="mainContent"><div id="parent"><div id="content"><div class="el-card is-always-shadow"><!--v-if--><div class="el-card__body" style=""><span id="htmlContent"><article class="markdown-body"><div id="bbob-markdown-content"><h2 id="toc-1" class="bbob-h2">前言</h2>
+<p class="bbob-p">在家搞了一台服务器（其实就是旧台式机），系统选择Debian。主要之前VPS使用过几次（Amazon和Google），都是选Debian系统，感觉不错。最重要比较熟悉了，不想换别的重新适应。</p>
+<h2 id="toc-2" class="bbob-h2">问题</h2>
+<p class="bbob-p">装系统我是先找个显示器接，使用U盘装，装时不选桌面，但选了SSH server。网络使用网线接的以太网。装完后记得开启OpenSSH，防火墙放开22端口，我使用ufw来管理防火墙问题。由于我这台服务器要放到另一间房间，路由器太远，不适合继续使用网线，所以选择使用无线网卡。由于我的网卡驱动已自行处理完没问题，接下来就是处理开机自动连接网络，静态ip的问题。</p>
+<h2 id="toc-3" class="bbob-h2">工具</h2>
+<p class="bbob-p">记得先安装一些工具<code>sudo apt install wpa_supplicant net-tools net-stat</code></p>
+<h2 id="toc-4" class="bbob-h2">无线网络配置</h2>
+<ul class="bbob-list-unordered">
+<li>将要连接的无线网络名称和密码示例是
+<pre><code class="bbob-code hljs language-makefile"><span class="hljs-section">名称: Home_Wifi</span>
+<span class="hljs-section">密码: homepassword2021</span>
+</code></pre>
+</li>
+<li>执行以下命令，将无线网络配置信息存到一个文件上，目录可以自行选择。这里选择存在<code>/etc/wpa_supplicant/wpa_supplicant.conf</code>文件。
+<pre><code class="bbob-code hljs language-javascript">sudo wpa_passphrase <span class="hljs-title class_">Home</span>_Wifi homepassword2021 &gt; <span class="hljs-regexp">/etc/</span>wpa_supplicant/wpa_supplicant.<span class="hljs-property">conf</span>
+</code></pre>
+命令执行成功，<code>cat /etc/wpa_supplicant/wpa_supplicant.conf</code>查看大概如下
+<pre><code class="bbob-code hljs language-cpp">network={
+    ssid=<span class="hljs-string">"Home_Wifi"</span>
+    <span class="hljs-meta">#psk=<span class="hljs-string">"homepassword2021"</span></span>
+    psk=ccb290fd4fe6b22935cbae31449e050edd02ad44627b16ce0151668f5f53c01b <span class="hljs-comment">//这里我随便找的示例，反正大概就是一串字符。</span>
+}
+</code></pre>
+</li>
+<li>编辑<code>/etc/network/interfaces</code>文件
+<pre><code class="bbob-code hljs language-bash">sudo vim /etc/network/interfaces
+</code></pre>
+在最后添加以下信息
+<pre><code class="bbob-code hljs language-css"># my wifi device
+auto wlan0
+allow-hotplug wlan0
+iface wlan0 inet static
+ <span class="hljs-selector-tag">address</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">1.166</span>
+ netmask <span class="hljs-number">255.255</span>.<span class="hljs-number">255.0</span>
+ gateway <span class="hljs-number">192.168</span>.<span class="hljs-number">1.1</span>
+pre-up wpa_supplicant -<span class="hljs-selector-tag">B</span> -<span class="hljs-selector-tag">i</span> wlan0 -c /etc/wpa_supplicant/wpa_supplicant<span class="hljs-selector-class">.conf</span>
+post-down killall -<span class="hljs-selector-tag">q</span> wpa_supplicant
+</code></pre>
+其中<code>wlan0</code>是你的无线网卡名称，自行<code>ip a</code>来查看叫什么。这里这段看也看得懂，主要设置静态ip，我设置<code>192.168.1.166</code>
+<pre><code class="bbob-code hljs language-cpp">iface wlan0 inet <span class="hljs-type">static</span>
+ address <span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.166</span>
+ netmask <span class="hljs-number">255.255</span><span class="hljs-number">.255</span><span class="hljs-number">.0</span>
+ gateway <span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.1</span>
+</code></pre>
+</li>
+<li>上面弄完了就好了，现在执行
+<pre><code class="bbob-code hljs language-undefined">sudo ifup wlan0
+</code></pre>
+记得wlan0是无线网卡名称，请先找到自己的无线网卡名称。</li>
+<li>没问题的话网络就已连接。<code>ifup</code>命令其实是使用<code>/etc/network/interfaces</code>配置文件来设置网络的<code>ifconfig</code>也能设置。要想关闭请使用<code>ifdown wlan0</code>。</li>
+</ul>
+<h2 id="toc-5" class="bbob-h2">USB网络共享配置</h2>
+<p class="bbob-p">有时想要使用手机Usb网络共享网络怎么办，方法大致相同，好像也是能用<code>/etc/network/interfaces</code>配置文件，但我选择使用<code>ifconfig</code>命令。</p>
+<ul class="bbob-list-unordered">
+<li>执行<code>ip a</code>查看你的usb连接名称，通常是<code>usb0</code></li>
+<li>执行<code>sudo ifconfig usb0 up</code>来启用目标设备，<code>sudo ifconfig usb0 down</code>是关闭目标设备。</li>
+<li>执行<code>sudo dhclient usb0</code>来自动分配ip地址。</li>
+<li>如果要静态ip，则是执行<code>sudo ifconfig usb0 192.168.1.167 netmask 255.255.255.0</code>，其中<code>192.168.1.167</code>是你要设置的静态ip。</li>
+</ul>
+<h2 id="toc-6" class="bbob-h2">断网重连和Usb网络设置</h2>
+<p class="bbob-p">网络断了不会自动重连，所以我自己写了一个Python脚本来重连，另外自动设置上面的Usb网络共享。原理是隔一段时间<code>ping</code>看看能不能通，不能通可用认为断网了，就执行shell命令重连<code>sudo systemctl restart networking</code>。</p>
+<pre><code class="bbob-code hljs language-python"><span class="hljs-comment">#!/usr/bin/python3</span>
+<span class="hljs-comment"># ./AutoReconnectNetwork/main.py</span>
+
+<span class="hljs-keyword">import</span> sys, subprocess, time, functools
+
+targethost = <span class="hljs-string">"8.8.8.8"</span> <span class="hljs-comment">#ping domain</span>
+waitToCheck = <span class="hljs-number">60</span> * <span class="hljs-number">5</span> <span class="hljs-comment">#interval of check(seconds)</span>
+startAfter = <span class="hljs-number">60</span> <span class="hljs-comment">#start script after time(seconds)</span>
+
+<span class="hljs-built_in">print</span> = functools.partial(<span class="hljs-built_in">print</span>,flush=<span class="hljs-literal">True</span>)
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">checkNetworkPass</span>():
+    result = subprocess.run(<span class="hljs-string">f"ping -c 2 <span class="hljs-subst">{targethost}</span>"</span>, shell=<span class="hljs-literal">True</span>, capture_output=<span class="hljs-literal">True</span>)
+    <span class="hljs-keyword">return</span> result.stdout <span class="hljs-keyword">and</span> result.stdout.decode(<span class="hljs-string">"utf-8"</span>).find(<span class="hljs-string">"2 received"</span>) != -<span class="hljs-number">1</span>
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">restartNetworking</span>():
+    subprocess.run(<span class="hljs-string">"systemctl restart networking"</span>, shell=<span class="hljs-literal">True</span>, capture_output=<span class="hljs-literal">True</span>)
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">existDevice</span>(<span class="hljs-params">deviceName</span>):
+    result = subprocess.run(<span class="hljs-string">f"ip link show <span class="hljs-subst">{deviceName}</span>"</span>, shell=<span class="hljs-literal">True</span>, capture_output=<span class="hljs-literal">True</span>)
+    <span class="hljs-keyword">return</span> result.stdout <span class="hljs-keyword">and</span> result.stdout.decode(<span class="hljs-string">"utf-8"</span>).find(<span class="hljs-string">"does not exist"</span>) == -<span class="hljs-number">1</span>
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">restartUsb</span>():
+    tarusb = <span class="hljs-string">"usb0"</span>
+    <span class="hljs-keyword">if</span> existDevice(tarusb):
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f"Exists <span class="hljs-subst">{tarusb}</span>, restarting it.."</span>)
+        subprocess.run(<span class="hljs-string">f"ifconfig <span class="hljs-subst">{tarusb}</span> up"</span>, shell=<span class="hljs-literal">True</span>, capture_output=<span class="hljs-literal">True</span>)
+        subprocess.run(<span class="hljs-string">f"ifconfig <span class="hljs-subst">{tarusb}</span> 192.168.1.167 netmask 255.255.255.0"</span>, shell=<span class="hljs-literal">True</span>, capture_output=<span class="hljs-literal">True</span>)
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f"No exists <span class="hljs-subst">{tarusb}</span>."</span>)
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">checkArgv</span>():
+    <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> sys.argv:
+        <span class="hljs-keyword">if</span> a == <span class="hljs-string">"-t"</span>:
+            <span class="hljs-keyword">global</span> startAfter
+            startAfter = <span class="hljs-number">0</span>
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:
+    checkArgv()
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f"Starting script after <span class="hljs-subst">{startAfter}</span> seconds:"</span>)
+    time.sleep(startAfter)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">"===================="</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">"[Config]"</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f"Target host:  <span class="hljs-subst">{targethost}</span>"</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f"Wait to check:  <span class="hljs-subst">{waitToCheck}</span>"</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">"===================="</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">"Now runing script..."</span>)
+    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">"Check networking..."</span>)
+        <span class="hljs-keyword">if</span> checkNetworkPass():
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">"Networking normal.."</span>)
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">"Networking not access, trying restart networking.."</span>)
+            restartNetworking()
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">"Networking restart done..."</span>)
+        restartUsb()
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f"Wait <span class="hljs-subst">{waitToCheck}</span> seconds to check again..."</span>)
+        time.sleep(waitToCheck)
+</code></pre>
+<p class="bbob-p">保存在一个目录下即可，新建文件夹<code>AutoReconnectNetwork</code>，保存在里面为<code>main.py</code>。执行<code>sudo python3 ./AutoReconnectNetwork/main.py -t</code>来测试看看。关于Usb网络共享，请自行修改变量：</p>
+<pre><code class="bbob-code hljs language-cpp"><span class="hljs-function">def <span class="hljs-title">restartUsb</span><span class="hljs-params">()</span>:
+    tarusb =</span> <span class="hljs-string">"你的usb设备名称"</span>
+    ...
+    ...
+</code></pre>
+<p class="bbob-p">脚本开头的一些变量写了注释，应该看得懂吧。由于我有无线网卡能用，不用usb共享网络，所以只有我已插上了usb线连接手机共享网络，脚本检测到了才帮我设置usb网络共享。检测时间和检测网络是否可用一致。</p>
+<p class="bbob-p">脚本肯定要开机自启动，然后后台运行的，我使用systemd管理。先写个简单的service配置：</p>
+<pre><code class="bbob-code hljs language-ini"><span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=Auto reconnect wifi when <span class="hljs-literal">no</span> access networking.
+<span class="hljs-attr">ConditionPathExists</span>=/home/jinker/src/AutoReconnectNetwork/main.py
+<span class="hljs-attr">After</span>=network.target
+
+<span class="hljs-section">[Service]</span>
+<span class="hljs-attr">Type</span>=simple
+<span class="hljs-attr">ExecStart</span>=/usr/bin/python3 /home/jinker/src/AutoReconnectNetwork/main.py
+
+<span class="hljs-section">[Install]</span>
+<span class="hljs-attr">WantedBy</span>=multi-user.target
+</code></pre>
+<p class="bbob-p">其中<code>ConditionPathExists</code>和<code>ExecStart</code>是你的脚本路径。<code>ExecStart</code>那边确保python3路径存在。将这个service配置保存为<code>AutoReconnectNetwork.service</code>放到<code>/usr/lib/systemd/system/</code>下。</p>
+<p class="bbob-p">执行<code>sudo systemctl enable AutoReconnectNetwork.service</code>来开机自启。</p>
+<p class="bbob-p">执行<code>sudo systemctl start AutoReconnectNetwork.service</code>来启动服务。</p>
+<p class="bbob-p">执行<code>sudo systemctl status AutoReconnectNetwork.service</code>来看服务状态。</p>
+<p class="bbob-p">脚本默认启动后60秒才检测，然后每5分钟再检测。你可以自行修改。</p>
+<h2 id="toc-7" class="bbob-h2">结论</h2>
+<p class="bbob-p">主要记录下，方便以后我折腾。</p>
+</div></article><script>hljs.highlightAll()</script>
+
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    // this.page.url = PAGE_URL;  // Replace PAGE_URL with your page"s canonical URL variable
+    this.page.identifier = "\articles\debianNetworking.md"; // Replace "\articles\debianNetworking.md" with your page"s unique identifier variable
+    };
+    (function() { // DON"T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement("script");
+    s.src = "https://reknij.disqus.com/embed.js";
+    s.setAttribute("data-timestamp", +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></span></div></div><div class="el-overlay" style="z-index: 2001; display: none;"><div aria-modal="true" aria-labelledby="el-drawer__title" aria-label="" class="el-drawer ltr" role="dialog" style="width: 50%;"><header id="el-drawer__title" class="el-drawer__header"><h4>Table of content</h4><button aria-label="close drawer" class="el-drawer__close-btn" type="button"><i class="el-icon el-drawer__close"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M764.288 214.592L512 466.88 259.712 214.592a31.936 31.936 0 00-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1045.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0045.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 10-45.12-45.184z"></path></svg></i></button></header><!--v-if--><!--v-if--></div></div><div class="el-affix" style="margin-left: calc(100% - 60px);"><div class=""><button class="el-button el-button--primary el-button--default" type="button"><!--v-if--><span class="">Toc</span></button></div></div></div></div></main><footer class="el-footer" style="height: auto;"><div style="text-align: center;"><span class="copyright">© 2022 Jinker Powered by <a class="bbob-project-link" href="https://github.com/Reknij/Bbob">Bbob</a> &amp; default</span><br><span class="el-tag el-tag--default el-tag--light extraLink" style="background-color: white;"><span class="el-tag__content"><a href="/sitemap-html.html">Sitemap</a></span><!--v-if--></span></div></footer></section></div></div></div><iframe style="display: none;"></iframe><div class="pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links ad-text adSense adBlock adContent adBanner" style="width: 1px !important; height: 1px !important; position: absolute !important; left: -10000px !important; top: -1000px !important;"></div></body></html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="en" style="--mainContentPadding:20px;"><head><script src="/bbob.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css"><link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/github.min.css"><script src="//unpkg.com/@highlightjs/cdn-assets@11.4.0/highlight.min.js"></script><script>!function(n){var t;"/"===n.search[1]&&(t=n.search.slice(1).split("&").map(function(n){return n.replace(/~and~/g,"&")}).join("?"),window.history.replaceState(null,null,n.pathname.slice(0,-1)+t+n.hash))}(window.location)</script><meta charset="UTF-8"><link rel="icon" href="/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>初始体验seafile开源网盘</title><link href="https://unpkg.com/element-plus@2.1.0/dist/index.css" rel="stylesheet"><script src="https://unpkg.com/vue@3.2.25/dist/vue.runtime.global.prod.js"></script><script src="https://unpkg.com/vue-router@4.0.12/dist/vue-router.global.prod.js"></script><script src="https://unpkg.com/element-plus@2.1.0"></script><script type="module" crossorigin="" src="/assets/index.a9cb413b.js"></script><link rel="stylesheet" href="/assets/index.42c19989.css"><script src="https://reknij.disqus.com/embed.js" data-timestamp="1647488998142"></script><link rel="prefetch" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.7ab903feba7624935283ca4c7d8c7203.css"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.9450cde9dd2c9d366781a8fc5ff6e933.js"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.8a051c75736795faf464e93aee7362f6.js"><link rel="prefetch" as="script" href="https://disqus.com/next/config.js"></head><body><div id="app" data-v-app=""><div class="el-card is-always-shadow" id="app-container"><!--v-if--><div class="el-card__body" style=""><section class="el-container is-vertical"><header class="el-header" style="height: auto;"><div class="nav-wrapper"><h1 class="title">Reknij Blog</h1><div class="nav-container"><div id="nav-item-/" class="nav-item"><a href="/" class="nav-item-a">Home</a></div><div id="nav-item-/articles/scroll" class="nav-item"><a href="/articles/scroll" class="nav-item-a">Articles</a></div><div id="nav-item-/filter/archives" class="nav-item"><a href="/filter/archives" class="nav-item-a">Archives</a></div><div id="nav-item-/filter/categories" class="nav-item"><a href="/filter/categories" class="nav-item-a">Categories</a></div><div id="nav-item-/filter/tags" class="nav-item"><a href="/filter/tags" class="nav-item-a">Tags</a></div><div id="nav-item-/about" class="nav-item"><a href="/about" class="nav-item-a">About</a></div></div></div></header><main class="el-main" id="mainContent"><div id="parent"><div id="content"><div class="el-card is-always-shadow"><!--v-if--><div class="el-card__body" style=""><span id="htmlContent"><article class="markdown-body"><div id="bbob-markdown-content"><h2 id="toc-1" class="bbob-h2">前言</h2>
+<p class="bbob-p">在家有个个人服务器，有1tb硬盘空间，就想安装个网盘玩玩。有许多开源的网盘如Nextcloud, Owncloud等等。这里选择seafile，听说性能好，毕竟使用c开发。我选择的是docker方式部署，简单方便。</p>
+<h2 id="toc-2" class="bbob-h2">准备</h2>
+<p class="bbob-p">确保已安装<code>docker</code>和<code>docker-compose</code>。</p>
+<h2 id="toc-3" class="bbob-h2">下载并修改<code>docker-compose.yml</code></h2>
+<p class="bbob-p">下载官方提供的<code>docker-compose.yml</code>文件。<a href="https://download.seafile.com/d/320e8adf90fa43ad8fee/files/?p=/docker/docker-compose.yml">点击打开链接后点击下载按钮</a></p>
+<p class="bbob-p">修改<code>docker-compose.yml</code>配置文件</p>
+<h3 id="toc-4" class="bbob-h3">数据库服务</h3>
+<p class="bbob-p">数据库服务为<code>services.db</code></p>
+<ul class="bbob-list-unordered">
+<li><code>enviroment</code>中<code>MYSQL_ROOT_PASSWORD</code>是数据库密码，改成自己想要的密码或是直接默认密码不改。若改了密码需要一起改<code>services.seafile.enviroment</code>中的<code>DB_ROOT_PASSWD</code>，确保两个相同。</li>
+</ul>
+<h3 id="toc-5" class="bbob-h3">seafile服务</h3>
+<p class="bbob-p">seafile服务为<code>services.seafile</code></p>
+<ul class="bbob-list-unordered">
+<li><code>ports</code>中可以更改80端口和443端口的映射。打个例子，我是个人服务器，没有域名，80端口已经部署了一个网页，若想部署seafile肯定不能部署在80端口，所以我选择部署在2000端口上，就将<code>80:80</code>改成<code>2000:80</code>就行。</li>
+<li><code>enviroment</code>中的<code>SEAFILE_ADMIN_EMAIL</code>以及<code>SEAFILE_ADMIN_PASSWORD</code>便是网盘首个管理员账号的邮件密码。自行更改就行。</li>
+<li>如果您把<code>enviroment</code>中<code>SEAFILE_SERVER_LETSENCRYPT</code>设置为 true，该容器将会自动为您申请一个 letsencrypt 机构颁发的 SSL 证书，并开启 https 访问。如果您想要使用自己的 SSL 证书，而且如果用来持久化存储 Seafile 数据的目录为 /opt/seafile-data，您可以做如下处理：
+<ul class="bbob-list-unordered">
+<li>创建 /opt/seafile-data/ssl 目录，然后拷贝您的证书文件和密钥文件到ssl目录下。</li>
+<li>假设您的站点名称是 seafile.example.com，那么您的证书名称必须就是 seafile.example.com.crt，密钥文件名称就必须是 seafile.example.com.key。</li>
+</ul>
+</li>
+</ul>
+<h2 id="toc-6" class="bbob-h2">启动 Seafile 服务</h2>
+<p class="bbob-p">执行以下命令启动 Seafile 服务</p>
+<pre><code class="bbob-code hljs language-undefined">docker-compose up -d
+</code></pre>
+<p class="bbob-p">需要等待几分钟，等容器首次启动时的初始化操作完成后，您就可以在浏览器上访问服务器ip或域名 来打开 Seafile 主页。</p>
+<p class="bbob-p">注意：</p>
+<ul class="bbob-list-unordered">
+<li>您应该在 docker-compose.yml 文件所在的目下执行以上命令。</li>
+<li>由于我将seafile服务部署在2000端口，因此访问 Seahub 网站时需要加上端口2000</li>
+</ul>
+<hr>
+<h2 id="toc-7" class="bbob-h2">修改 Seafile 服务的配置</h2>
+<p class="bbob-p">Seafile 的配置文件存放在<code>shared/seafile/conf</code>目录下，您可以根据<a href="https://manual-cn.seafile.com/">Seafile 手册</a>的指导来修改这些配置项。一旦修改了配置文件，您需要重启服务以使其生效：</p>
+<pre><code class="bbob-code hljs language-undefined">docker-compose restart
+</code></pre>
+<h2 id="toc-8" class="bbob-h2">Seafile 目录结构</h2>
+<p class="bbob-p"><code>/shared</code>
+共享卷的挂载点,您可以选择在容器外部存储某些持久性信息.在这个项目中，我们会在外部保存各种日志文件和上传数据。 这使您可以轻松重建容器而不会丢失重要信息。</p>
+<ul class="bbob-list-unordered">
+<li><p class="bbob-p"><code>/shared/seafile</code>: Seafile 服务的配置文件以及数据文件</p>
+</li>
+<li><p class="bbob-p"><code>/shared/logs</code>: 日志目录</p>
+<ul class="bbob-list-unordered">
+<li><code>/shared/logs/var-log</code>: 我们将容器内的/var/log链接到本目录。您可以在<code>/shared/logs/var-log/nginx/</code>中找到 nginx 的日志文件</li>
+<li><code>/shared/logs/seafile</code>: Seafile 服务运行产生的日志文件目录。比如您可以在<code>/shared/logs/seafile/seafile.log</code>文件中看到 seaf-server 的日志</li>
+</ul>
+</li>
+<li><p class="bbob-p"><code>/shared/ssl</code>: 存放证书的目录，默认不存在</p>
+</li>
+</ul>
+<h2 id="toc-9" class="bbob-h2">升级 Seafile 服务</h2>
+<p class="bbob-p">如果要升级 Seafile 服务到最新版本：</p>
+<pre><code class="bbob-code hljs language-bash">docker pull seafileltd/seafile-mc:latest
+docker-compose down
+docker-compose up -d
+</code></pre>
+<hr>
+<h2 id="toc-10" class="bbob-h2">问题</h2>
+<ul class="bbob-list-unordered">
+<li>Seahub 登陆页面显示可以使用邮件或用户名登陆，然而只能使用邮件登陆，输入用户名登陆会提示错误。我使用的 Seafile 服务器版本是<code>v8.0.7</code></li>
+</ul>
+<h2 id="toc-11" class="bbob-h2">用户默认的配额空间</h2>
+<ul class="bbob-list-unordered">
+<li>可以在 系统管理 &gt; 用户选项 中为每个用户设置配额，每个用户默认为0，设置为0表示重置为默认上限。有趣的是它的大小计算方式为每1000MB为1GB。</li>
+<li>在<code>/shared/seafile/conf/seafile.conf</code>中可以设置默认上限。编辑此文件添加或修改：
+<pre><code class="bbob-code hljs language-ini"><span class="hljs-section">[quota]</span>
+<span class="hljs-comment"># 单位为 GB</span>
+<span class="hljs-attr">default</span> = <span class="hljs-number">2</span>
+</code></pre>
+这个设置对所有用户生效. 如果你想对某一特定用户进行容量分配, 请以管理员身份登陆 Seahub 网站,
+在 系统管理 页面中进行设置。</li>
+</ul>
+<hr>
+<h2 id="toc-12" class="bbob-h2">参考资料</h2>
+<ul class="bbob-list-unordered">
+<li><a href="https://cloud.seafile.com/published/seafile-manual-cn/docker/%E7%94%A8Docker%E9%83%A8%E7%BD%B2Seafile.md#user-content-%E5%90%AF%E5%8A%A8%20Seafile%20%E6%9C%8D%E5%8A%A1">用 Docker 部署 Seafile 服务</a></li>
+<li><a href="https://cloud.seafile.com/published/seafile-manual-cn/config/README.md#user-content-%E5%90%AF%E5%8A%A8%20Seafile%20%E6%9C%8D%E5%8A%A1">Seafile 服务器个性化配置</a></li>
+</ul>
+</div></article><script>hljs.highlightAll()</script>
+
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    // this.page.url = PAGE_URL;  // Replace PAGE_URL with your page"s canonical URL variable
+    this.page.identifier = "\articles\seafile-get-started.md"; // Replace "\articles\seafile-get-started.md" with your page"s unique identifier variable
+    };
+    (function() { // DON"T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement("script");
+    s.src = "https://reknij.disqus.com/embed.js";
+    s.setAttribute("data-timestamp", +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></span></div></div><div class="el-overlay" style="z-index: 2001; display: none;"><div aria-modal="true" aria-labelledby="el-drawer__title" aria-label="" class="el-drawer ltr" role="dialog" style="width: 50%;"><header id="el-drawer__title" class="el-drawer__header"><h4>Table of content</h4><button aria-label="close drawer" class="el-drawer__close-btn" type="button"><i class="el-icon el-drawer__close"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M764.288 214.592L512 466.88 259.712 214.592a31.936 31.936 0 00-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1045.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0045.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 10-45.12-45.184z"></path></svg></i></button></header><!--v-if--><!--v-if--></div></div><div class="el-affix" style="margin-left: calc(100% - 60px);"><div class=""><button class="el-button el-button--primary el-button--default" type="button"><!--v-if--><span class="">Toc</span></button></div></div></div></div></main><footer class="el-footer" style="height: auto;"><div style="text-align: center;"><span class="copyright">© 2022 Jinker Powered by <a class="bbob-project-link" href="https://github.com/Reknij/Bbob">Bbob</a> &amp; default</span><br><span class="el-tag el-tag--default el-tag--light extraLink" style="background-color: white;"><span class="el-tag__content"><a href="/sitemap-html.html">Sitemap</a></span><!--v-if--></span></div></footer></section></div></div></div><iframe style="display: none;"></iframe><div class="pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links ad-text adSense adBlock adContent adBanner" style="width: 1px !important; height: 1px !important; position: absolute !important; left: -10000px !important; top: -1000px !important;"></div></body></html>

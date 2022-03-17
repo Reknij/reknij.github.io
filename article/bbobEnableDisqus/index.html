@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="en" style="--mainContentPadding:20px;"><head><script src="/bbob.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css"><link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/github.min.css"><script src="//unpkg.com/@highlightjs/cdn-assets@11.4.0/highlight.min.js"></script><script>!function(n){var t;"/"===n.search[1]&&(t=n.search.slice(1).split("&").map(function(n){return n.replace(/~and~/g,"&")}).join("?"),window.history.replaceState(null,null,n.pathname.slice(0,-1)+t+n.hash))}(window.location)</script><meta charset="UTF-8"><link rel="icon" href="/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Bbob 启用Disqus评论</title><link href="https://unpkg.com/element-plus@2.1.0/dist/index.css" rel="stylesheet"><script src="https://unpkg.com/vue@3.2.25/dist/vue.runtime.global.prod.js"></script><script src="https://unpkg.com/vue-router@4.0.12/dist/vue-router.global.prod.js"></script><script src="https://unpkg.com/element-plus@2.1.0"></script><script type="module" crossorigin="" src="/assets/index.a9cb413b.js"></script><link rel="stylesheet" href="/assets/index.42c19989.css"><script src="https://reknij.disqus.com/embed.js" data-timestamp="1647488997935"></script></head><body><div id="app" data-v-app=""><div class="el-card is-always-shadow" id="app-container"><!--v-if--><div class="el-card__body" style=""><section class="el-container is-vertical"><header class="el-header" style="height: auto;"><div class="nav-wrapper"><h1 class="title">Reknij Blog</h1><div class="nav-container"><div id="nav-item-/" class="nav-item"><a href="/" class="nav-item-a">Home</a></div><div id="nav-item-/articles/scroll" class="nav-item"><a href="/articles/scroll" class="nav-item-a">Articles</a></div><div id="nav-item-/filter/archives" class="nav-item"><a href="/filter/archives" class="nav-item-a">Archives</a></div><div id="nav-item-/filter/categories" class="nav-item"><a href="/filter/categories" class="nav-item-a">Categories</a></div><div id="nav-item-/filter/tags" class="nav-item"><a href="/filter/tags" class="nav-item-a">Tags</a></div><div id="nav-item-/about" class="nav-item"><a href="/about" class="nav-item-a">About</a></div></div></div></header><main class="el-main" id="mainContent"><div id="parent"><div id="content"><div class="el-card is-always-shadow"><!--v-if--><div class="el-card__body" style=""><span id="htmlContent"><article class="markdown-body"><div id="bbob-markdown-content"><h1 id="toc-1" class="bbob-h1">Disqus是什么</h1>
+<blockquote class="bbob-quote">
+<p class="bbob-p">Disqus（/dɪsˈkʌs/，与英语“discuss”同音）是一家使用社交网络形式，向网络社区提供网站留言服务的公司。该公司的平台提供不同的功能，例如与不同社交网络服务链接、社交网络、用户个人文件、垃圾宣传及审核工具、数据分析、电邮通知和在移动设备留言等。它是于2007年由Daniel Ha和Jason Yan成立为一家Y Combinator初创公司。</p>
+</blockquote>
+<h1 id="toc-2" class="bbob-h1">安装</h1>
+<p class="bbob-p">首先安装插件，到GitHub网页跟着指示安装。</p>
+<pre><code class="bbob-code hljs language-bash">bbob add -a https://github.com/Reknij/bbob-plugin-disqus/releases/download/v1.0.0/bbob-plugin-disqus.rar
+</code></pre>
+<p class="bbob-p">这里我安装的是v1.0.0版本。</p>
+<h1 id="toc-3" class="bbob-h1">配置</h1>
+<p class="bbob-p">在<code>./configs/</code>目录下新建一个配置文件<code>bbob-plugin-disqus-config.json</code>，接着输入以下内容</p>
+<pre><code class="bbob-code hljs language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"shortName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"example"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p class="bbob-p">请将<code>shortName</code>改成你自己的。关于shortName请自行到Disqus注册，可以得到你的shortName，一个Disqus账号可以有多个<code>shortName</code>，一个<code>shortName</code>代表一个网站。</p>
+<h1 id="toc-4" class="bbob-h1">使用</h1>
+<p class="bbob-p">输入命令后：</p>
+<pre><code class="bbob-code hljs language-css">bbob g -<span class="hljs-selector-tag">p</span>
+</code></pre>
+<p class="bbob-p">打开网页浏览<a href="http://localhost:3000/">localhost</a>，打开其中一个文章即可看到效果。如果更改过预览端口，请自行通过指定的端口查看预览网页。</p>
+</div></article><script>hljs.highlightAll()</script>
+
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    // this.page.url = PAGE_URL;  // Replace PAGE_URL with your page"s canonical URL variable
+    this.page.identifier = "\articles\bbobEnableDisqus.md"; // Replace "\articles\bbobEnableDisqus.md" with your page"s unique identifier variable
+    };
+    (function() { // DON"T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement("script");
+    s.src = "https://reknij.disqus.com/embed.js";
+    s.setAttribute("data-timestamp", +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></span></div></div><div class="el-overlay" style="z-index: 2001; display: none;"><div aria-modal="true" aria-labelledby="el-drawer__title" aria-label="" class="el-drawer ltr" role="dialog" style="width: 50%;"><header id="el-drawer__title" class="el-drawer__header"><h4>Table of content</h4><button aria-label="close drawer" class="el-drawer__close-btn" type="button"><i class="el-icon el-drawer__close"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M764.288 214.592L512 466.88 259.712 214.592a31.936 31.936 0 00-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1045.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0045.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 10-45.12-45.184z"></path></svg></i></button></header><!--v-if--><!--v-if--></div></div><div class="el-affix" style="margin-left: calc(100% - 60px);"><div class=""><button class="el-button el-button--primary el-button--default" type="button"><!--v-if--><span class="">Toc</span></button></div></div></div></div></main><footer class="el-footer" style="height: auto;"><div style="text-align: center;"><span class="copyright">© 2022 Jinker Powered by <a class="bbob-project-link" href="https://github.com/Reknij/Bbob">Bbob</a> &amp; default</span><br><span class="el-tag el-tag--default el-tag--light extraLink" style="background-color: white;"><span class="el-tag__content"><a href="/sitemap-html.html">Sitemap</a></span><!--v-if--></span></div></footer></section></div></div></div></body></html>

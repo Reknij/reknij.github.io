@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="en" style="--mainContentPadding:20px;"><head><script src="/bbob.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css"><link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/github.min.css"><script src="//unpkg.com/@highlightjs/cdn-assets@11.4.0/highlight.min.js"></script><script>!function(n){var t;"/"===n.search[1]&&(t=n.search.slice(1).split("&").map(function(n){return n.replace(/~and~/g,"&")}).join("?"),window.history.replaceState(null,null,n.pathname.slice(0,-1)+t+n.hash))}(window.location)</script><meta charset="UTF-8"><link rel="icon" href="/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>MVC，MVP 和 MVVM 的理解</title><link href="https://unpkg.com/element-plus@2.1.0/dist/index.css" rel="stylesheet"><script src="https://unpkg.com/vue@3.2.25/dist/vue.runtime.global.prod.js"></script><script src="https://unpkg.com/vue-router@4.0.12/dist/vue-router.global.prod.js"></script><script src="https://unpkg.com/element-plus@2.1.0"></script><script type="module" crossorigin="" src="/assets/index.a9cb413b.js"></script><link rel="stylesheet" href="/assets/index.42c19989.css"><script src="https://reknij.disqus.com/embed.js" data-timestamp="1647488998001"></script><link rel="prefetch" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.7ab903feba7624935283ca4c7d8c7203.css"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.9450cde9dd2c9d366781a8fc5ff6e933.js"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.8a051c75736795faf464e93aee7362f6.js"><link rel="prefetch" as="script" href="https://disqus.com/next/config.js"></head><body><div id="app" data-v-app=""><div class="el-card is-always-shadow" id="app-container"><!--v-if--><div class="el-card__body" style=""><section class="el-container is-vertical"><header class="el-header" style="height: auto;"><div class="nav-wrapper"><h1 class="title">Reknij Blog</h1><div class="nav-container"><div id="nav-item-/" class="nav-item"><a href="/" class="nav-item-a">Home</a></div><div id="nav-item-/articles/scroll" class="nav-item"><a href="/articles/scroll" class="nav-item-a">Articles</a></div><div id="nav-item-/filter/archives" class="nav-item"><a href="/filter/archives" class="nav-item-a">Archives</a></div><div id="nav-item-/filter/categories" class="nav-item"><a href="/filter/categories" class="nav-item-a">Categories</a></div><div id="nav-item-/filter/tags" class="nav-item"><a href="/filter/tags" class="nav-item-a">Tags</a></div><div id="nav-item-/about" class="nav-item"><a href="/about" class="nav-item-a">About</a></div></div></div></header><main class="el-main" id="mainContent"><div id="parent"><div id="content"><div class="el-card is-always-shadow"><!--v-if--><div class="el-card__body" style=""><span id="htmlContent"><article class="markdown-body"><div id="bbob-markdown-content"><h1 id="toc-1" class="bbob-h1">前言</h1>
+<p class="bbob-p">做客户端开发、前端开发对<strong>MVC、MVP、MVVM</strong>这些名词不了解也应该大致听过，都是为了解决图形界面应用程序复杂性管理问题而产生的应用架构模式。</p>
+<p class="bbob-p">网上很多文章关于这方面的讨论比较杂乱，各种MV模式之间的区别分不清，甚至有些描述都是错误的。本文追根溯源，从最经典的<strong>Smalltalk-80 MVC模式</strong>开始逐步还原图形界面之下最真实的MV模式。</p>
+<!--more-->
+<h2 id="toc-2" class="bbob-h2">GUI程序所面临的问题</h2>
+<p class="bbob-p">图形界面的应用程序提供给用户可视化的操作界面，这个界面提供给数据和信息。用户输入行为（键盘，鼠标等）会执行一些业务逻辑，可能会导致对应用程序数据的变更，数据的变更自然需要用户界面的同步变更以提供最准确的信息。例如用户对一个电子表格重新排序的操作，应用程序需要响应用户操作，对数据进行排序，然后需要同步到界面上。</p>
+<p class="bbob-p">在开发应用程序的时候，以求更好的管理应用程序的复杂性，<strong>基于职责分离（Speration of Duties）的思想都会对应用程序进行分层</strong>。在开发图形界面应用程序的时候，会把<strong>管理用户界面的层次称为View</strong>，<strong>应用程序的数据为Model</strong>（注意这里的Model指的是Domain Model，这个应用程序对需要解决的问题的数据抽象，不包含应用的状态，可以简单理解为对象）。Model层对应用程序的业务逻辑无知，只保存数据结构和提供数据操作的接口。</p>
+<p class="bbob-p"><img src="https://i.loli.net/2021/03/23/hAvOzScnpmHqDgB.png" alt="MV*所解决的问题解释图"></p>
+<p class="bbob-p">有了View和Model的分层，那么就有了两个问题：</p>
+<ol class="bbob-list-ordered">
+<li>响应用户操作的业务逻辑（例如排序）的管理。</li>
+<li>View如何同步Model的变更。</li>
+</ol>
+<p class="bbob-p">带着这两个问题开始探索MV模式，会发现这些模式之间的差异可以归纳为对这两个问题处理的方式的不同。而几乎所有的MV模式都是经典的Smalltalk-80 MVC的修改版。</p>
+<h2 id="toc-3" class="bbob-h2">MV*模式解决什么问题</h2>
+<p class="bbob-p">MV*就是实现了领域模型数据和UI层的解耦。</p>
+<p class="bbob-p">MVC、MVP、MVVM对其解耦的思路的不同。从历史的角度来看，MVC、MVP和MVVM是一种进化的关系。但是鉴于项目的规模以及模式实现的方式不同，<strong>不同的MV*模式各有其优点和缺点，难分孰好孰坏</strong>。</p>
+<p class="bbob-p">但是业界越来越认为：<strong>MVVM是前端领域最好的MV*模式</strong>。Angular、Vue是MVVM模式典范</p>
+<h1 id="toc-4" class="bbob-h1">MVC模式</h1>
+<h2 id="toc-5" class="bbob-h2">MVC依赖关系</h2>
+<p class="bbob-p">MVC除了把应用程序分成<strong>View、Model层</strong>，还额外的加了一个<strong>Controller层</strong>，职责为进行Model和View之间的协作（路由、输入预处理等）的应用逻辑（application logic）。</p>
+<ul class="bbob-list-unordered">
+<li><p class="bbob-p"><strong>Model，模型层</strong>：主要是与业务数据有关。一般对数据的处理，业务逻辑都会放在model进行处理</p>
+</li>
+<li><p class="bbob-p"><strong>View，视图层</strong>：是应用程序数据的可视化表示。渲染html页面，展示给用户</p>
+</li>
+<li><p class="bbob-p"><strong>Controller，控制器层</strong>：管理应用程序中Model和View之间的逻辑和协调。调度View层和Model层，将用户界面和业务逻辑合理的组织在一起，起粘合剂的效果。所以Controller中的内容能少则少，这样才能提供最大的灵活性</p>
+</li>
+</ul>
+<p class="bbob-p"><img src="https://i.loli.net/2021/03/23/i7rEWQNyVFAjGYb.png" alt="MVC各层所负责的部分解释图">
+<img src="https://i.loli.net/2021/03/23/LxJNhvsfoT2jHdr.jpg" alt="MVC依赖关系"></p>
+<p class="bbob-p">Controller和View都依赖Model层，Controller和View可以互相依赖。在一些网上的资料Controller和View之间的依赖关系可能不一样，有些是单向依赖，有些是双向依赖，这个其实关系不大，后面会看到它们的依赖关系都是为了把处理用户行为触发的业务逻辑的处理权交给Controller。</p>
+<p class="bbob-p">用户对View的输入等操作并不会在View的相关模块中处理逻辑，而是由Controller层获得这些操作（所谓的Pass Call），并由Controller层对这些操作中的数据经过应用逻辑的操作，然后在调用Model层的接口，将数据交给Model层。Model层执行与业务逻辑相关的操作，并更新数据。<strong>Model和View通过观察者模式联系在一起</strong>，即<strong>View是Model的观察者，当Model数据变动之后，通知View层进行数据更新</strong>。</p>
+<p class="bbob-p"><img src="https://i.loli.net/2021/03/23/87GzX3nYpVJxRUW.png" alt="MVC调用解释图"></p>
+<p class="bbob-p"><img src="https://i.loli.net/2021/03/23/rfy8WIzhRFH5Q3p.jpg" alt="MVC详细解释图"></p>
+<p class="bbob-p">MVC要实现的目标是<strong>将软件用户界面和业务逻辑分离</strong>以使代码可扩展性、可复用性、可维护性、灵活性加强。</p>
+<h2 id="toc-6" class="bbob-h2">MVC Model 2</h2>
+<p class="bbob-p">在Web服务端开发的时候也会接触到MVC模式，而这种MVC模式不能严格称为MVC模式。经典的MVC模式只是解决客户端图形界面应用程序的问题，而对服务端无效。服务端的MVC模式又自己特定的名字：MVC Model 2，或者叫JSP Model 2，或者直接就是Model 2 。Model 2客户端服务端的交互模式如下：</p>
+<p class="bbob-p"><img src="https://i.loli.net/2021/03/23/bRI8E65XJawoMLh.jpg" alt="MVC Model 2 交互图"></p>
+<p class="bbob-p">服务端接收到来自客户端的请求，服务端通过路由规则把这个请求交由给特定的Controller进行处理，Controller执行相应的业务逻辑，对数据库数据（Model）进行操作，然后用数据去渲染特定的模版，返回给客户端。</p>
+<p class="bbob-p">因为HTTP协议是单工协议并且是无状态的，服务器无法直接给客户端推送数据。除非客户端再次发起请求，否则服务器端的Model的变更就无法告知客户端。所以可以看到经典的Smalltalk-80 MVC中Model通过观察者模式告知View更新这一环被无情地打破，不能称为严格的MVC。</p>
+<p class="bbob-p">Model 2模式最早在1998年应用在JSP应用程序当中，JSP Model 1应用管理的混乱诱发了JSP参考了客户端MVC模式，催生了Model 2。</p>
+<p class="bbob-p"><img src="https://i.loli.net/2021/03/23/sUiJ7h49mktGxAH.jpg" alt="JSP Model 1 和 JSP Model 2 比较图"></p>
+<p class="bbob-p">后来这种模式几乎被应用在所有语言的Web开发框架当中。PHP的ThinkPHP，Python的Dijango、Flask，NodeJS的Express，Ruby的RoR，基本都采纳了这种模式。平常所讲的MVC基本是这种服务端的MVC。</p>
+<h2 id="toc-7" class="bbob-h2">SpringMVC模型</h2>
+<p class="bbob-p">SpringMVC其实就一种基于Servlet的MVC模型：</p>
+<ul class="bbob-list-unordered">
+<li><p class="bbob-p">模型：一个或多个javabean对象，用于存储数据和业务逻辑。</p>
+</li>
+<li><p class="bbob-p">视图：一个和多个JSP页面，想控制器提交数据和为模型提供数据显示，JSP页面主要使用HTML标记和JavaBean标记来显示数据。</p>
+</li>
+<li><p class="bbob-p">控制器：一个或多个Servlet对象，根据视图提交的请求进行控制，即将请求转发给业务逻辑的javabean，并将处理记过存放到实体模型javabean中，输出给视图显示。</p>
+</li>
+</ul>
+<p class="bbob-p"><img src="https://i.loli.net/2021/03/23/PkM9rSV3zBCgQiF.jpg" alt="SpringMVC详细解释图"></p>
+<ul class="bbob-list-unordered">
+<li><p class="bbob-p"><strong>DispatcherServlet-前端控制器</strong>：接收请求，响应结果，相当于转发器，中央处理器。是整个流程控制的中心，控制其它组件执行，统一调度，降低组件之间的耦合性，提高每个组件的扩展性。dispatcherServlet是整个流程控制的中心，由它调用其它组件处理用户的请求。</p>
+</li>
+<li><p class="bbob-p"><strong>HandlerMapping-处理器映射器</strong>：按照特定规则（HandlerAdapter要求的规则）去执行Handle。根据请求的url查找Handler。通过扩展处理器映射器实现不同的映射方式，springmvc提供了不同的映射器实现不同的映射方式：配置文件方式，实现接口方式，注解方式等。</p>
+</li>
+<li><p class="bbob-p"><strong>HandlAdapter-处理器适配器</strong>：通过扩展处理器适配器，支持更多类型的处理器。</p>
+</li>
+<li><p class="bbob-p"><strong>ViewResolver-视图解析器</strong>：进行视图解析，根据逻辑视图名解析成真正的视图（view）。通过扩展视图解析器，支持更多类型的视图解析，例如：jsp、freemarker、pdf、excel等。</p>
+</li>
+<li><p class="bbob-p"><strong>Handler-处理器</strong>：Handler 是继DispatcherServlet前端控制器的后端控制器，在DispatcherServlet的控制下Handler对具体的用户请求进行处理。由于Handler涉及到具体的用户业务请求，所以一般情况需要工程师根据业务需求开发Handler(编写Handler时按照HandlerAdapter的要求去做，这样适配器才可以去正确执行Handler)。</p>
+</li>
+<li><p class="bbob-p"><strong>View-视图</strong>：View是一个接口，实现类支持不同的View类型（jsp、freemarker、pdf...）</p>
+</li>
+</ul>
+<p class="bbob-p"><img src="https://i.loli.net/2021/03/23/lQns2djGAoRcxty.jpg" alt="SpringMVC详细解释图补充"></p>
+<h2 id="toc-8" class="bbob-h2">MVC 优点与缺点</h2>
+<h3 id="toc-9" class="bbob-h3">优点：</h3>
+<ul class="bbob-list-unordered">
+<li><p class="bbob-p">把业务逻辑全部分离到Controller中，模块化程度高。当业务逻辑变更的时候，不需要变更View和Model，只需要Controller换成另外一个Controller就行了（Swappable Controller）。</p>
+</li>
+<li><p class="bbob-p">观察者模式可以做到多视图同时更新。</p>
+</li>
+</ul>
+<h3 id="toc-10" class="bbob-h3">缺点：</h3>
+<ul class="bbob-list-unordered">
+<li><p class="bbob-p">Controller测试困难。因为<strong>视图同步操作是由View自己执行</strong>，而View只能在有UI的环境下运行。在没有UI环境下对Controller进行单元测试的时候，Controller业务逻辑的正确性是无法验证的：<strong>Controller更新Model的时候，无法对View的更新操作进行断言</strong>。</p>
+</li>
+<li><p class="bbob-p"><strong>View无法组件化</strong>。View是强依赖特定的Model的，如果需要把这个View抽出来作为一个另外一个应用程序可复用的组件就困难了。因为不同程序的的Domain Model是不一样的</p>
+</li>
+</ul>
+<h1 id="toc-11" class="bbob-h1">MVP</h1>
+<p class="bbob-p">MVP模式有两种：</p>
+<ol class="bbob-list-ordered">
+<li><strong>Passive View</strong></li>
+<li>Supervising Controller</li>
+</ol>
+<p class="bbob-p">而大多数情况下讨论的都是<strong>Passive View</strong>模式。本文会对<strong>Passive View</strong>模式进行较为详细的介绍，而Supervising Controller模式则简单提及。</p>
+<h2 id="toc-12" class="bbob-h2">历史背景</h2>
+<blockquote class="bbob-quote">
+<p class="bbob-p">MVP模式是MVC模式的改良。在上个世纪90年代，IBM旗下的子公司Taligent在用C/C++开发一个叫CommonPoint的图形界面应用系统的时候提出来的。</p>
+</blockquote>
+<h2 id="toc-13" class="bbob-h2">MVP（Passive View）的依赖关系</h2>
+<p class="bbob-p">MVP模式把MVC模式中的Controller换成了<strong>Presenter</strong>。MVP层次之间的依赖关系如下：</p>
+<p class="bbob-p"><img src="https://i.loli.net/2021/03/23/FxsQjrJCN3IgnKH.jpg" alt="MVP依赖关系图"></p>
+<p class="bbob-p">MVP<strong>打破了View原来对于Model的依赖</strong>，其余的依赖关系和MVC模式一致。</p>
+<h2 id="toc-14" class="bbob-h2">MVP（Passive View）调用关系</h2>
+<p class="bbob-p"><img src="https://i.loli.net/2021/03/23/tRZA5wIv3nMgF9l.png" alt="MVP调用关系图"></p>
+<p class="bbob-p">MVP比起MVC模式，它的特点很明显。<strong>MVP中M和V之间的依赖关系被消除了</strong>。</p>
+<p class="bbob-p">在MVC中，M和V之间通过观察者模式依赖。这种依赖关系在MVP中被转移到M和P层中。这样一来P层必须通过一定的机制通知V层进行数据的更新。所以MVP模式中V层中提供了供P层调用的接口。P层作为观察者获得数据变化是，将调用V层的接口将变化反映到V层中。</p>
+<p class="bbob-p">在MVP中：</p>
+<ul class="bbob-list-unordered">
+<li><p class="bbob-p">Model层依然是主要与业务数据有关。</p>
+</li>
+<li><p class="bbob-p">View依然是应用程序的可视化表示，但是在MVP中它对领域数据（Model层）完全无知，<strong>View不再负责同步的逻辑，而是由Presenter负责。Presenter中既有应用程序逻辑也有同步逻辑。所以比起MVC中View层更轻了</strong>。但是，<strong>View需要提供操作界面的接口给Presenter进行调用</strong>。</p>
+</li>
+<li><p class="bbob-p">Presenter层比较重，它不仅调用Model的接口，也调用View的接口。而且需要作为观察者获得Model的数据更新。</p>
+</li>
+</ul>
+<h2 id="toc-15" class="bbob-h2">MVP（Passive View）优点与缺点</h2>
+<h3 id="toc-16" class="bbob-h3">优点：</h3>
+<ul class="bbob-list-unordered">
+<li><p class="bbob-p">便于测试。Presenter对View是通过接口进行，在对Presenter进行不依赖UI环境的单元测试的时候。可以通过Mock一个View对象，这个对象只需要实现了View的接口即可。然后依赖注入到Presenter中，单元测试的时候就可以完整的测试Presenter应用逻辑的正确性。这里根据上面的例子给出了Presenter的单元测试样例。</p>
+</li>
+<li><p class="bbob-p">View可以进行组件化。在MVP当中，View不依赖Model。这样就可以让View从特定的业务场景中脱离出来，可以说View可以做到对业务完全无知。它只需要提供一系列接口提供给上层操作。这样就可以做到高度可复用的View组件。</p>
+</li>
+</ul>
+<h3 id="toc-17" class="bbob-h3">缺点</h3>
+<ul class="bbob-list-unordered">
+<li>Presenter中除了应用逻辑以外，还有大量的View-&gt;Model，Model-&gt;View的手动同步逻辑，造成Presenter比较笨重，维护起来会比较困难。</li>
+</ul>
+<h2 id="toc-18" class="bbob-h2">MVP（Supervising Controller）</h2>
+<p class="bbob-p">上面讲的是MVP的Passive View模式，该模式下View非常Passive，它几乎什么都不知道，Presenter让它干什么它就干什么。而Supervising Controller模式中，Presenter会把一部分简单的同步逻辑交给View自己去做，Presenter只负责比较复杂的、高层次的UI操作，所以可以把它看成一个Supervising Controller。</p>
+<p class="bbob-p">Supervising Controller模式下的依赖和调用关系：</p>
+<p class="bbob-p"><img src="https://i.loli.net/2021/03/23/t8JvLdOSU5wYmKQ.png" alt="MVP (Supervising Controller) 调用关系图"></p>
+<p class="bbob-p">因为Supervising Controller用得比较少，<strong>MVVM可以看作是一种特殊的MVP（Passive View）模式</strong>，或者说是对MVP模式的一种改良。对它的讨论就到这里为止。</p>
+<h1 id="toc-19" class="bbob-h1">MVVM模式</h1>
+<p class="bbob-p">MVVM可以看作是一种特殊的MVP（Passive View）模式，或者说是对MVP模式的一种改良。</p>
+<h2 id="toc-20" class="bbob-h2">历史背景</h2>
+<blockquote class="bbob-quote">
+<p class="bbob-p">MVVM模式最早是微软公司提出，并且了大量使用在.NET的WPF和Sliverlight中。2005年微软工程师John Gossman在自己的博客上首次公布了MVVM模式。</p>
+</blockquote>
+<h2 id="toc-21" class="bbob-h2">ViewModel</h2>
+<p class="bbob-p">MVVM代表的是Model-View-<strong>ViewModel</strong>，这里需要解释一下什么是<strong>ViewModel</strong>。ViewModel的含义就是 <strong>"Model of View"，视图的模型</strong>。它的含义包含了<strong>领域模型（Domain Model）和视图的状态（State）</strong>。 在图形界面应用程序当中，界面所提供的信息可能不仅仅包含应用程序的领域模型。还可能包含一些领域模型不包含的视图状态，例如电子表格程序上需要显示当前排序的状态是顺序的还是逆序的，而这是Domain Model所不包含的，但也是需要显示的信息。</p>
+<p class="bbob-p">可以简单把ViewModel理解为页面上所显示内容的数据抽象，和Domain Model不一样，ViewModel更适合用来描述View。</p>
+<h2 id="toc-22" class="bbob-h2">MVVM的依赖</h2>
+<p class="bbob-p">MVVM的依赖关系和MVP依赖，只不过是把P换成了VM。</p>
+<p class="bbob-p">Model-View-ViewModel模式中，M层数据的变化不是通过观察者模式通知到V层的（即没有M和V的依赖），也不是通过VM层调用V层的接口将数据传递给V层的（这意味着用户代码不需要手动更新V层）。而是通过在VM层实现一个特殊的binder，将数据从M层直接绑定到V层。这样ViewModel层了解Model层，View层了解ViewModel层。</p>
+<p class="bbob-p">ViewModel充当了一个数据转换器的作用。它将Model信息转换为View信息，还将命令从View传递到Model。在这里，View可以访问ViewModel,ViewModel可以访问Model。</p>
+<p class="bbob-p">MVVM依赖关系：</p>
+<p class="bbob-p"><img src="https://i.loli.net/2021/03/23/6ty2mfBPQX1p5jY.jpg" alt="MVVM依赖关系图"></p>
+<h2 id="toc-23" class="bbob-h2">MVVM调用关系</h2>
+<p class="bbob-p"><img src="https://i.loli.net/2021/03/23/RMpmPjxuJlr5XiN.png" alt="MVVM调用关系图"></p>
+<p class="bbob-p">MVVM的调用关系和MVP一样。但是，在ViewModel当中会有一个叫Binder，或者是Data-binding engine的东西。以前全部由Presenter负责的View和Model之间数据同步操作交由给Binder处理。你只需要在View的模版语法当中，指令式地声明View上的显示的内容是和Model的哪一块数据绑定的。当ViewModel对进行Model更新的时候，Binder会自动把数据更新到View上去，当用户对View进行操作（例如表单输入），Binder也会自动把数据更新到Model上去。这种方式称为：Two-way data-binding，双向数据绑定。可以简单而不恰当地理解为一个模版引擎，但是会根据数据变更实时渲染。</p>
+<p class="bbob-p"><strong>MVVM把View和Model的同步逻辑自动化了</strong>。以前Presenter负责的View和Model同步不再手动地进行操作，而是交由框架所提供的Binder进行负责。只需要告诉Binder，View显示的数据对应的是Model哪一部分即可。</p>
+<p class="bbob-p"><img src="https://i.loli.net/2021/03/23/OTyNzBcb13Grt4Z.jpg" alt="MVVM关系补充"></p>
+<h2 id="toc-24" class="bbob-h2">MVVM优点与缺点</h2>
+<h3 id="toc-25" class="bbob-h3">优点：</h3>
+<ul class="bbob-list-unordered">
+<li><p class="bbob-p">双向绑定技术，当Model变化时，View-Model会自动更新，View也会自动变化。很好做到数据的一致性，不用担心，在模块的这一块数据是这个值，在另一块就是另一个值了。所以 MVVM模式有些时候又被称作：model-view-binder模式。</p>
+</li>
+<li><p class="bbob-p">提高可维护性。解决了MVP大量的手动View和Model同步的问题，提供双向绑定机制。提高了代码的可维护性。</p>
+</li>
+<li><p class="bbob-p">简化测试。因为同步逻辑是交由Binder做的，View跟着Model同时变更，所以只需要保证Model的正确性，View就正确。大大减少了对View同步更新的测试。</p>
+</li>
+</ul>
+<h3 id="toc-26" class="bbob-h3">缺点：</h3>
+<ul class="bbob-list-unordered">
+<li><p class="bbob-p">过于简单的图形界面不适用，或说牛刀杀鸡。</p>
+</li>
+<li><p class="bbob-p">对于大型的图形应用程序，视图状态较多，ViewModel的构建和维护的成本都会比较高。</p>
+</li>
+<li><p class="bbob-p">数据绑定的声明是指令式地写在View的模版当中的，这些内容是没办法去打断点debug的。</p>
+</li>
+<li><p class="bbob-p">一个大的模块中model也会很大，虽然使用方便了也很容易保证了数据的一致性，当时长期持有，不释放内存就造成了花费更多的内存。</p>
+</li>
+<li><p class="bbob-p">数据双向绑定不利于代码重用。客户端开发最常用的重用是View，但是数据双向绑定技术，让你在一个View都绑定了一个model，不同模块的model都不同。那就不能简单重用View了。</p>
+</li>
+</ul>
+<h1 id="toc-27" class="bbob-h1">结语</h1>
+<p class="bbob-p">可以看到，从<strong>MVC-&gt;MVP-&gt;MVVM</strong>，就像一个打怪升级的过程。后者解决了前者遗留的问题，把前者的缺点优化成了优点。同样的Demo功能，代码从最开始的一堆文件，优化成了最后只需要20几行代码就完成。MV*模式之间的区分还是蛮清晰的，希望可以给对这些模式理解比较模糊的同学带来一些参考和思路。</p>
+<h1 id="toc-28" class="bbob-h1">文章参考来源</h1>
+<ul class="bbob-list-unordered">
+<li><p class="bbob-p"><a href="https://zhuanlan.zhihu.com/p/38108311">MVC，MVP 和 MVVM 模式如何选择？</a></p>
+</li>
+<li><p class="bbob-p"><a href="https://www.zhoulujun.cn/html/theory/engineering/model/7823.html">再谈MV*(MVVM MVP MVC)模式的设计原理—封装与解耦</a></p>
+</li>
+</ul>
+</div></article><script>hljs.highlightAll()</script>
+
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    // this.page.url = PAGE_URL;  // Replace PAGE_URL with your page"s canonical URL variable
+    this.page.identifier = "\articles\MVPatternUnderstanding.md"; // Replace "\articles\MVPatternUnderstanding.md" with your page"s unique identifier variable
+    };
+    (function() { // DON"T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement("script");
+    s.src = "https://reknij.disqus.com/embed.js";
+    s.setAttribute("data-timestamp", +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></span></div></div><div class="el-overlay" style="z-index: 2001; display: none;"><div aria-modal="true" aria-labelledby="el-drawer__title" aria-label="" class="el-drawer ltr" role="dialog" style="width: 50%;"><header id="el-drawer__title" class="el-drawer__header"><h4>Table of content</h4><button aria-label="close drawer" class="el-drawer__close-btn" type="button"><i class="el-icon el-drawer__close"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M764.288 214.592L512 466.88 259.712 214.592a31.936 31.936 0 00-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1045.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0045.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 10-45.12-45.184z"></path></svg></i></button></header><!--v-if--><!--v-if--></div></div><div class="el-affix" style="margin-left: calc(100% - 60px);"><div class=""><button class="el-button el-button--primary el-button--default" type="button"><!--v-if--><span class="">Toc</span></button></div></div></div></div></main><footer class="el-footer" style="height: auto;"><div style="text-align: center;"><span class="copyright">© 2022 Jinker Powered by <a class="bbob-project-link" href="https://github.com/Reknij/Bbob">Bbob</a> &amp; default</span><br><span class="el-tag el-tag--default el-tag--light extraLink" style="background-color: white;"><span class="el-tag__content"><a href="/sitemap-html.html">Sitemap</a></span><!--v-if--></span></div></footer></section></div></div></div><iframe style="display: none;"></iframe><div class="pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links ad-text adSense adBlock adContent adBanner" style="width: 1px !important; height: 1px !important; position: absolute !important; left: -10000px !important; top: -1000px !important;"></div></body></html>
