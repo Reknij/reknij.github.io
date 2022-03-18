@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="en" style="--mainContentPadding:20px;"><head><script src="/bbob.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css"><link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/github.min.css"><script src="//unpkg.com/@highlightjs/cdn-assets@11.4.0/highlight.min.js"></script><script>!function(n){var t;"/"===n.search[1]&&(t=n.search.slice(1).split("&").map(function(n){return n.replace(/~and~/g,"&")}).join("?"),window.history.replaceState(null,null,n.pathname.slice(0,-1)+t+n.hash))}(window.location)</script><meta charset="UTF-8"><link rel="icon" href="/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Bbob博客部署</title><link href="https://unpkg.com/element-plus@2.1.0/dist/index.css" rel="stylesheet"><script src="https://unpkg.com/vue@3.2.31/dist/vue.runtime.global.prod.js"></script><script src="https://unpkg.com/vue-router@4.0.14/dist/vue-router.global.prod.js"></script><script src="https://unpkg.com/element-plus@2.1.0"></script><script type="module" crossorigin="" src="/assets/index.56282ac9.js"></script><link rel="stylesheet" href="/assets/index.42c19989.css"><script src="https://reknij.disqus.com/embed.js" data-timestamp="1647578145754"></script></head><body><div id="app" data-v-app=""><div class="el-card is-always-shadow" id="app-container"><!--v-if--><div class="el-card__body" style=""><section class="el-container is-vertical"><header class="el-header" style="height: auto;"><div class="nav-wrapper"><h1 class="title">Reknij Blog</h1><div class="nav-container"><div id="nav-item-/" class="nav-item"><a href="/" class="nav-item-a">Home</a></div><div id="nav-item-/articles/scroll" class="nav-item"><a href="/articles/scroll" class="nav-item-a">Articles</a></div><div id="nav-item-/filter/archives" class="nav-item"><a href="/filter/archives" class="nav-item-a">Archives</a></div><div id="nav-item-/filter/categories" class="nav-item"><a href="/filter/categories" class="nav-item-a">Categories</a></div><div id="nav-item-/filter/tags" class="nav-item"><a href="/filter/tags" class="nav-item-a">Tags</a></div><div id="nav-item-/about" class="nav-item"><a href="/about" class="nav-item-a">About</a></div></div></div></header><main class="el-main" id="mainContent"><div id="parent"><div id="content"><div class="el-card is-always-shadow"><!--v-if--><div class="el-card__body" style=""><span id="htmlContent"><article class="markdown-body"><div id="bbob-markdown-content"><h1 id="toc-1" class="bbob-h1">简介</h1>
+<p class="bbob-p">前端时间对Bbob添加了部署命令，方便部署，在此记录一下。</p>
+<h1 id="toc-2" class="bbob-h1">部署命令</h1>
+<p class="bbob-p">部署通过命令<code>deploy</code>执行。将会调用插件指定方法。部署是对<code>dist</code>文件夹进行处理，确保已执行<code>generate</code>生成博客网站。</p>
+<p class="bbob-p">也可以通过缩写：</p>
+<pre><code class="bbob-code hljs language-undefined">./Bbob.exe d
+</code></pre>
+<p class="bbob-p">还可以生成博客后立即部署：</p>
+<pre><code class="bbob-code hljs language-cpp">./Bbob.exe generate deploy
+./Bbob.exe g d <span class="hljs-comment">//缩写</span>
+</code></pre>
+<h1 id="toc-3" class="bbob-h1">部署插件</h1>
+<p class="bbob-p">部署命令同样调用插件来执行，Bbob内置了GitDeploy插件，可以以git方式部署。</p>
+<h2 id="toc-4" class="bbob-h2">GitDeploy</h2>
+<p class="bbob-p">通过配置文件<code>./configs/GitDeploy.config.json</code>配置你的git仓库，分支等等信息。</p>
+<pre><code class="bbob-code hljs language-json"><span class="hljs-comment">// GitDeploy.config.json</span>
+<span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"repos"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"yourRepository"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"branch"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"yourBranch"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"message"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"commit message"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p class="bbob-p">其中branch和message可以忽略，branch将会默认为<code>main</code>，message则默认为部署时的时间。</p>
+<h3 id="toc-5" class="bbob-h3">type</h3>
+<p class="bbob-p">指定<code>type</code>后，GitDeploy插件将会进行额外处理。目前只包含了<code>github</code>。若无指定type或无效的type，则不做任何操作。</p>
+<pre><code class="bbob-code hljs language-bash">
+{
+    ...
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"github"</span>,
+    ...
+}
+</code></pre>
+<h4 id="toc-6" class="bbob-h4">GitHub</h4>
+<p class="bbob-p">通过指定<code>type</code>为<code>github</code>后，部署时插件将会对index.html文件复制一份并重命名为404.html到网站根目录下。主要GitHub未找到网页时会将网站根目录下的404.html返回，这对于SPA网站很有用。</p>
+</div></article><script>hljs.highlightAll()</script>
+
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    // this.page.url = PAGE_URL;  // Replace PAGE_URL with your page"s canonical URL variable
+    this.page.identifier = "\articles\deployBlog.md"; // Replace "\articles\deployBlog.md" with your page"s unique identifier variable
+    };
+    (function() { // DON"T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement("script");
+    s.src = "https://reknij.disqus.com/embed.js";
+    s.setAttribute("data-timestamp", +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></span></div></div><div class="el-overlay" style="z-index: 2001; display: none;"><div aria-modal="true" aria-labelledby="el-drawer__title" aria-label="" class="el-drawer ltr" role="dialog" style="width: 50%;"><header id="el-drawer__title" class="el-drawer__header"><h4>Table of content</h4><button aria-label="close drawer" class="el-drawer__close-btn" type="button"><i class="el-icon el-drawer__close"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M764.288 214.592L512 466.88 259.712 214.592a31.936 31.936 0 00-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1045.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0045.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 10-45.12-45.184z"></path></svg></i></button></header><!--v-if--><!--v-if--></div></div><div class="el-affix" style="margin-left: calc(100% - 60px);"><div class=""><button class="el-button el-button--primary el-button--default" type="button"><!--v-if--><span class="">Toc</span></button></div></div></div></div></main><footer class="el-footer" style="height: auto;"><div style="text-align: center;"><span class="copyright">© 2022 Jinker Powered by <a class="bbob-project-link" href="https://github.com/Reknij/Bbob">Bbob</a> &amp; default</span><br><span class="el-tag el-tag--default el-tag--light extraLink" style="background-color: white;"><span class="el-tag__content"><a href="/sitemap-html.html">Sitemap</a></span><!--v-if--></span></div></footer></section></div></div></div></body></html>
