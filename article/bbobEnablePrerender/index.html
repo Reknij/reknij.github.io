@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en" style="--mainContentPadding:20px;"><head><script src="/bbob.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css"><link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/github.min.css"><script src="//unpkg.com/@highlightjs/cdn-assets@11.4.0/highlight.min.js"></script><meta charset="UTF-8"><link rel="icon" href="/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Bbob启用预渲染解决SEO</title><link href="https://unpkg.com/element-plus@2.1.0/dist/index.css" rel="stylesheet"><script src="https://unpkg.com/vue@3.2.31/dist/vue.runtime.global.prod.js"></script><script src="https://unpkg.com/vue-router@4.0.14/dist/vue-router.global.prod.js"></script><script src="https://unpkg.com/element-plus@2.1.0"></script><script type="module" crossorigin="" src="/assets/index.56282ac9.js"></script><link rel="stylesheet" href="/assets/index.42c19989.css"><script src="https://reknij.disqus.com/embed.js" data-timestamp="1647776267751"></script></head><body><div id="app" data-v-app=""><div class="el-card is-always-shadow" id="app-container"><!--v-if--><div class="el-card__body" style=""><section class="el-container is-vertical"><header class="el-header" style="height: auto;"><div class="nav-wrapper"><h1 class="title">Reknij Blog</h1><div class="nav-container"><div id="nav-item-/" class="nav-item"><a href="/" class="nav-item-a">Home</a></div><div id="nav-item-/articles/scroll" class="nav-item"><a href="/articles/scroll" class="nav-item-a">Articles</a></div><div id="nav-item-/filter/archives" class="nav-item"><a href="/filter/archives" class="nav-item-a">Archives</a></div><div id="nav-item-/filter/categories" class="nav-item"><a href="/filter/categories" class="nav-item-a">Categories</a></div><div id="nav-item-/filter/tags" class="nav-item"><a href="/filter/tags" class="nav-item-a">Tags</a></div><div id="nav-item-/about" class="nav-item"><a href="/about" class="nav-item-a">About</a></div></div></div></header><main class="el-main" id="mainContent"><div id="parent"><div id="content"><div class="el-card is-always-shadow"><!--v-if--><div class="el-card__body" style=""><span id="htmlContent"><article class="markdown-body"><div id="bbob-markdown-content"><h1 id="toc-1" class="bbob-h1">SEO</h1>
+<blockquote class="bbob-quote">
+<p class="bbob-p">搜索引擎优化（英语：search engine optimization，缩写为SEO）是透过了解搜索引擎的运作规则来调整网站，以及提高目的网站在有关搜索引擎内排名的方式。由于不少研究发现，搜索引擎的用户往往只会留意搜索结果最前面的几个条目，所以不少网站都希望透过各种形式来影响搜索引擎的排序，让自己的网站可以有优秀的搜索排名。当中尤以各种依靠广告维生的网站为甚。</p>
+</blockquote>
+<h1 id="toc-2" class="bbob-h1">预渲染</h1>
+<p class="bbob-p">预渲染指用户请求文档前便已经是渲染完成的文档。若用户请求无预渲染的SPA页面，最先得到的是一个空页面，没有相应的数据，不利于SEO。预渲染后的页面已经实装了数据，页面即是用户请求的最终页面。</p>
+<h2 id="toc-3" class="bbob-h2">原理</h2>
+<p class="bbob-p">通过代码控制无头浏览器(Headless browser)，访问网页路由，得到渲染完成后的数据，并保存下来。访问时便不会出现文档404错误。而且每一个预渲染的界面都是一个SPA应用。不会影响用户体验。</p>
+<h1 id="toc-4" class="bbob-h1">Bbob 预渲染插件</h1>
+<p class="bbob-p">若想要在Bbob中解决seo问题，就必须使用预渲染插件<a href="https://github.com/Reknij/bbob-plugin-prerender">bbob-plugin-prerender</a>。插件由我开发，直接使用即可。需要注意的是，此插件需要主题支持。Bbob自带的主题已经默认支持。若自己开发的主题想要支持也十分简单，请到<a href="https://github.com/Reknij/bbob-plugin-prerender#theme-supportdevelopmemt">插件项目网页</a>查看详情。</p>
+<h2 id="toc-5" class="bbob-h2">使用</h2>
+<p class="bbob-p">先安装，请将以下命令中的v1.0.0替换为你想要的版本。</p>
+<pre><code class="bbob-code hljs language-bash">bbob add -a https://github.com/Reknij/bbob-plugin-prerender/releases/download/v1.0.0/bbob-plugin-prerender.rar
+</code></pre>
+<p class="bbob-p">安装完成后，只要主题支持，默认启用预渲染。执行<code>bbob g</code>，可以看到插件已经起作用。执行<code>bbob p</code>预览你的博客页面，打开Chrome开发者工具可以看到网页请求的页面已包含最终数据，而不是一个空页面。</p>
+<h2 id="toc-6" class="bbob-h2">注意</h2>
+<p class="bbob-p">使用此插件，必须将Bbob自带插件<code>BuildWebArticleJson</code>的配置文件中<code>shortAddress</code>启用为<code>true</code>。</p>
+<pre><code class="bbob-code hljs language-bash">// ./configs/BuildWebArticleJson.config.json
+{
+    <span class="hljs-string">"shortAddress"</span>: <span class="hljs-literal">true</span>, //change to <span class="hljs-literal">true</span>
+    <span class="hljs-string">"shortAddressEndWithSlash"</span>: <span class="hljs-literal">false</span>
+}
+</code></pre>
+<p class="bbob-p">倘若要你的博客不出现301重定向，可以将<code>shortAddressEndWithSlash</code>改为<code>true</code>。<code>BuildWebArticleJson</code>插件会自动在短地址后面加上'/'。</p>
+<h1 id="toc-7" class="bbob-h1">引用</h1>
+<ul class="bbob-list-unordered">
+<li><a href="https://www.zhihu.com/question/273930443/answer/948862957">服务端渲染(SSR)和预渲染(Prerendering)有什么区别？ - 方应杭的回答 - 知乎</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E%E6%9C%80%E4%BD%B3%E5%8C%96">搜索引擎优化 - 维基百科</a></li>
+</ul>
+</div></article><script>hljs.highlightAll()</script>
+
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    // this.page.url = PAGE_URL;  // Replace PAGE_URL with your page"s canonical URL variable
+    this.page.identifier = "\articles\bbobEnablePrerender.md"; // Replace "\articles\bbobEnablePrerender.md" with your page"s unique identifier variable
+    };
+    (function() { // DON"T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement("script");
+    s.src = "https://reknij.disqus.com/embed.js";
+    s.setAttribute("data-timestamp", +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></span></div></div><div class="el-overlay" style="z-index: 2001; display: none;"><div aria-modal="true" aria-labelledby="el-drawer__title" aria-label="" class="el-drawer ltr" role="dialog" style="width: 50%;"><header id="el-drawer__title" class="el-drawer__header"><h4>Table of content</h4><button aria-label="close drawer" class="el-drawer__close-btn" type="button"><i class="el-icon el-drawer__close"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M764.288 214.592L512 466.88 259.712 214.592a31.936 31.936 0 00-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1045.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0045.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 10-45.12-45.184z"></path></svg></i></button></header><!--v-if--><!--v-if--></div></div><div class="el-affix" style="margin-left: calc(100% - 60px);"><div class=""><button class="el-button el-button--primary el-button--default" type="button"><!--v-if--><span class="">Toc</span></button></div></div></div></div></main><footer class="el-footer" style="height: auto;"><div style="text-align: center;"><span class="copyright">© 2022 Jinker Powered by <a class="bbob-project-link" href="https://github.com/Reknij/Bbob">Bbob</a> &amp; default</span><br><span class="el-tag el-tag--default el-tag--light extraLink" style="background-color: white;"><span class="el-tag__content"><a href="/sitemap-html.html">Sitemap</a></span><!--v-if--></span></div></footer></section></div></div></div></body></html>
