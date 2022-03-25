@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" style="--mainContentPadding:20px;"><head><script src="/bbob.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css"><link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/github.min.css"><script src="//unpkg.com/@highlightjs/cdn-assets@11.4.0/highlight.min.js"></script><meta charset="UTF-8"><link rel="icon" href="/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>论坛系统NodeBB初体验</title><link href="https://unpkg.com/element-plus@2.1.0/dist/index.css" rel="stylesheet"><script src="https://unpkg.com/vue@3.2.31/dist/vue.runtime.global.prod.js"></script><script src="https://unpkg.com/vue-router@4.0.14/dist/vue-router.global.prod.js"></script><script src="https://unpkg.com/element-plus@2.1.0"></script><script type="module" crossorigin="" src="/assets/index.56282ac9.js"></script><link rel="stylesheet" href="/assets/index.42c19989.css"><script src="https://reknij.disqus.com/embed.js" data-timestamp="1647753804138"></script><link rel="prefetch" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.7ab903feba7624935283ca4c7d8c7203.css"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.9450cde9dd2c9d366781a8fc5ff6e933.js"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.8a051c75736795faf464e93aee7362f6.js"><link rel="prefetch" as="script" href="https://disqus.com/next/config.js"></head><body><div id="app" data-v-app=""><div class="el-card is-always-shadow" id="app-container"><!--v-if--><div class="el-card__body" style=""><section class="el-container is-vertical"><header class="el-header" style="height: auto;"><div class="nav-wrapper"><h1 class="title">Reknij Blog</h1><div class="nav-container"><div id="nav-item-/" class="nav-item"><a href="/" class="nav-item-a">Home</a></div><div id="nav-item-/articles/scroll" class="nav-item"><a href="/articles/scroll" class="nav-item-a">Articles</a></div><div id="nav-item-/filter/archives" class="nav-item"><a href="/filter/archives" class="nav-item-a">Archives</a></div><div id="nav-item-/filter/categories" class="nav-item"><a href="/filter/categories" class="nav-item-a">Categories</a></div><div id="nav-item-/filter/tags" class="nav-item"><a href="/filter/tags" class="nav-item-a">Tags</a></div><div id="nav-item-/about" class="nav-item"><a href="/about" class="nav-item-a">About</a></div></div></div></header><main class="el-main" id="mainContent"><div id="parent"><div id="content"><div class="el-card is-always-shadow"><!--v-if--><div class="el-card__body" style=""><span id="htmlContent"><article class="markdown-body"><div id="bbob-markdown-content"><h2 id="toc-1" class="bbob-h2">前言</h2>
+<!DOCTYPE html><html lang="en" style="--mainContentPadding:20px;"><head><script src="/bbob.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css"><link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/github.min.css"><script src="//unpkg.com/@highlightjs/cdn-assets@11.4.0/highlight.min.js"></script><meta charset="UTF-8"><link rel="icon" href="/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>论坛系统NodeBB初体验</title><link href="https://unpkg.com/element-plus@2.1.0/dist/index.css" rel="stylesheet"><script src="https://unpkg.com/vue@3.2.31/dist/vue.runtime.global.prod.js"></script><script src="https://unpkg.com/vue-router@4.0.14/dist/vue-router.global.prod.js"></script><script src="https://unpkg.com/element-plus@2.1.0"></script><script type="module" crossorigin="" src="/assets/index.5b3202c7.js"></script><link rel="stylesheet" href="/assets/index.42c19989.css"></head><body><div id="app" data-v-app=""><div class="el-card is-always-shadow" id="app-container"><!--v-if--><div class="el-card__body" style=""><section class="el-container is-vertical"><header class="el-header" style="height: auto;"><div class="nav-wrapper"><h1 class="title">Reknij Blog</h1><div class="nav-container"><div id="nav-item-/" class="nav-item"><a href="/" class="nav-item-a">Home</a></div><div id="nav-item-/articles/scroll" class="nav-item"><a href="/articles/scroll" class="nav-item-a">Articles</a></div><div id="nav-item-/filter/archives" class="nav-item"><a href="/filter/archives" class="nav-item-a">Archives</a></div><div id="nav-item-/filter/categories" class="nav-item"><a href="/filter/categories" class="nav-item-a">Categories</a></div><div id="nav-item-/filter/tags" class="nav-item"><a href="/filter/tags" class="nav-item-a">Tags</a></div><div id="nav-item-/about" class="nav-item"><a href="/about" class="nav-item-a">About</a></div></div></div></header><main class="el-main" id="mainContent"><div id="parent" class=""><div id="content"><div class="el-card is-always-shadow"><!--v-if--><div class="el-card__body" style=""><span id="htmlContent"><article class="markdown-body"><div id="bbob-markdown-content"><h2 id="toc-1" class="bbob-h2">前言</h2>
 <p class="bbob-p">有许多老开源或收费的论坛系统，如 Discuz!。不过我对php并不感冒，而且Discuz我觉得年代已久，体验难以跟上现代化，所以找到了NodeBB这个开源论坛系统。</p>
 <h2 id="toc-2" class="bbob-h2">NodeBB简介</h2>
 <p class="bbob-p">NodeBB 论坛软件由 Node.js 提供支持，支持 Redis、MongoDB 或 PostgreSQL 数据库。它利用网络套接字进行即时交互和实时通知。NodeBB 具有许多开箱即用的现代功能，例如社交网络集成和流媒体讨论，同时仍确保与旧浏览器兼容。
@@ -15,49 +15,49 @@
 <ul class="bbob-list-unordered">
 <li>安装MongoDB。完成安装<code>mongo</code>进入Mongo Shell</li>
 <li>切换到admin 数据库
-<pre><code class="bbob-code hljs language-perl"><span class="hljs-keyword">use</span> admin
+<pre><code class="bbob-code">use admin
 </code></pre>
 </li>
 <li>创建一个管理员用户
-<pre><code class="bbob-code hljs language-css">db<span class="hljs-selector-class">.createUser</span>( { user: <span class="hljs-string">"admin"</span>, pwd: <span class="hljs-string">"&lt;Enter a secure password&gt;"</span>, roles: [ { role: <span class="hljs-string">"root"</span>, db: <span class="hljs-string">"admin"</span> } ] } )
+<pre><code class="bbob-code">db.createUser( { user: "admin", pwd: "&lt;Enter a secure password&gt;", roles: [ { role: "root", db: "admin" } ] } )
 </code></pre>
 </li>
 <li>切换到一个新的数据库，主要用来储存数据，名字可以是默认的'nodebb'，之后配置nodebb就不必输入数据库名。这里用默认的'nodebb'名称。
-<pre><code class="bbob-code hljs language-rust"><span class="hljs-keyword">use</span> nodebb <span class="hljs-comment">//切换到一个不存在的数据库会自动创建</span>
+<pre><code class="bbob-code">use nodebb //切换到一个不存在的数据库会自动创建
 </code></pre>
 </li>
 <li>创建一个拥有适当权限的用户管理nodebb数据库。
-<pre><code class="bbob-code hljs language-css">db<span class="hljs-selector-class">.createUser</span>( { user: <span class="hljs-string">"nodebb"</span>, pwd: <span class="hljs-string">"&lt;Enter a secure password&gt;"</span>, roles: [ { role: <span class="hljs-string">"readWrite"</span>, db: <span class="hljs-string">"nodebb"</span> }, { role: <span class="hljs-string">"clusterMonitor"</span>, db: <span class="hljs-string">"admin"</span> } ] } )
+<pre><code class="bbob-code">db.createUser( { user: "nodebb", pwd: "&lt;Enter a secure password&gt;", roles: [ { role: "readWrite", db: "nodebb" }, { role: "clusterMonitor", db: "admin" } ] } )
 </code></pre>
 </li>
 <li>配置完可以退出Mongo Shell
-<pre><code class="bbob-code hljs language-scss"><span class="hljs-built_in">quit</span>()
+<pre><code class="bbob-code">quit()
 </code></pre>
 </li>
 <li>编辑<code>/etc/mongod.conf</code>，增加以下配置以启用数据库身份验证
-<pre><code class="bbob-code hljs language-makefile"><span class="hljs-section">security:</span>
-<span class="hljs-section">authorization: enabled</span>
+<pre><code class="bbob-code">security:
+authorization: enabled
 </code></pre>
 </li>
 <li>重启MongoDB，可以验证是否生效
-<pre><code class="bbob-code hljs language-cpp">sudo systemctl restart mongod
-mongo -u admin -p your_password --authenticationDatabase=admin <span class="hljs-comment">//连接验证是否可行</span>
+<pre><code class="bbob-code">sudo systemctl restart mongod
+mongo -u admin -p your_password --authenticationDatabase=admin //连接验证是否可行
 </code></pre>
 </li>
 </ul>
 <h3 id="toc-6" class="bbob-h3">NodeBB</h3>
 <ul class="bbob-list-unordered">
 <li>使用git clone命令克隆仓库下来本地，我这里克隆<code>v1.18.x</code>版本，其他版本就像这样<code>v1.16.x</code>
-<pre><code class="bbob-code hljs language-bash">git <span class="hljs-built_in">clone</span> -b v1.18.x https://github.com/NodeBB/NodeBB.git nodebb
-<span class="hljs-built_in">cd</span> nodebb //切换文件夹到nodebb中
+<pre><code class="bbob-code">git clone -b v1.18.x https://github.com/NodeBB/NodeBB.git nodebb
+cd nodebb //切换文件夹到nodebb中
 </code></pre>
 </li>
 <li>执行命令以配置，配置完会得到一个config.json文件，日后想要修改配置可以通过这个文件
-<pre><code class="bbob-code hljs language-bash">./nodebb setup
+<pre><code class="bbob-code">./nodebb setup
 </code></pre>
 </li>
 <li>配置完便可以启动nodebb了。
-<pre><code class="bbob-code hljs language-bash">./nodebb start //启动
+<pre><code class="bbob-code">./nodebb start //启动
 ./nodebb stop //停止
 </code></pre>
 </li>
@@ -65,13 +65,13 @@ mongo -u admin -p your_password --authenticationDatabase=admin <span class="hljs
 <h3 id="toc-7" class="bbob-h3">Nginx</h3>
 <ul class="bbob-list-unordered">
 <li>安装Nginx，完成安装若没有启动需要启动。
-<pre><code class="bbob-code hljs language-cpp">sudo systemctl start nginx <span class="hljs-comment">//启动</span>
-sudo systemctl status nginx <span class="hljs-comment">//查看状态</span>
+<pre><code class="bbob-code">sudo systemctl start nginx //启动
+sudo systemctl status nginx //查看状态
 </code></pre>
 </li>
 <li>配置server块，最好在<code>/etc/nginx/sites-available/</code>中添加新文件，可以复制default后修改，方便许多。添加文件后记得<code>ln -s</code>文件到<code>/etc/nginx/sites-enabled/</code>下以启用配置。
-<pre><code class="bbob-code hljs language-perl">server {
-    <span class="hljs-keyword">listen</span> <span class="hljs-number">80</span>;
+<pre><code class="bbob-code">server {
+    listen 80;
 
     server_name forum.example.com;
 
@@ -82,19 +82,19 @@ sudo systemctl status nginx <span class="hljs-comment">//查看状态</span>
         proxy_set_header Host $http_host;
         proxy_set_header X-NginX-Proxy true;
 
-        proxy_pass http:<span class="hljs-regexp">//</span><span class="hljs-number">127.0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span>:<span class="hljs-number">4567</span>;
+        proxy_pass http://127.0.0.1:4567;
         proxy_redirect off;
 
-        <span class="hljs-comment"># Socket.IO Support</span>
-        proxy_http_version <span class="hljs-number">1.1</span>;
+        # Socket.IO Support
+        proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection <span class="hljs-string">"upgrade"</span>;
+        proxy_set_header Connection "upgrade";
     }
 }
 </code></pre>
 </li>
 <li>记得重新加载Nginx
-<pre><code class="bbob-code hljs language-undefined">sudo nginx -s reload
+<pre><code class="bbob-code">sudo nginx -s reload
 </code></pre>
 </li>
 <li>浏览器浏览<code>http://forum.example.com</code>或<code>http://localhost</code>可以查看效果</li>
@@ -107,15 +107,15 @@ sudo systemctl status nginx <span class="hljs-comment">//查看状态</span>
 <h3 id="toc-10" class="bbob-h3">拉已构建好的镜像</h3>
 <ul class="bbob-list-unordered">
 <li>Docker先创建一个网络
-<pre><code class="bbob-code hljs language-lua">sudo docker network <span class="hljs-built_in">create</span> mongo-net
+<pre><code class="bbob-code">sudo docker network create mongo-net
 </code></pre>
 </li>
 <li>拉个MongoDB镜像并启动
-<pre><code class="bbob-code hljs language-scss">sudo docker run <span class="hljs-attr">--name</span> mongo <span class="hljs-attr">--restart</span> always <span class="hljs-attr">--network</span> mongo-net -d mongo
+<pre><code class="bbob-code">sudo docker run --name mongo --restart always --network mongo-net -d mongo
 </code></pre>
 </li>
 <li>Docker Hub中已经有官网的NodeBB镜像，一样拉下来启动即可
-<pre><code class="bbob-code hljs language-css">sudo docker run <span class="hljs-attr">--restart</span> always <span class="hljs-attr">--name</span> forum <span class="hljs-attr">--network</span> mongo-net -<span class="hljs-selector-tag">p</span> <span class="hljs-number">4567</span>:<span class="hljs-number">4567</span> -d nodebb/docker
+<pre><code class="bbob-code">sudo docker run --restart always --name forum --network mongo-net -p 4567:4567 -d nodebb/docker
 </code></pre>
 </li>
 <li>执行成功后论坛已启动，浏览器进入论坛会进入图形配置页面，简单配置一下即可。</li>
@@ -147,4 +147,4 @@ sudo systemctl status nginx <span class="hljs-comment">//查看状态</span>
     (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></span></div></div><div class="el-overlay" style="z-index: 2001; display: none;"><div aria-modal="true" aria-labelledby="el-drawer__title" aria-label="" class="el-drawer ltr" role="dialog" style="width: 50%;"><header id="el-drawer__title" class="el-drawer__header"><h4>Table of content</h4><button aria-label="close drawer" class="el-drawer__close-btn" type="button"><i class="el-icon el-drawer__close"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M764.288 214.592L512 466.88 259.712 214.592a31.936 31.936 0 00-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1045.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0045.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 10-45.12-45.184z"></path></svg></i></button></header><!--v-if--><!--v-if--></div></div><div class="el-affix" style="margin-left: calc(100% - 60px);"><div class=""><button class="el-button el-button--primary el-button--default" type="button"><!--v-if--><span class="">Toc</span></button></div></div></div></div></main><footer class="el-footer" style="height: auto;"><div style="text-align: center;"><span class="copyright">© 2022 Jinker Powered by <a class="bbob-project-link" href="https://github.com/Reknij/Bbob">Bbob</a> &amp; default</span><br><span class="el-tag el-tag--default el-tag--light extraLink" style="background-color: white;"><span class="el-tag__content"><a href="/sitemap-html.html">Sitemap</a></span><!--v-if--></span></div></footer></section></div></div></div><iframe style="display: none;"></iframe><div class="pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links ad-text adSense adBlock adContent adBanner" style="width: 1px !important; height: 1px !important; position: absolute !important; left: -10000px !important; top: -1000px !important;"></div></body></html>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></span></div></div><div class="el-overlay" style="z-index: 2001; display: none;"><div aria-modal="true" aria-labelledby="el-drawer__title" aria-label="" class="el-drawer ltr" role="dialog" style="width: 50%;"><header id="el-drawer__title" class="el-drawer__header"><h4>Table of content</h4><button aria-label="close drawer" class="el-drawer__close-btn" type="button"><i class="el-icon el-drawer__close"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M764.288 214.592L512 466.88 259.712 214.592a31.936 31.936 0 00-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1045.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0045.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 10-45.12-45.184z"></path></svg></i></button></header><!--v-if--><!--v-if--></div></div><div class="el-affix" style="margin-left: calc(100% - 60px);"><div class=""><button class="el-button el-button--primary el-button--default" type="button"><!--v-if--><span class="">Toc</span></button></div></div></div></div></main><footer class="el-footer" style="height: auto;"><div style="text-align: center;"><span class="copyright">© 2022 Jinker Powered by <a class="bbob-project-link" href="https://github.com/Reknij/Bbob">Bbob</a> &amp; default</span><br><span class="el-tag el-tag--default el-tag--light extraLink" style="background-color: white;"><span class="el-tag__content"><a href="/sitemap-html.html">Sitemap</a></span><!--v-if--></span></div></footer></section></div></div></div></body></html>
