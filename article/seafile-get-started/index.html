@@ -1,73 +1,462 @@
-<!DOCTYPE html><html lang="en" style="--mainContentPadding:20px;"><head><script src="/bbob.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css"><link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/github.min.css"><script src="//unpkg.com/@highlightjs/cdn-assets@11.4.0/highlight.min.js"></script><meta charset="UTF-8"><link rel="icon" href="/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>初始体验seafile开源网盘 - Reknij Blog</title><link href="https://unpkg.com/element-plus@2.1.0/dist/index.css" rel="stylesheet"><script src="https://unpkg.com/vue@3.2.31/dist/vue.runtime.global.prod.js"></script><script src="https://unpkg.com/vue-router@4.0.14/dist/vue-router.global.prod.js"></script><script src="https://unpkg.com/element-plus@2.1.0"></script><script type="module" crossorigin="" src="/assets/index.1cf0ea95.js"></script><link rel="stylesheet" href="/assets/index.205457d4.css"><script src="https://reknij.disqus.com/embed.js" data-timestamp="1648648381150"></script><link rel="prefetch" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.63860eb743c7d9d2adf0fa435788abe7.css"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.9450cde9dd2c9d366781a8fc5ff6e933.js"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.90614da243fa6052a038b5539f5086e5.js"><link rel="prefetch" as="script" href="https://disqus.com/next/config.js"></head><body><div id="app" data-v-app=""><img class="background bgToCenter" src="https://w.wallhaven.cc/full/y8/wallhaven-y8l89d.png" style="background-size: cover;"><div class="background cover" id="app-cover"></div><section class="el-container is-vertical app-container center" infinite-scroll-distance="60" style="min-height: 100vh;"><header class="el-header" style="height: auto;"><div class="app-container"><div class="nav-wrapper"><h1 class="title">Reknij Blog</h1><div class="nav-container"><div id="nav-item-/" class="nav-item"><a href="/" class="nav-item-a">主页</a></div><div id="nav-item-/articles/scroll" class="nav-item"><a href="/articles/scroll" class="nav-item-a">全部文章</a></div><div id="nav-item-/filter/archives" class="nav-item"><a href="/filter/archives" class="nav-item-a">归档</a></div><div id="nav-item-/filter/categories" class="nav-item"><a href="/filter/categories" class="nav-item-a">分类</a></div><div id="nav-item-/filter/tags" class="nav-item"><a href="/filter/tags" class="nav-item-a">标签</a></div><div id="nav-item-/about" class="nav-item"><a href="/about" class="nav-item-a">关于</a></div></div></div></div></header><main class="el-main" id="mainContent"><div class="app-container"><div id="content"><div class="el-card is-always-shadow"><!--v-if--><div class="el-card__body" style=""><div class="el-page-header" id="backBtn"><div class="el-page-header__left"><div class="el-page-header__icon"><i class="el-icon"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M224 480h640a32 32 0 110 64H224a32 32 0 010-64z"></path><path fill="currentColor" d="M237.248 512l265.408 265.344a32 32 0 01-45.312 45.312l-288-288a32 32 0 010-45.312l288-288a32 32 0 1145.312 45.312L237.248 512z"></path></svg></i></div><div class="el-page-header__title">返回</div></div><div class="el-page-header__content"></div></div><span class="articleTitle">初始体验seafile开源网盘</span><span class="articleDate">发布于 <span style="text-decoration: underline dashed;">2021-11-17 18:05:08</span></span><div style="text-align: center; margin-top: 5px;"><span class="el-tag el-tag--warning el-tag--default el-tag--light tagItem"><span class="el-tag__content">服务器</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">网盘</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">云盘</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">Seafile</span><!--v-if--></span></div><div class="el-divider el-divider--horizontal" style="--el-border-style:solid;"><!--v-if--></div><span><article style="background-color: transparent;" class="markdown-body"><div id="bbob-markdown-content"><h2 id="toc-1" class="bbob-h2">前言</h2>
-<p class="bbob-p">在家有个个人服务器，有1tb硬盘空间，就想安装个网盘玩玩。有许多开源的网盘如Nextcloud, Owncloud等等。这里选择seafile，听说性能好，毕竟使用c开发。我选择的是docker方式部署，简单方便。</p>
-<h2 id="toc-2" class="bbob-h2">准备</h2>
-<p class="bbob-p">确保已安装<code>docker</code>和<code>docker-compose</code>。</p>
-<h2 id="toc-3" class="bbob-h2">下载并修改<code>docker-compose.yml</code></h2>
-<p class="bbob-p">下载官方提供的<code>docker-compose.yml</code>文件。<a href="https://download.seafile.com/d/320e8adf90fa43ad8fee/files/?p=/docker/docker-compose.yml">点击打开链接后点击下载按钮</a></p>
-<p class="bbob-p">修改<code>docker-compose.yml</code>配置文件</p>
-<h3 id="toc-4" class="bbob-h3">数据库服务</h3>
-<p class="bbob-p">数据库服务为<code>services.db</code></p>
-<ul class="bbob-list-unordered">
+<!DOCTYPE html><html lang="en" style="--mainContentPadding:20px;"><head><script src="/bbob.js"></script><script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>MathJax={options:{processHtmlClass:"math",ignoreHtmlClass:".*"}}</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css"><link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/github.min.css"><script src="//unpkg.com/@highlightjs/cdn-assets@11.4.0/highlight.min.js"></script><meta charset="UTF-8"><link rel="icon" href="/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>初始体验seafile开源网盘 - Reknij Blog</title><link href="https://unpkg.com/element-plus@2.1.0/dist/index.css" rel="stylesheet"><script src="https://unpkg.com/vue@3.2.31/dist/vue.runtime.global.prod.js"></script><script src="https://unpkg.com/vue-router@4.0.14/dist/vue-router.global.prod.js"></script><script src="https://unpkg.com/element-plus@2.1.0"></script><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><script type="module" crossorigin="" src="/assets/index.1cf0ea95.js"></script><link rel="stylesheet" href="/assets/index.205457d4.css"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style><script src="https://reknij.disqus.com/embed.js" data-timestamp="1648719163571"></script><link rel="prefetch" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.63860eb743c7d9d2adf0fa435788abe7.css"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.9450cde9dd2c9d366781a8fc5ff6e933.js"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.90614da243fa6052a038b5539f5086e5.js"><link rel="prefetch" as="script" href="https://disqus.com/next/config.js"></head><body><div id="app" data-v-app=""><img class="background bgToCenter" src="https://w.wallhaven.cc/full/y8/wallhaven-y8l89d.png" style="background-size: cover;"><div class="background cover" id="app-cover"></div><section class="el-container is-vertical app-container center" infinite-scroll-distance="60" style="min-height: 100vh;"><header class="el-header" style="height: auto;"><div class="app-container"><div class="nav-wrapper"><h1 class="title">Reknij Blog</h1><div class="nav-container"><div id="nav-item-/" class="nav-item"><a href="/" class="nav-item-a">主页</a></div><div id="nav-item-/articles/scroll" class="nav-item"><a href="/articles/scroll" class="nav-item-a">全部文章</a></div><div id="nav-item-/filter/archives" class="nav-item"><a href="/filter/archives" class="nav-item-a">归档</a></div><div id="nav-item-/filter/categories" class="nav-item"><a href="/filter/categories" class="nav-item-a">分类</a></div><div id="nav-item-/filter/tags" class="nav-item"><a href="/filter/tags" class="nav-item-a">标签</a></div><div id="nav-item-/about" class="nav-item"><a href="/about" class="nav-item-a">关于</a></div></div></div></div></header><main class="el-main" id="mainContent"><div class="app-container"><div id="content"><div class="el-card is-always-shadow"><!--v-if--><div class="el-card__body" style=""><div class="el-page-header" id="backBtn"><div class="el-page-header__left"><div class="el-page-header__icon"><i class="el-icon"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M224 480h640a32 32 0 110 64H224a32 32 0 010-64z"></path><path fill="currentColor" d="M237.248 512l265.408 265.344a32 32 0 01-45.312 45.312l-288-288a32 32 0 010-45.312l288-288a32 32 0 1145.312 45.312L237.248 512z"></path></svg></i></div><div class="el-page-header__title">返回</div></div><div class="el-page-header__content"></div></div><span class="articleTitle">初始体验seafile开源网盘</span><span class="articleDate">发布于 <span style="text-decoration: underline dashed;">2021-11-17 18:05:08</span></span><div style="text-align: center; margin-top: 5px;"><span class="el-tag el-tag--warning el-tag--default el-tag--light tagItem"><span class="el-tag__content">服务器</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">网盘</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">云盘</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">Seafile</span><!--v-if--></span></div><div class="el-divider el-divider--horizontal" style="--el-border-style:solid;"><!--v-if--></div><span><article style="background-color: transparent;" class="markdown-body"><div id="bbob-markdown-content"><h2 id="toc-1">前言</h2>
+<p>在家有个个人服务器，有1tb硬盘空间，就想安装个网盘玩玩。有许多开源的网盘如Nextcloud, Owncloud等等。这里选择seafile，听说性能好，毕竟使用c开发。我选择的是docker方式部署，简单方便。</p>
+<h2 id="toc-2">准备</h2>
+<p>确保已安装<code>docker</code>和<code>docker-compose</code>。</p>
+<h2 id="toc-3">下载并修改<code>docker-compose.yml</code></h2>
+<p>下载官方提供的<code>docker-compose.yml</code>文件。<a href="https://download.seafile.com/d/320e8adf90fa43ad8fee/files/?p=/docker/docker-compose.yml">点击打开链接后点击下载按钮</a></p>
+<p>修改<code>docker-compose.yml</code>配置文件</p>
+<h3 id="toc-4">数据库服务</h3>
+<p>数据库服务为<code>services.db</code></p>
+<ul>
 <li><code>enviroment</code>中<code>MYSQL_ROOT_PASSWORD</code>是数据库密码，改成自己想要的密码或是直接默认密码不改。若改了密码需要一起改<code>services.seafile.enviroment</code>中的<code>DB_ROOT_PASSWD</code>，确保两个相同。</li>
 </ul>
-<h3 id="toc-5" class="bbob-h3">seafile服务</h3>
-<p class="bbob-p">seafile服务为<code>services.seafile</code></p>
-<ul class="bbob-list-unordered">
+<h3 id="toc-5">seafile服务</h3>
+<p>seafile服务为<code>services.seafile</code></p>
+<ul>
 <li><code>ports</code>中可以更改80端口和443端口的映射。打个例子，我是个人服务器，没有域名，80端口已经部署了一个网页，若想部署seafile肯定不能部署在80端口，所以我选择部署在2000端口上，就将<code>80:80</code>改成<code>2000:80</code>就行。</li>
 <li><code>enviroment</code>中的<code>SEAFILE_ADMIN_EMAIL</code>以及<code>SEAFILE_ADMIN_PASSWORD</code>便是网盘首个管理员账号的邮件密码。自行更改就行。</li>
 <li>如果您把<code>enviroment</code>中<code>SEAFILE_SERVER_LETSENCRYPT</code>设置为 true，该容器将会自动为您申请一个 letsencrypt 机构颁发的 SSL 证书，并开启 https 访问。如果您想要使用自己的 SSL 证书，而且如果用来持久化存储 Seafile 数据的目录为 /opt/seafile-data，您可以做如下处理：
-<ul class="bbob-list-unordered">
+<ul>
 <li>创建 /opt/seafile-data/ssl 目录，然后拷贝您的证书文件和密钥文件到ssl目录下。</li>
 <li>假设您的站点名称是 seafile.example.com，那么您的证书名称必须就是 seafile.example.com.crt，密钥文件名称就必须是 seafile.example.com.key。</li>
 </ul>
 </li>
 </ul>
-<h2 id="toc-6" class="bbob-h2">启动 Seafile 服务</h2>
-<p class="bbob-p">执行以下命令启动 Seafile 服务</p>
-<pre><code class="bbob-code hljs language-undefined">docker-compose up -d
+<h2 id="toc-6">启动 Seafile 服务</h2>
+<p>执行以下命令启动 Seafile 服务</p>
+<pre><code class="hljs language-undefined">docker-compose up -d
 </code></pre>
-<p class="bbob-p">需要等待几分钟，等容器首次启动时的初始化操作完成后，您就可以在浏览器上访问服务器ip或域名 来打开 Seafile 主页。</p>
-<p class="bbob-p">注意：</p>
-<ul class="bbob-list-unordered">
+<p>需要等待几分钟，等容器首次启动时的初始化操作完成后，您就可以在浏览器上访问服务器ip或域名 来打开 Seafile 主页。</p>
+<p>注意：</p>
+<ul>
 <li>您应该在 docker-compose.yml 文件所在的目下执行以上命令。</li>
 <li>由于我将seafile服务部署在2000端口，因此访问 Seahub 网站时需要加上端口2000</li>
 </ul>
 <hr>
-<h2 id="toc-7" class="bbob-h2">修改 Seafile 服务的配置</h2>
-<p class="bbob-p">Seafile 的配置文件存放在<code>shared/seafile/conf</code>目录下，您可以根据<a href="https://manual-cn.seafile.com/">Seafile 手册</a>的指导来修改这些配置项。一旦修改了配置文件，您需要重启服务以使其生效：</p>
-<pre><code class="bbob-code hljs language-undefined">docker-compose restart
+<h2 id="toc-7">修改 Seafile 服务的配置</h2>
+<p>Seafile 的配置文件存放在<code>shared/seafile/conf</code>目录下，您可以根据<a href="https://manual-cn.seafile.com/">Seafile 手册</a>的指导来修改这些配置项。一旦修改了配置文件，您需要重启服务以使其生效：</p>
+<pre><code class="hljs language-undefined">docker-compose restart
 </code></pre>
-<h2 id="toc-8" class="bbob-h2">Seafile 目录结构</h2>
-<p class="bbob-p"><code>/shared</code>
+<h2 id="toc-8">Seafile 目录结构</h2>
+<p><code>/shared</code>
 共享卷的挂载点,您可以选择在容器外部存储某些持久性信息.在这个项目中，我们会在外部保存各种日志文件和上传数据。 这使您可以轻松重建容器而不会丢失重要信息。</p>
-<ul class="bbob-list-unordered">
-<li><p class="bbob-p"><code>/shared/seafile</code>: Seafile 服务的配置文件以及数据文件</p>
+<ul>
+<li><p><code>/shared/seafile</code>: Seafile 服务的配置文件以及数据文件</p>
 </li>
-<li><p class="bbob-p"><code>/shared/logs</code>: 日志目录</p>
-<ul class="bbob-list-unordered">
+<li><p><code>/shared/logs</code>: 日志目录</p>
+<ul>
 <li><code>/shared/logs/var-log</code>: 我们将容器内的/var/log链接到本目录。您可以在<code>/shared/logs/var-log/nginx/</code>中找到 nginx 的日志文件</li>
 <li><code>/shared/logs/seafile</code>: Seafile 服务运行产生的日志文件目录。比如您可以在<code>/shared/logs/seafile/seafile.log</code>文件中看到 seaf-server 的日志</li>
 </ul>
 </li>
-<li><p class="bbob-p"><code>/shared/ssl</code>: 存放证书的目录，默认不存在</p>
+<li><p><code>/shared/ssl</code>: 存放证书的目录，默认不存在</p>
 </li>
 </ul>
-<h2 id="toc-9" class="bbob-h2">升级 Seafile 服务</h2>
-<p class="bbob-p">如果要升级 Seafile 服务到最新版本：</p>
-<pre><code class="bbob-code hljs language-bash">docker pull seafileltd/seafile-mc:latest
+<h2 id="toc-9">升级 Seafile 服务</h2>
+<p>如果要升级 Seafile 服务到最新版本：</p>
+<pre><code class="hljs language-bash">docker pull seafileltd/seafile-mc:latest
 docker-compose down
 docker-compose up -d
 </code></pre>
 <hr>
-<h2 id="toc-10" class="bbob-h2">问题</h2>
-<ul class="bbob-list-unordered">
+<h2 id="toc-10">问题</h2>
+<ul>
 <li>Seahub 登陆页面显示可以使用邮件或用户名登陆，然而只能使用邮件登陆，输入用户名登陆会提示错误。我使用的 Seafile 服务器版本是<code>v8.0.7</code></li>
 </ul>
-<h2 id="toc-11" class="bbob-h2">用户默认的配额空间</h2>
-<ul class="bbob-list-unordered">
+<h2 id="toc-11">用户默认的配额空间</h2>
+<ul>
 <li>可以在 系统管理 &gt; 用户选项 中为每个用户设置配额，每个用户默认为0，设置为0表示重置为默认上限。有趣的是它的大小计算方式为每1000MB为1GB。</li>
 <li>在<code>/shared/seafile/conf/seafile.conf</code>中可以设置默认上限。编辑此文件添加或修改：
-<pre><code class="bbob-code hljs language-ini"><span class="hljs-section">[quota]</span>
+<pre><code class="hljs language-ini"><span class="hljs-section">[quota]</span>
 <span class="hljs-comment"># 单位为 GB</span>
 <span class="hljs-attr">default</span> = <span class="hljs-number">2</span>
 </code></pre>
@@ -75,12 +464,12 @@ docker-compose up -d
 在 系统管理 页面中进行设置。</li>
 </ul>
 <hr>
-<h2 id="toc-12" class="bbob-h2">参考资料</h2>
-<ul class="bbob-list-unordered">
+<h2 id="toc-12">参考资料</h2>
+<ul>
 <li><a href="https://cloud.seafile.com/published/seafile-manual-cn/docker/%E7%94%A8Docker%E9%83%A8%E7%BD%B2Seafile.md#user-content-%E5%90%AF%E5%8A%A8%20Seafile%20%E6%9C%8D%E5%8A%A1">用 Docker 部署 Seafile 服务</a></li>
 <li><a href="https://cloud.seafile.com/published/seafile-manual-cn/config/README.md#user-content-%E5%90%AF%E5%8A%A8%20Seafile%20%E6%9C%8D%E5%8A%A1">Seafile 服务器个性化配置</a></li>
 </ul>
-</div></article><script>hljs.highlightAll()</script>
+</div></article><script>hljs.highlightAll()</script><script>MathJax.typeset()</script>
 
 <div id="disqus_thread"></div>
 <script>

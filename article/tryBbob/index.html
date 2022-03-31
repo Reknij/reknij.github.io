@@ -1,27 +1,416 @@
-<!DOCTYPE html><html lang="en" style="--mainContentPadding:20px;"><head><script src="/bbob.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css"><link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/github.min.css"><script src="//unpkg.com/@highlightjs/cdn-assets@11.4.0/highlight.min.js"></script><meta charset="UTF-8"><link rel="icon" href="/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>尝试自己创建的博客框架 - Reknij Blog</title><link href="https://unpkg.com/element-plus@2.1.0/dist/index.css" rel="stylesheet"><script src="https://unpkg.com/vue@3.2.31/dist/vue.runtime.global.prod.js"></script><script src="https://unpkg.com/vue-router@4.0.14/dist/vue-router.global.prod.js"></script><script src="https://unpkg.com/element-plus@2.1.0"></script><script type="module" crossorigin="" src="/assets/index.1cf0ea95.js"></script><link rel="stylesheet" href="/assets/index.205457d4.css"><script src="https://reknij.disqus.com/embed.js" data-timestamp="1648648383394"></script><link rel="prefetch" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.63860eb743c7d9d2adf0fa435788abe7.css"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.9450cde9dd2c9d366781a8fc5ff6e933.js"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.90614da243fa6052a038b5539f5086e5.js"><link rel="prefetch" as="script" href="https://disqus.com/next/config.js"></head><body><div id="app" data-v-app=""><img class="background bgToCenter" src="https://w.wallhaven.cc/full/y8/wallhaven-y8l89d.png" style="background-size: cover;"><div class="background cover" id="app-cover"></div><section class="el-container is-vertical app-container center" infinite-scroll-distance="60" style="min-height: 100vh;"><header class="el-header" style="height: auto;"><div class="app-container"><div class="nav-wrapper"><h1 class="title">Reknij Blog</h1><div class="nav-container"><div id="nav-item-/" class="nav-item"><a href="/" class="nav-item-a">主页</a></div><div id="nav-item-/articles/scroll" class="nav-item"><a href="/articles/scroll" class="nav-item-a">全部文章</a></div><div id="nav-item-/filter/archives" class="nav-item"><a href="/filter/archives" class="nav-item-a">归档</a></div><div id="nav-item-/filter/categories" class="nav-item"><a href="/filter/categories" class="nav-item-a">分类</a></div><div id="nav-item-/filter/tags" class="nav-item"><a href="/filter/tags" class="nav-item-a">标签</a></div><div id="nav-item-/about" class="nav-item"><a href="/about" class="nav-item-a">关于</a></div></div></div></div></header><main class="el-main" id="mainContent"><div class="app-container"><div id="content"><div class="el-card is-always-shadow"><!--v-if--><div class="el-card__body" style=""><div class="el-page-header" id="backBtn"><div class="el-page-header__left"><div class="el-page-header__icon"><i class="el-icon"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M224 480h640a32 32 0 110 64H224a32 32 0 010-64z"></path><path fill="currentColor" d="M237.248 512l265.408 265.344a32 32 0 01-45.312 45.312l-288-288a32 32 0 010-45.312l288-288a32 32 0 1145.312 45.312L237.248 512z"></path></svg></i></div><div class="el-page-header__title">返回</div></div><div class="el-page-header__content"></div></div><span class="articleTitle">尝试自己创建的博客框架</span><span class="articleDate">发布于 <span style="text-decoration: underline dashed;">2022-02-14 19:36:28Z</span></span><div style="text-align: center; margin-top: 5px;"><span class="el-tag el-tag--warning el-tag--default el-tag--light tagItem"><span class="el-tag__content">编程</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">Bbob</span><!--v-if--></span></div><div class="el-divider el-divider--horizontal" style="--el-border-style:solid;"><!--v-if--></div><span><article style="background-color: transparent;" class="markdown-body"><div id="bbob-markdown-content"><h1 id="toc-1" class="bbob-h1">前因</h1>
-<p class="bbob-p">由于编程对我来说是爱好不是工作，生活中不常写代码，有很长一段时间我都没碰过代码，怕不再进步，因此找个东西写写。</p>
-<h1 id="toc-2" class="bbob-h1">Bbob</h1>
-<p class="bbob-p"><a href="https://github.com/Reknij/Bbob">Bbob</a> 是我自己写的一个博客框架，有别于传统静态博客，其核心其实就是将构建好的js文件以<code>&lt;script&gt;</code>标签插入到<code>index.html</code>，主题就是一个网站。</p>
-<h1 id="toc-3" class="bbob-h1">前言</h1>
-<p class="bbob-p">到目前写本文章为止，Bbob只发布了window版本，大致上是可以多平台的(基于Dotnet 6)，但没时间测试和搞，便搁置了。</p>
-<p class="bbob-p">我打包提供在了Release中，下载压缩包即可。</p>
-<p class="bbob-p">由于我还不知道如何将程序作为全局命令，所以使用步骤需要先将压缩包解压，得到其中文件，复制到指定文件夹中(你的博客文件夹)。</p>
-<h1 id="toc-4" class="bbob-h1">命令简介</h1>
-<p class="bbob-p">主要分三个命令，初始化<code>init</code>，新建博客文章<code>new blog</code>和生成博客网站<code>generate</code>。</p>
-<h2 class="bbob-h2"><code>init</code></h2>
-<p class="bbob-p">输入命令可以得到一个最初始的文件结构。其中包括重要的配置文件<code>config.json</code>。</p>
-<h2 class="bbob-h2"><code>new &lt;option&gt;</code></h2>
-<p class="bbob-p">新建博客文章便是输入<code>new blog</code>即可，目前也只有<code>blog</code>这个选项。新建的文章会存放到Bbob.exe程序路径下的一个<code>articles</code>文件夹中。</p>
-<h2 class="bbob-h2"><code>generate</code></h2>
-<p class="bbob-p">程序比较核心的功能，输入命令后便生成目标博客网站。可以到Bbob.exe程序路径下的<code>dist</code>文件夹查询结果。</p>
-<h1 id="toc-5" class="bbob-h1">使用</h1>
-<ol class="bbob-list-ordered">
+<!DOCTYPE html><html lang="en" style="--mainContentPadding:20px;"><head><script src="/bbob.js"></script><script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>MathJax={options:{processHtmlClass:"math",ignoreHtmlClass:".*"}}</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css"><link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/github.min.css"><script src="//unpkg.com/@highlightjs/cdn-assets@11.4.0/highlight.min.js"></script><meta charset="UTF-8"><link rel="icon" href="/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>尝试自己创建的博客框架 - Reknij Blog</title><link href="https://unpkg.com/element-plus@2.1.0/dist/index.css" rel="stylesheet"><script src="https://unpkg.com/vue@3.2.31/dist/vue.runtime.global.prod.js"></script><script src="https://unpkg.com/vue-router@4.0.14/dist/vue-router.global.prod.js"></script><script src="https://unpkg.com/element-plus@2.1.0"></script><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><script type="module" crossorigin="" src="/assets/index.1cf0ea95.js"></script><link rel="stylesheet" href="/assets/index.205457d4.css"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style><script src="https://reknij.disqus.com/embed.js" data-timestamp="1648719163636"></script></head><body><div id="app" data-v-app=""><img class="background bgToCenter" src="https://w.wallhaven.cc/full/y8/wallhaven-y8l89d.png" style="background-size: cover;"><div class="background cover" id="app-cover"></div><section class="el-container is-vertical app-container center" infinite-scroll-distance="60" style="min-height: 100vh;"><header class="el-header" style="height: auto;"><div class="app-container"><div class="nav-wrapper"><h1 class="title">Reknij Blog</h1><div class="nav-container"><div id="nav-item-/" class="nav-item"><a href="/" class="nav-item-a">主页</a></div><div id="nav-item-/articles/scroll" class="nav-item"><a href="/articles/scroll" class="nav-item-a">全部文章</a></div><div id="nav-item-/filter/archives" class="nav-item"><a href="/filter/archives" class="nav-item-a">归档</a></div><div id="nav-item-/filter/categories" class="nav-item"><a href="/filter/categories" class="nav-item-a">分类</a></div><div id="nav-item-/filter/tags" class="nav-item"><a href="/filter/tags" class="nav-item-a">标签</a></div><div id="nav-item-/about" class="nav-item"><a href="/about" class="nav-item-a">关于</a></div></div></div></div></header><main class="el-main" id="mainContent"><div class="app-container"><div id="content"><div class="el-card is-always-shadow"><!--v-if--><div class="el-card__body" style=""><div class="el-page-header" id="backBtn"><div class="el-page-header__left"><div class="el-page-header__icon"><i class="el-icon"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M224 480h640a32 32 0 110 64H224a32 32 0 010-64z"></path><path fill="currentColor" d="M237.248 512l265.408 265.344a32 32 0 01-45.312 45.312l-288-288a32 32 0 010-45.312l288-288a32 32 0 1145.312 45.312L237.248 512z"></path></svg></i></div><div class="el-page-header__title">返回</div></div><div class="el-page-header__content"></div></div><span class="articleTitle">尝试自己创建的博客框架</span><span class="articleDate">发布于 <span style="text-decoration: underline dashed;">2022-02-14 19:36:28Z</span></span><div style="text-align: center; margin-top: 5px;"><span class="el-tag el-tag--warning el-tag--default el-tag--light tagItem"><span class="el-tag__content">编程</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">Bbob</span><!--v-if--></span></div><div class="el-divider el-divider--horizontal" style="--el-border-style:solid;"><!--v-if--></div><span><article style="background-color: transparent;" class="markdown-body"><div id="bbob-markdown-content"><h1 id="toc-1">前因</h1>
+<p>由于编程对我来说是爱好不是工作，生活中不常写代码，有很长一段时间我都没碰过代码，怕不再进步，因此找个东西写写。</p>
+<h1 id="toc-2">Bbob</h1>
+<p><a href="https://github.com/Reknij/Bbob">Bbob</a> 是我自己写的一个博客框架，有别于传统静态博客，其核心其实就是将构建好的js文件以<code>&lt;script&gt;</code>标签插入到<code>index.html</code>，主题就是一个网站。</p>
+<h1 id="toc-3">前言</h1>
+<p>到目前写本文章为止，Bbob只发布了window版本，大致上是可以多平台的(基于Dotnet 6)，但没时间测试和搞，便搁置了。</p>
+<p>我打包提供在了Release中，下载压缩包即可。</p>
+<p>由于我还不知道如何将程序作为全局命令，所以使用步骤需要先将压缩包解压，得到其中文件，复制到指定文件夹中(你的博客文件夹)。</p>
+<h1 id="toc-4">命令简介</h1>
+<p>主要分三个命令，初始化<code>init</code>，新建博客文章<code>new blog</code>和生成博客网站<code>generate</code>。</p>
+<h2 id="init"><code>init</code></h2>
+<p>输入命令可以得到一个最初始的文件结构。其中包括重要的配置文件<code>config.json</code>。</p>
+<h2 id="new-option"><code>new &lt;option&gt;</code></h2>
+<p>新建博客文章便是输入<code>new blog</code>即可，目前也只有<code>blog</code>这个选项。新建的文章会存放到Bbob.exe程序路径下的一个<code>articles</code>文件夹中。</p>
+<h2 id="generate"><code>generate</code></h2>
+<p>程序比较核心的功能，输入命令后便生成目标博客网站。可以到Bbob.exe程序路径下的<code>dist</code>文件夹查询结果。</p>
+<h1 id="toc-5">使用</h1>
+<ol>
 <li>首先新建一个文章，文件名可以默认也可指定，省略文件名将默认使用时间作为文件名。
-<pre><code class="bbob-code hljs language-cpp">./Bbob.exe <span class="hljs-keyword">new</span> blog hello-Bbob
+<pre><code class="hljs language-cpp">./Bbob.exe <span class="hljs-keyword">new</span> blog hello-Bbob
 </code></pre>
 直接使用<code>new</code>命令无需要<code>init</code>命令。</li>
 <li>文件内容大致如下，打开文件<code>./articles/hello-Bbob.md</code>查看。
-<pre><code class="bbob-code hljs language-yaml"><span class="hljs-string">//hello-Bbob.md</span>
+<pre><code class="hljs language-yaml"><span class="hljs-string">//hello-Bbob.md</span>
 <span class="hljs-meta">---</span>
 <span class="hljs-attr">title:</span> <span class="hljs-string">hello-Bbob</span>
 <span class="hljs-attr">date:</span> <span class="hljs-number">2022-02-14 19:36:28Z</span>
@@ -29,7 +418,7 @@
 </span></code></pre>
 </li>
 <li>稍微编辑内容，可以添加分类以及标签
-<pre><code class="bbob-code hljs language-yaml"><span class="hljs-string">//hello-Bbob.md</span>
+<pre><code class="hljs language-yaml"><span class="hljs-string">//hello-Bbob.md</span>
 <span class="hljs-meta">---</span>
 <span class="hljs-attr">title:</span> <span class="hljs-string">Hello,</span> <span class="hljs-string">Bbob!</span> <span class="hljs-string">//修改标题</span>
 <span class="hljs-attr">date:</span> <span class="hljs-number">2022-02-14 19:36:28Z</span>
@@ -42,26 +431,26 @@
 </code></pre>
 </li>
 <li>编辑好文件后，输入命令<code>generate</code>生成博客即可
-<pre><code class="bbob-code hljs language-undefined">./Bbob.exe generate
+<pre><code class="hljs language-undefined">./Bbob.exe generate
 </code></pre>
 </li>
 </ol>
-<h2 id="toc-6" class="bbob-h2">预览</h2>
-<p class="bbob-p">这时可以使用工具<code>anywhere</code>预览你的博客。需要安装node.js。</p>
-<pre><code class="bbob-code hljs language-undefined">npm install anywhere -g
+<h2 id="toc-6">预览</h2>
+<p>这时可以使用工具<code>anywhere</code>预览你的博客。需要安装node.js。</p>
+<pre><code class="hljs language-undefined">npm install anywhere -g
 </code></pre>
-<h2 id="toc-7" class="bbob-h2">发布</h2>
-<p class="bbob-p">发布网站就像你平时如何发布网站那般操作，我是发布在github.io。</p>
-<h1 id="toc-8" class="bbob-h1">注意</h1>
-<p class="bbob-p">如果你需要部署的网址是子域名，如<code>www.baseurl.com/sub/</code>，需要更改配置文件<code>config.publicPath</code>为你的子域名，当然也可以直接整个域名包括子域名。</p>
-<pre><code class="bbob-code hljs language-bash">// ./config.json
+<h2 id="toc-7">发布</h2>
+<p>发布网站就像你平时如何发布网站那般操作，我是发布在github.io。</p>
+<h1 id="toc-8">注意</h1>
+<p>如果你需要部署的网址是子域名，如<code>www.baseurl.com/sub/</code>，需要更改配置文件<code>config.publicPath</code>为你的子域名，当然也可以直接整个域名包括子域名。</p>
+<pre><code class="hljs language-bash">// ./config.json
 {
     ...
     <span class="hljs-string">"publicPath"</span>: <span class="hljs-string">"/sub"</span>
     ...
 }
 </code></pre>
-</div></article><script>hljs.highlightAll()</script>
+</div></article><script>hljs.highlightAll()</script><script>MathJax.typeset()</script>
 
 <div id="disqus_thread"></div>
 <script>
@@ -76,4 +465,4 @@
     (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></span></div></div><div class="el-overlay" style="z-index: 2001; display: none;"><div aria-modal="true" aria-labelledby="el-drawer__title" aria-label="" class="el-drawer ltr" role="dialog" style="width: 50%;"><header id="el-drawer__title" class="el-drawer__header"><h4 style="color: var(--theme-font-color);">尝试自己创建的博客框架</h4><button aria-label="close drawer" class="el-drawer__close-btn" type="button"><i class="el-icon el-drawer__close"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M764.288 214.592L512 466.88 259.712 214.592a31.936 31.936 0 00-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1045.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0045.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 10-45.12-45.184z"></path></svg></i></button></header><!--v-if--><!--v-if--></div></div><div class="el-affix" style="margin-left: calc(100% - 60px); height: 32px; width: 60px;"><div class="el-affix--fixed" style="height: 32px; width: 60px; bottom: 80px; z-index: 100;"><button class="el-button el-button--primary el-button--default" type="button"><!--v-if--><span class="">Toc</span></button></div></div></div></div></main><footer class="el-footer" style="height: auto;"><div style="text-align: center;"><span class="copyright">© 2022 Jinker Powered by <a class="bbob-project-link" href="https://github.com/Reknij/Bbob">Bbob</a> &amp; default</span><br><a class="extraLink" href="/sitemap-html.html">Sitemap</a></div></footer></section></div><iframe style="display: none;"></iframe><div class="pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links ad-text adSense adBlock adContent adBanner" style="width: 1px !important; height: 1px !important; position: absolute !important; left: -10000px !important; top: -1000px !important;"></div></body></html>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></span></div></div><div class="el-overlay" style="z-index: 2001; display: none;"><div aria-modal="true" aria-labelledby="el-drawer__title" aria-label="" class="el-drawer ltr" role="dialog" style="width: 50%;"><header id="el-drawer__title" class="el-drawer__header"><h4 style="color: var(--theme-font-color);">尝试自己创建的博客框架</h4><button aria-label="close drawer" class="el-drawer__close-btn" type="button"><i class="el-icon el-drawer__close"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M764.288 214.592L512 466.88 259.712 214.592a31.936 31.936 0 00-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1045.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0045.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 10-45.12-45.184z"></path></svg></i></button></header><!--v-if--><!--v-if--></div></div><div class="el-affix" style="margin-left: calc(100% - 60px); height: 32px; width: 60px;"><div class="el-affix--fixed" style="height: 32px; width: 60px; bottom: 80px; z-index: 100;"><button class="el-button el-button--primary el-button--default" type="button"><!--v-if--><span class="">Toc</span></button></div></div></div></div></main><footer class="el-footer" style="height: auto;"><div style="text-align: center;"><span class="copyright">© 2022 Jinker Powered by <a class="bbob-project-link" href="https://github.com/Reknij/Bbob">Bbob</a> &amp; default</span><br><a class="extraLink" href="/sitemap-html.html">Sitemap</a></div></footer></section></div></body></html>

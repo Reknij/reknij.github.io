@@ -1,76 +1,465 @@
-<!DOCTYPE html><html lang="en" style="--mainContentPadding:20px;"><head><script src="/bbob.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css"><link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/github.min.css"><script src="//unpkg.com/@highlightjs/cdn-assets@11.4.0/highlight.min.js"></script><meta charset="UTF-8"><link rel="icon" href="/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>论坛系统NodeBB初体验 - Reknij Blog</title><link href="https://unpkg.com/element-plus@2.1.0/dist/index.css" rel="stylesheet"><script src="https://unpkg.com/vue@3.2.31/dist/vue.runtime.global.prod.js"></script><script src="https://unpkg.com/vue-router@4.0.14/dist/vue-router.global.prod.js"></script><script src="https://unpkg.com/element-plus@2.1.0"></script><script type="module" crossorigin="" src="/assets/index.1cf0ea95.js"></script><link rel="stylesheet" href="/assets/index.205457d4.css"><script src="https://reknij.disqus.com/embed.js" data-timestamp="1648648379327"></script></head><body><div id="app" data-v-app=""><img class="background bgToCenter" src="https://w.wallhaven.cc/full/y8/wallhaven-y8l89d.png" style="background-size: cover;"><div class="background cover" id="app-cover"></div><section class="el-container is-vertical app-container center" infinite-scroll-distance="60" style="min-height: 100vh;"><header class="el-header" style="height: auto;"><div class="app-container"><div class="nav-wrapper"><h1 class="title">Reknij Blog</h1><div class="nav-container"><div id="nav-item-/" class="nav-item"><a href="/" class="nav-item-a">主页</a></div><div id="nav-item-/articles/scroll" class="nav-item"><a href="/articles/scroll" class="nav-item-a">全部文章</a></div><div id="nav-item-/filter/archives" class="nav-item"><a href="/filter/archives" class="nav-item-a">归档</a></div><div id="nav-item-/filter/categories" class="nav-item"><a href="/filter/categories" class="nav-item-a">分类</a></div><div id="nav-item-/filter/tags" class="nav-item"><a href="/filter/tags" class="nav-item-a">标签</a></div><div id="nav-item-/about" class="nav-item"><a href="/about" class="nav-item-a">关于</a></div></div></div></div></header><main class="el-main" id="mainContent"><div class="app-container"><div id="content"><div class="el-card is-always-shadow"><!--v-if--><div class="el-card__body" style=""><div class="el-page-header" id="backBtn"><div class="el-page-header__left"><div class="el-page-header__icon"><i class="el-icon"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M224 480h640a32 32 0 110 64H224a32 32 0 010-64z"></path><path fill="currentColor" d="M237.248 512l265.408 265.344a32 32 0 01-45.312 45.312l-288-288a32 32 0 010-45.312l288-288a32 32 0 1145.312 45.312L237.248 512z"></path></svg></i></div><div class="el-page-header__title">返回</div></div><div class="el-page-header__content"></div></div><span class="articleTitle">论坛系统NodeBB初体验</span><span class="articleDate">发布于 <span style="text-decoration: underline dashed;">2021-09-27 23:15:14</span></span><div style="text-align: center; margin-top: 5px;"><span class="el-tag el-tag--warning el-tag--default el-tag--light tagItem"><span class="el-tag__content">编程</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">初体验</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">论坛系统</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">社区</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">nodebb</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">Web开发</span><!--v-if--></span></div><div class="el-divider el-divider--horizontal" style="--el-border-style:solid;"><!--v-if--></div><span><article style="background-color: transparent;" class="markdown-body"><div id="bbob-markdown-content"><h2 id="toc-1" class="bbob-h2">前言</h2>
-<p class="bbob-p">有许多老开源或收费的论坛系统，如 Discuz!。不过我对php并不感冒，而且Discuz我觉得年代已久，体验难以跟上现代化，所以找到了NodeBB这个开源论坛系统。</p>
-<h2 id="toc-2" class="bbob-h2">NodeBB简介</h2>
-<p class="bbob-p">NodeBB 论坛软件由 Node.js 提供支持，支持 Redis、MongoDB 或 PostgreSQL 数据库。它利用网络套接字进行即时交互和实时通知。NodeBB 具有许多开箱即用的现代功能，例如社交网络集成和流媒体讨论，同时仍确保与旧浏览器兼容。
+<!DOCTYPE html><html lang="en" style="--mainContentPadding:20px;"><head><script src="/bbob.js"></script><script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>MathJax={options:{processHtmlClass:"math",ignoreHtmlClass:".*"}}</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css"><link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/github.min.css"><script src="//unpkg.com/@highlightjs/cdn-assets@11.4.0/highlight.min.js"></script><meta charset="UTF-8"><link rel="icon" href="/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>论坛系统NodeBB初体验 - Reknij Blog</title><link href="https://unpkg.com/element-plus@2.1.0/dist/index.css" rel="stylesheet"><script src="https://unpkg.com/vue@3.2.31/dist/vue.runtime.global.prod.js"></script><script src="https://unpkg.com/vue-router@4.0.14/dist/vue-router.global.prod.js"></script><script src="https://unpkg.com/element-plus@2.1.0"></script><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><script type="module" crossorigin="" src="/assets/index.1cf0ea95.js"></script><link rel="stylesheet" href="/assets/index.205457d4.css"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style><script src="https://reknij.disqus.com/embed.js" data-timestamp="1648719165747"></script><link rel="prefetch" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.63860eb743c7d9d2adf0fa435788abe7.css"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.9450cde9dd2c9d366781a8fc5ff6e933.js"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.90614da243fa6052a038b5539f5086e5.js"><link rel="prefetch" as="script" href="https://disqus.com/next/config.js"></head><body><div id="app" data-v-app=""><img class="background bgToCenter" src="https://w.wallhaven.cc/full/y8/wallhaven-y8l89d.png" style="background-size: cover;"><div class="background cover" id="app-cover"></div><section class="el-container is-vertical app-container center" infinite-scroll-distance="60" style="min-height: 100vh;"><header class="el-header" style="height: auto;"><div class="app-container"><div class="nav-wrapper"><h1 class="title">Reknij Blog</h1><div class="nav-container"><div id="nav-item-/" class="nav-item"><a href="/" class="nav-item-a">主页</a></div><div id="nav-item-/articles/scroll" class="nav-item"><a href="/articles/scroll" class="nav-item-a">全部文章</a></div><div id="nav-item-/filter/archives" class="nav-item"><a href="/filter/archives" class="nav-item-a">归档</a></div><div id="nav-item-/filter/categories" class="nav-item"><a href="/filter/categories" class="nav-item-a">分类</a></div><div id="nav-item-/filter/tags" class="nav-item"><a href="/filter/tags" class="nav-item-a">标签</a></div><div id="nav-item-/about" class="nav-item"><a href="/about" class="nav-item-a">关于</a></div></div></div></div></header><main class="el-main" id="mainContent"><div class="app-container"><div id="content"><div class="el-card is-always-shadow"><!--v-if--><div class="el-card__body" style=""><div class="el-page-header" id="backBtn"><div class="el-page-header__left"><div class="el-page-header__icon"><i class="el-icon"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M224 480h640a32 32 0 110 64H224a32 32 0 010-64z"></path><path fill="currentColor" d="M237.248 512l265.408 265.344a32 32 0 01-45.312 45.312l-288-288a32 32 0 010-45.312l288-288a32 32 0 1145.312 45.312L237.248 512z"></path></svg></i></div><div class="el-page-header__title">返回</div></div><div class="el-page-header__content"></div></div><span class="articleTitle">论坛系统NodeBB初体验</span><span class="articleDate">发布于 <span style="text-decoration: underline dashed;">2021-09-27 23:15:14</span></span><div style="text-align: center; margin-top: 5px;"><span class="el-tag el-tag--warning el-tag--default el-tag--light tagItem"><span class="el-tag__content">编程</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">初体验</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">论坛系统</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">社区</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">nodebb</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">Web开发</span><!--v-if--></span></div><div class="el-divider el-divider--horizontal" style="--el-border-style:solid;"><!--v-if--></div><span><article style="background-color: transparent;" class="markdown-body"><div id="bbob-markdown-content"><h2 id="toc-1">前言</h2>
+<p>有许多老开源或收费的论坛系统，如 Discuz!。不过我对php并不感冒，而且Discuz我觉得年代已久，体验难以跟上现代化，所以找到了NodeBB这个开源论坛系统。</p>
+<h2 id="toc-2">NodeBB简介</h2>
+<p>NodeBB 论坛软件由 Node.js 提供支持，支持 Redis、MongoDB 或 PostgreSQL 数据库。它利用网络套接字进行即时交互和实时通知。NodeBB 具有许多开箱即用的现代功能，例如社交网络集成和流媒体讨论，同时仍确保与旧浏览器兼容。
 通过使用第三方插件启用附加功能。</p>
-<h2 id="toc-3" class="bbob-h2">事前准备</h2>
-<ul class="bbob-list-unordered">
+<h2 id="toc-3">事前准备</h2>
+<ul>
 <li>安装<a href="https://docs.mongodb.com/manual/installation/">MongoDB</a> (最好最新稳定版)</li>
 <li>安装Git</li>
 <li>安装<a href="https://nodejs.org/zh-cn/download/">Node.js</a> (需要特定版，我目前对应的版本是node v14和npm v6)</li>
 <li>安装<a href="https://nginx.org/en/download.html">Nginx</a>w</li>
 </ul>
-<h2 id="toc-4" class="bbob-h2">步骤</h2>
-<h3 id="toc-5" class="bbob-h3">MongoDB</h3>
-<ul class="bbob-list-unordered">
+<h2 id="toc-4">步骤</h2>
+<h3 id="toc-5">MongoDB</h3>
+<ul>
 <li>安装MongoDB。完成安装<code>mongo</code>进入Mongo Shell</li>
 <li>切换到admin 数据库
-<pre><code class="bbob-code hljs language-perl"><span class="hljs-keyword">use</span> admin
+<pre><code class="hljs language-perl"><span class="hljs-keyword">use</span> admin
 </code></pre>
 </li>
 <li>创建一个管理员用户
-<pre><code class="bbob-code hljs language-css">db<span class="hljs-selector-class">.createUser</span>( { user: <span class="hljs-string">"admin"</span>, pwd: <span class="hljs-string">"&lt;Enter a secure password&gt;"</span>, roles: [ { role: <span class="hljs-string">"root"</span>, db: <span class="hljs-string">"admin"</span> } ] } )
+<pre><code class="hljs language-css">db<span class="hljs-selector-class">.createUser</span>( { user: <span class="hljs-string">"admin"</span>, pwd: <span class="hljs-string">"&lt;Enter a secure password&gt;"</span>, roles: [ { role: <span class="hljs-string">"root"</span>, db: <span class="hljs-string">"admin"</span> } ] } )
 </code></pre>
 </li>
 <li>切换到一个新的数据库，主要用来储存数据，名字可以是默认的'nodebb'，之后配置nodebb就不必输入数据库名。这里用默认的'nodebb'名称。
-<pre><code class="bbob-code hljs language-rust"><span class="hljs-keyword">use</span> nodebb <span class="hljs-comment">//切换到一个不存在的数据库会自动创建</span>
+<pre><code class="hljs language-rust"><span class="hljs-keyword">use</span> nodebb <span class="hljs-comment">//切换到一个不存在的数据库会自动创建</span>
 </code></pre>
 </li>
 <li>创建一个拥有适当权限的用户管理nodebb数据库。
-<pre><code class="bbob-code hljs language-css">db<span class="hljs-selector-class">.createUser</span>( { user: <span class="hljs-string">"nodebb"</span>, pwd: <span class="hljs-string">"&lt;Enter a secure password&gt;"</span>, roles: [ { role: <span class="hljs-string">"readWrite"</span>, db: <span class="hljs-string">"nodebb"</span> }, { role: <span class="hljs-string">"clusterMonitor"</span>, db: <span class="hljs-string">"admin"</span> } ] } )
+<pre><code class="hljs language-css">db<span class="hljs-selector-class">.createUser</span>( { user: <span class="hljs-string">"nodebb"</span>, pwd: <span class="hljs-string">"&lt;Enter a secure password&gt;"</span>, roles: [ { role: <span class="hljs-string">"readWrite"</span>, db: <span class="hljs-string">"nodebb"</span> }, { role: <span class="hljs-string">"clusterMonitor"</span>, db: <span class="hljs-string">"admin"</span> } ] } )
 </code></pre>
 </li>
 <li>配置完可以退出Mongo Shell
-<pre><code class="bbob-code hljs language-scss"><span class="hljs-built_in">quit</span>()
+<pre><code class="hljs language-scss"><span class="hljs-built_in">quit</span>()
 </code></pre>
 </li>
 <li>编辑<code>/etc/mongod.conf</code>，增加以下配置以启用数据库身份验证
-<pre><code class="bbob-code hljs language-makefile"><span class="hljs-section">security:</span>
+<pre><code class="hljs language-makefile"><span class="hljs-section">security:</span>
 <span class="hljs-section">authorization: enabled</span>
 </code></pre>
 </li>
 <li>重启MongoDB，可以验证是否生效
-<pre><code class="bbob-code hljs language-cpp">sudo systemctl restart mongod
+<pre><code class="hljs language-cpp">sudo systemctl restart mongod
 mongo -u admin -p your_password --authenticationDatabase=admin <span class="hljs-comment">//连接验证是否可行</span>
 </code></pre>
 </li>
 </ul>
-<h3 id="toc-6" class="bbob-h3">NodeBB</h3>
-<ul class="bbob-list-unordered">
+<h3 id="toc-6">NodeBB</h3>
+<ul>
 <li>使用git clone命令克隆仓库下来本地，我这里克隆<code>v1.18.x</code>版本，其他版本就像这样<code>v1.16.x</code>
-<pre><code class="bbob-code hljs language-bash">git <span class="hljs-built_in">clone</span> -b v1.18.x https://github.com/NodeBB/NodeBB.git nodebb
+<pre><code class="hljs language-bash">git <span class="hljs-built_in">clone</span> -b v1.18.x https://github.com/NodeBB/NodeBB.git nodebb
 <span class="hljs-built_in">cd</span> nodebb //切换文件夹到nodebb中
 </code></pre>
 </li>
 <li>执行命令以配置，配置完会得到一个config.json文件，日后想要修改配置可以通过这个文件
-<pre><code class="bbob-code hljs language-bash">./nodebb setup
+<pre><code class="hljs language-bash">./nodebb setup
 </code></pre>
 </li>
 <li>配置完便可以启动nodebb了。
-<pre><code class="bbob-code hljs language-bash">./nodebb start //启动
+<pre><code class="hljs language-bash">./nodebb start //启动
 ./nodebb stop //停止
 </code></pre>
 </li>
 </ul>
-<h3 id="toc-7" class="bbob-h3">Nginx</h3>
-<ul class="bbob-list-unordered">
+<h3 id="toc-7">Nginx</h3>
+<ul>
 <li>安装Nginx，完成安装若没有启动需要启动。
-<pre><code class="bbob-code hljs language-cpp">sudo systemctl start nginx <span class="hljs-comment">//启动</span>
+<pre><code class="hljs language-cpp">sudo systemctl start nginx <span class="hljs-comment">//启动</span>
 sudo systemctl status nginx <span class="hljs-comment">//查看状态</span>
 </code></pre>
 </li>
 <li>配置server块，最好在<code>/etc/nginx/sites-available/</code>中添加新文件，可以复制default后修改，方便许多。添加文件后记得<code>ln -s</code>文件到<code>/etc/nginx/sites-enabled/</code>下以启用配置。
-<pre><code class="bbob-code hljs language-perl">server {
+<pre><code class="hljs language-perl">server {
     <span class="hljs-keyword">listen</span> <span class="hljs-number">80</span>;
 
     server_name forum.example.com;
@@ -94,45 +483,45 @@ sudo systemctl status nginx <span class="hljs-comment">//查看状态</span>
 </code></pre>
 </li>
 <li>记得重新加载Nginx
-<pre><code class="bbob-code hljs language-undefined">sudo nginx -s reload
+<pre><code class="hljs language-undefined">sudo nginx -s reload
 </code></pre>
 </li>
 <li>浏览器浏览<code>http://forum.example.com</code>或<code>http://localhost</code>可以查看效果</li>
 </ul>
-<h2 id="toc-8" class="bbob-h2">使用Docker</h2>
-<h3 id="toc-9" class="bbob-h3">自行构建</h3>
-<ul class="bbob-list-unordered">
+<h2 id="toc-8">使用Docker</h2>
+<h3 id="toc-9">自行构建</h3>
+<ul>
 <li>项目有<code>Dockerfile</code>和<code>docker-compose.yml</code>，可以使用docker-compose启动，不过我遇到一些问题，可以先试试可行没有再使用下面的方法</li>
 </ul>
-<h3 id="toc-10" class="bbob-h3">拉已构建好的镜像</h3>
-<ul class="bbob-list-unordered">
+<h3 id="toc-10">拉已构建好的镜像</h3>
+<ul>
 <li>Docker先创建一个网络
-<pre><code class="bbob-code hljs language-lua">sudo docker network <span class="hljs-built_in">create</span> mongo-net
+<pre><code class="hljs language-lua">sudo docker network <span class="hljs-built_in">create</span> mongo-net
 </code></pre>
 </li>
 <li>拉个MongoDB镜像并启动
-<pre><code class="bbob-code hljs language-scss">sudo docker run <span class="hljs-attr">--name</span> mongo <span class="hljs-attr">--restart</span> always <span class="hljs-attr">--network</span> mongo-net -d mongo
+<pre><code class="hljs language-scss">sudo docker run <span class="hljs-attr">--name</span> mongo <span class="hljs-attr">--restart</span> always <span class="hljs-attr">--network</span> mongo-net -d mongo
 </code></pre>
 </li>
 <li>Docker Hub中已经有官网的NodeBB镜像，一样拉下来启动即可
-<pre><code class="bbob-code hljs language-css">sudo docker run <span class="hljs-attr">--restart</span> always <span class="hljs-attr">--name</span> forum <span class="hljs-attr">--network</span> mongo-net -<span class="hljs-selector-tag">p</span> <span class="hljs-number">4567</span>:<span class="hljs-number">4567</span> -d nodebb/docker
+<pre><code class="hljs language-css">sudo docker run <span class="hljs-attr">--restart</span> always <span class="hljs-attr">--name</span> forum <span class="hljs-attr">--network</span> mongo-net -<span class="hljs-selector-tag">p</span> <span class="hljs-number">4567</span>:<span class="hljs-number">4567</span> -d nodebb/docker
 </code></pre>
 </li>
 <li>执行成功后论坛已启动，浏览器进入论坛会进入图形配置页面，简单配置一下即可。</li>
 </ul>
-<h2 id="toc-11" class="bbob-h2">事后经验</h2>
-<ul class="bbob-list-unordered">
+<h2 id="toc-11">事后经验</h2>
+<ul>
 <li>确保所有步骤都正常运行，尤其是Docker 网络，保持NodeBB容器和MongoDB容器在一个网络，NodeBB才能连接数据库。</li>
 <li>MongoDB的hostname在容器中貌似根据容器名称定义。如启动MongoDB容器时<code>--name mongo</code>，容器之间<code>ping mongo</code>可以ping通，显示出MongoDB容器的ip</li>
 <li>不要以其他权限运行NodeBB， 如sudo</li>
 </ul>
-<h2 id="toc-12" class="bbob-h2">相关资料</h2>
-<ul class="bbob-list-unordered">
+<h2 id="toc-12">相关资料</h2>
+<ul>
 <li><a href="https://github.com/NodeBB/NodeBB">NodeBB GitHub</a></li>
 <li><a href="https://docs.nodebb.org/">NodeBB Documentation</a></li>
 <li><a href="https://www.jianshu.com/p/ab72fe404c8d">快速搭建论坛，用 NodeBB 搭建自己的社区，汇聚可爱的人们 - 简书</a></li>
 </ul>
-</div></article><script>hljs.highlightAll()</script>
+</div></article><script>hljs.highlightAll()</script><script>MathJax.typeset()</script>
 
 <div id="disqus_thread"></div>
 <script>
@@ -147,4 +536,4 @@ sudo systemctl status nginx <span class="hljs-comment">//查看状态</span>
     (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></span></div></div><div class="el-overlay" style="z-index: 2001; display: none;"><div aria-modal="true" aria-labelledby="el-drawer__title" aria-label="" class="el-drawer ltr" role="dialog" style="width: 50%;"><header id="el-drawer__title" class="el-drawer__header"><h4 style="color: var(--theme-font-color);">论坛系统NodeBB初体验</h4><button aria-label="close drawer" class="el-drawer__close-btn" type="button"><i class="el-icon el-drawer__close"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M764.288 214.592L512 466.88 259.712 214.592a31.936 31.936 0 00-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1045.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0045.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 10-45.12-45.184z"></path></svg></i></button></header><!--v-if--><!--v-if--></div></div><div class="el-affix" style="margin-left: calc(100% - 60px); height: 32px; width: 60px;"><div class="el-affix--fixed" style="height: 32px; width: 60px; bottom: 80px; z-index: 100;"><button class="el-button el-button--primary el-button--default" type="button"><!--v-if--><span class="">Toc</span></button></div></div></div></div></main><footer class="el-footer" style="height: auto;"><div style="text-align: center;"><span class="copyright">© 2022 Jinker Powered by <a class="bbob-project-link" href="https://github.com/Reknij/Bbob">Bbob</a> &amp; default</span><br><a class="extraLink" href="/sitemap-html.html">Sitemap</a></div></footer></section></div></body></html>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></span></div></div><div class="el-overlay" style="z-index: 2001; display: none;"><div aria-modal="true" aria-labelledby="el-drawer__title" aria-label="" class="el-drawer ltr" role="dialog" style="width: 50%;"><header id="el-drawer__title" class="el-drawer__header"><h4 style="color: var(--theme-font-color);">论坛系统NodeBB初体验</h4><button aria-label="close drawer" class="el-drawer__close-btn" type="button"><i class="el-icon el-drawer__close"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M764.288 214.592L512 466.88 259.712 214.592a31.936 31.936 0 00-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1045.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0045.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 10-45.12-45.184z"></path></svg></i></button></header><!--v-if--><!--v-if--></div></div><div class="el-affix" style="margin-left: calc(100% - 60px); height: 32px; width: 60px;"><div class="el-affix--fixed" style="height: 32px; width: 60px; bottom: 80px; z-index: 100;"><button class="el-button el-button--primary el-button--default" type="button"><!--v-if--><span class="">Toc</span></button></div></div></div></div></main><footer class="el-footer" style="height: auto;"><div style="text-align: center;"><span class="copyright">© 2022 Jinker Powered by <a class="bbob-project-link" href="https://github.com/Reknij/Bbob">Bbob</a> &amp; default</span><br><a class="extraLink" href="/sitemap-html.html">Sitemap</a></div></footer></section></div><iframe style="display: none;"></iframe><div class="pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links ad-text adSense adBlock adContent adBanner" style="width: 1px !important; height: 1px !important; position: absolute !important; left: -10000px !important; top: -1000px !important;"></div></body></html>

@@ -1,33 +1,422 @@
-<!DOCTYPE html><html lang="en" style="--mainContentPadding:20px;"><head><script src="/bbob.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css"><link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/github.min.css"><script src="//unpkg.com/@highlightjs/cdn-assets@11.4.0/highlight.min.js"></script><meta charset="UTF-8"><link rel="icon" href="/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Bbob启用预渲染解决SEO - Reknij Blog</title><link href="https://unpkg.com/element-plus@2.1.0/dist/index.css" rel="stylesheet"><script src="https://unpkg.com/vue@3.2.31/dist/vue.runtime.global.prod.js"></script><script src="https://unpkg.com/vue-router@4.0.14/dist/vue-router.global.prod.js"></script><script src="https://unpkg.com/element-plus@2.1.0"></script><script type="module" crossorigin="" src="/assets/index.1cf0ea95.js"></script><link rel="stylesheet" href="/assets/index.205457d4.css"><script src="https://reknij.disqus.com/embed.js" data-timestamp="1648648377693"></script></head><body><div id="app" data-v-app=""><img class="background bgToCenter" src="https://w.wallhaven.cc/full/y8/wallhaven-y8l89d.png" style="background-size: cover;"><div class="background cover" id="app-cover"></div><section class="el-container is-vertical app-container center" infinite-scroll-distance="60" style="min-height: 100vh;"><header class="el-header" style="height: auto;"><div class="app-container"><div class="nav-wrapper"><h1 class="title">Reknij Blog</h1><div class="nav-container"><div id="nav-item-/" class="nav-item"><a href="/" class="nav-item-a">主页</a></div><div id="nav-item-/articles/scroll" class="nav-item"><a href="/articles/scroll" class="nav-item-a">全部文章</a></div><div id="nav-item-/filter/archives" class="nav-item"><a href="/filter/archives" class="nav-item-a">归档</a></div><div id="nav-item-/filter/categories" class="nav-item"><a href="/filter/categories" class="nav-item-a">分类</a></div><div id="nav-item-/filter/tags" class="nav-item"><a href="/filter/tags" class="nav-item-a">标签</a></div><div id="nav-item-/about" class="nav-item"><a href="/about" class="nav-item-a">关于</a></div></div></div></div></header><main class="el-main" id="mainContent"><div class="app-container"><div id="content"><div class="el-card is-always-shadow"><!--v-if--><div class="el-card__body" style=""><div class="el-page-header" id="backBtn"><div class="el-page-header__left"><div class="el-page-header__icon"><i class="el-icon"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M224 480h640a32 32 0 110 64H224a32 32 0 010-64z"></path><path fill="currentColor" d="M237.248 512l265.408 265.344a32 32 0 01-45.312 45.312l-288-288a32 32 0 010-45.312l288-288a32 32 0 1145.312 45.312L237.248 512z"></path></svg></i></div><div class="el-page-header__title">返回</div></div><div class="el-page-header__content"></div></div><span class="articleTitle">Bbob启用预渲染解决SEO</span><span class="articleDate">发布于 <span style="text-decoration: underline dashed;">2022-03-20 18:37:34</span></span><div style="text-align: center; margin-top: 5px;"><span class="el-tag el-tag--warning el-tag--default el-tag--light tagItem"><span class="el-tag__content">编程</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">Bbob</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">Prerender</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">SEO</span><!--v-if--></span></div><div class="el-divider el-divider--horizontal" style="--el-border-style:solid;"><!--v-if--></div><span><article style="background-color: transparent;" class="markdown-body"><div id="bbob-markdown-content"><h1 id="toc-1" class="bbob-h1">SEO</h1>
-<blockquote class="bbob-quote">
-<p class="bbob-p">搜索引擎优化（英语：search engine optimization，缩写为SEO）是透过了解搜索引擎的运作规则来调整网站，以及提高目的网站在有关搜索引擎内排名的方式。由于不少研究发现，搜索引擎的用户往往只会留意搜索结果最前面的几个条目，所以不少网站都希望透过各种形式来影响搜索引擎的排序，让自己的网站可以有优秀的搜索排名。当中尤以各种依靠广告维生的网站为甚。</p>
+<!DOCTYPE html><html lang="en" style="--mainContentPadding:20px;"><head><script src="/bbob.js"></script><script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>MathJax={options:{processHtmlClass:"math",ignoreHtmlClass:".*"}}</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css"><link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/github.min.css"><script src="//unpkg.com/@highlightjs/cdn-assets@11.4.0/highlight.min.js"></script><meta charset="UTF-8"><link rel="icon" href="/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Bbob启用预渲染解决SEO - Reknij Blog</title><link href="https://unpkg.com/element-plus@2.1.0/dist/index.css" rel="stylesheet"><script src="https://unpkg.com/vue@3.2.31/dist/vue.runtime.global.prod.js"></script><script src="https://unpkg.com/vue-router@4.0.14/dist/vue-router.global.prod.js"></script><script src="https://unpkg.com/element-plus@2.1.0"></script><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><script type="module" crossorigin="" src="/assets/index.1cf0ea95.js"></script><link rel="stylesheet" href="/assets/index.205457d4.css"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style><script src="https://reknij.disqus.com/embed.js" data-timestamp="1648719162620"></script></head><body><div id="app" data-v-app=""><img class="background bgToCenter" src="https://w.wallhaven.cc/full/y8/wallhaven-y8l89d.png" style="background-size: cover;"><div class="background cover" id="app-cover"></div><section class="el-container is-vertical app-container center" infinite-scroll-distance="60" style="min-height: 100vh;"><header class="el-header" style="height: auto;"><div class="app-container"><div class="nav-wrapper"><h1 class="title">Reknij Blog</h1><div class="nav-container"><div id="nav-item-/" class="nav-item"><a href="/" class="nav-item-a">主页</a></div><div id="nav-item-/articles/scroll" class="nav-item"><a href="/articles/scroll" class="nav-item-a">全部文章</a></div><div id="nav-item-/filter/archives" class="nav-item"><a href="/filter/archives" class="nav-item-a">归档</a></div><div id="nav-item-/filter/categories" class="nav-item"><a href="/filter/categories" class="nav-item-a">分类</a></div><div id="nav-item-/filter/tags" class="nav-item"><a href="/filter/tags" class="nav-item-a">标签</a></div><div id="nav-item-/about" class="nav-item"><a href="/about" class="nav-item-a">关于</a></div></div></div></div></header><main class="el-main" id="mainContent"><div class="app-container"><div id="content"><div class="el-card is-always-shadow"><!--v-if--><div class="el-card__body" style=""><div class="el-page-header" id="backBtn"><div class="el-page-header__left"><div class="el-page-header__icon"><i class="el-icon"><svg class="icon" width="200" height="200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M224 480h640a32 32 0 110 64H224a32 32 0 010-64z"></path><path fill="currentColor" d="M237.248 512l265.408 265.344a32 32 0 01-45.312 45.312l-288-288a32 32 0 010-45.312l288-288a32 32 0 1145.312 45.312L237.248 512z"></path></svg></i></div><div class="el-page-header__title">返回</div></div><div class="el-page-header__content"></div></div><span class="articleTitle">Bbob启用预渲染解决SEO</span><span class="articleDate">发布于 <span style="text-decoration: underline dashed;">2022-03-20 18:37:34</span></span><div style="text-align: center; margin-top: 5px;"><span class="el-tag el-tag--warning el-tag--default el-tag--light tagItem"><span class="el-tag__content">编程</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">Bbob</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">Prerender</span><!--v-if--></span><span class="el-tag el-tag--success el-tag--default el-tag--light tagItem"><span class="el-tag__content">SEO</span><!--v-if--></span></div><div class="el-divider el-divider--horizontal" style="--el-border-style:solid;"><!--v-if--></div><span><article style="background-color: transparent;" class="markdown-body"><div id="bbob-markdown-content"><h1 id="toc-1">SEO</h1>
+<blockquote>
+<p>搜索引擎优化（英语：search engine optimization，缩写为SEO）是透过了解搜索引擎的运作规则来调整网站，以及提高目的网站在有关搜索引擎内排名的方式。由于不少研究发现，搜索引擎的用户往往只会留意搜索结果最前面的几个条目，所以不少网站都希望透过各种形式来影响搜索引擎的排序，让自己的网站可以有优秀的搜索排名。当中尤以各种依靠广告维生的网站为甚。</p>
 </blockquote>
-<h1 id="toc-2" class="bbob-h1">预渲染</h1>
-<p class="bbob-p">预渲染指用户请求文档前便已经是渲染完成的文档。若用户请求无预渲染的SPA页面，最先得到的是一个空页面，没有相应的数据，不利于SEO。预渲染后的页面已经实装了数据，页面即是用户请求的最终页面。</p>
-<h2 id="toc-3" class="bbob-h2">原理</h2>
-<p class="bbob-p">通过代码控制无头浏览器(Headless browser)，访问网页路由，得到渲染完成后的数据，并保存下来。访问时便不会出现文档404错误。而且每一个预渲染的界面都是一个SPA应用。不会影响用户体验。</p>
-<h1 id="toc-4" class="bbob-h1">Bbob 预渲染插件</h1>
-<p class="bbob-p">若想要在Bbob中解决seo问题，就必须使用预渲染插件<a href="https://github.com/Reknij/bbob-plugin-prerender">bbob-plugin-prerender</a>。插件由我开发，直接使用即可。需要注意的是，此插件需要主题支持。Bbob自带的主题已经默认支持。若自己开发的主题想要支持也十分简单，请到<a href="https://github.com/Reknij/bbob-plugin-prerender#theme-supportdevelopmemt">插件项目网页</a>查看详情。</p>
-<h2 id="toc-5" class="bbob-h2">使用</h2>
-<p class="bbob-p">先安装，请将以下命令中的v1.0.0替换为你想要的版本。</p>
-<pre><code class="bbob-code hljs language-bash">bbob add -a https://github.com/Reknij/bbob-plugin-prerender/releases/download/v1.0.0/bbob-plugin-prerender.rar
+<h1 id="toc-2">预渲染</h1>
+<p>预渲染指用户请求文档前便已经是渲染完成的文档。若用户请求无预渲染的SPA页面，最先得到的是一个空页面，没有相应的数据，不利于SEO。预渲染后的页面已经实装了数据，页面即是用户请求的最终页面。</p>
+<h2 id="toc-3">原理</h2>
+<p>通过代码控制无头浏览器(Headless browser)，访问网页路由，得到渲染完成后的数据，并保存下来。访问时便不会出现文档404错误。而且每一个预渲染的界面都是一个SPA应用。不会影响用户体验。</p>
+<h1 id="toc-4">Bbob 预渲染插件</h1>
+<p>若想要在Bbob中解决seo问题，就必须使用预渲染插件<a href="https://github.com/Reknij/bbob-plugin-prerender">bbob-plugin-prerender</a>。插件由我开发，直接使用即可。需要注意的是，此插件需要主题支持。Bbob自带的主题已经默认支持。若自己开发的主题想要支持也十分简单，请到<a href="https://github.com/Reknij/bbob-plugin-prerender#theme-supportdevelopmemt">插件项目网页</a>查看详情。</p>
+<h2 id="toc-5">使用</h2>
+<p>先安装，请将以下命令中的v1.0.0替换为你想要的版本。</p>
+<pre><code class="hljs language-bash">bbob add -a https://github.com/Reknij/bbob-plugin-prerender/releases/download/v1.0.0/bbob-plugin-prerender.rar
 </code></pre>
-<p class="bbob-p">安装完成后，只要主题支持，默认启用预渲染。执行<code>bbob g</code>，可以看到插件已经起作用。执行<code>bbob p</code>预览你的博客页面，打开Chrome开发者工具可以看到网页请求的页面已包含最终数据，而不是一个空页面。</p>
-<h2 id="toc-6" class="bbob-h2">注意</h2>
-<p class="bbob-p">使用此插件，必须将Bbob自带插件<code>BuildWebArticleJson</code>的配置文件中<code>shortAddress</code>启用为<code>true</code>。</p>
-<pre><code class="bbob-code hljs language-bash">// ./configs/BuildWebArticleJson.config.json
+<p>安装完成后，只要主题支持，默认启用预渲染。执行<code>bbob g</code>，可以看到插件已经起作用。执行<code>bbob p</code>预览你的博客页面，打开Chrome开发者工具可以看到网页请求的页面已包含最终数据，而不是一个空页面。</p>
+<h2 id="toc-6">注意</h2>
+<p>使用此插件，必须将Bbob自带插件<code>BuildWebArticleJson</code>的配置文件中<code>shortAddress</code>启用为<code>true</code>。</p>
+<pre><code class="hljs language-bash">// ./configs/BuildWebArticleJson.config.json
 {
     <span class="hljs-string">"shortAddress"</span>: <span class="hljs-literal">true</span>, //change to <span class="hljs-literal">true</span>
     <span class="hljs-string">"shortAddressEndWithSlash"</span>: <span class="hljs-literal">false</span>
 }
 </code></pre>
-<p class="bbob-p">倘若要你的博客不出现301重定向，可以将<code>shortAddressEndWithSlash</code>改为<code>true</code>。<code>BuildWebArticleJson</code>插件会自动在短地址后面加上'/'。</p>
-<h1 id="toc-7" class="bbob-h1">引用</h1>
-<ul class="bbob-list-unordered">
+<p>倘若要你的博客不出现301重定向，可以将<code>shortAddressEndWithSlash</code>改为<code>true</code>。<code>BuildWebArticleJson</code>插件会自动在短地址后面加上'/'。</p>
+<h1 id="toc-7">引用</h1>
+<ul>
 <li><a href="https://www.zhihu.com/question/273930443/answer/948862957">服务端渲染(SSR)和预渲染(Prerendering)有什么区别？ - 方应杭的回答 - 知乎</a></li>
 <li><a href="https://zh.wikipedia.org/wiki/%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E%E6%9C%80%E4%BD%B3%E5%8C%96">搜索引擎优化 - 维基百科</a></li>
 </ul>
-</div></article><script>hljs.highlightAll()</script>
+</div></article><script>hljs.highlightAll()</script><script>MathJax.typeset()</script>
 
 <div id="disqus_thread"></div>
 <script>
