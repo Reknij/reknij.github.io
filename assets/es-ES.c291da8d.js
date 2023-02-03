@@ -1,1 +1,0 @@
-const a={welcome:"Bienvenido a mi blog!",home:"P\xE1gina principal",articles:"Art\xEDculos",archives:"Archivo",categories:"Categor\xEDas",tags:"Etiquetas",about:"Sobre",back:"Atr\xE1s",postedOn:"Publicado en",author:"Autor",description:"Descripci\xF3n",aboutBlog:"Acerca del blog",lastBuild:"Hora de \xFAltima modificaci\xF3n del blog"};export{a as default};

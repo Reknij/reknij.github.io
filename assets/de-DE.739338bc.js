@@ -1,1 +1,0 @@
-const e={welcome:"Willkommen auf meinem Blog!",home:"Startseite",articles:"Artikel",archives:"Archiv",categories:"Kategorien",tags:"Stichworte",about:"\xDCber",back:"Zur\xFCck",postedOn:"Gepostet am",author:"Autor",description:"Beschreibung",aboutBlog:"\xDCber Blog",lastBuild:"Zeitpunkt der letzten \xC4nderung des Blogs"};export{e as default};

@@ -1,1 +1,0 @@
-const o={welcome:"Welcome to my Blog!",home:"Home",articles:"Articles",archives:"Archives",categories:"Categories",tags:"Tags",about:"About",back:"Back",postedOn:"Posted on",author:"Author",description:"Description",aboutBlog:"About Blog",lastBuild:"Blog Last Modified Time"};export{o as default};
